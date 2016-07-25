@@ -96,7 +96,7 @@
 小计1.硬件系统组成:总线，I/O设备，主存，CPU2.操作系统：应用程序和硬件之间的软件；作用：防止硬件被滥用，向应用程序提供简单一致的接口；抽象概念：虚拟机-进程-虚拟存储器-文件（IO)主存)（处理器)操作系统）。3.并发(concurrency)，杂技员玩球;并行(parallelism),多核。
 信息的表示和处理主要内容略
 小计1.字长 整数和指针数据的标称大小2.大">
-<meta property="og:updated_time" content="2016-07-24T12:13:02.000Z">
+<meta property="og:updated_time" content="2016-07-25T03:52:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSAPP 1~2">
 <meta name="twitter:description" content="系统漫游主要内容略
@@ -335,7 +335,43 @@
 <h4 id="小计"><a href="#小计" class="headerlink" title="小计"></a>小计</h4><p>1.硬件系统组成:总线，I/O设备，主存，CPU<br>2.操作系统：应用程序和硬件之间的软件；作用：防止硬件被滥用，向应用程序提供简单一致的接口；抽象概念：虚拟机-进程-虚拟存储器-文件（IO)主存)（处理器)操作系统）。<br>3.并发(concurrency)，杂技员玩球;并行(parallelism),多核。</p>
 <h3 id="信息的表示和处理"><a href="#信息的表示和处理" class="headerlink" title="信息的表示和处理"></a>信息的表示和处理</h3><h4 id="主要内容-1"><a href="#主要内容-1" class="headerlink" title="主要内容"></a>主要内容</h4><p>略</p>
 <h4 id="小计-1"><a href="#小计-1" class="headerlink" title="小计"></a>小计</h4><p>1.字长 整数和指针数据的标称大小<br>2.大端法(低位在前)和小端法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#include &lt;stdio.h&gt;</span></div><div class="line">//查看为大端还是小端思路</div><div class="line">typedef unsigned char *byte_pointer;</div><div class="line">void show_bytes(byte_pointer start, int len)&#123;</div><div class="line">	int i;</div><div class="line">	<span class="keyword">for</span>(i=0;i&lt;len;i++)&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%.2x"</span>, start[i]);</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"\n"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void show_int(int x)&#123;</div><div class="line">	show_bytes((byte_pointer) &amp;x, sizeof(int));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>3.无符号数逻辑右移，有符号数算术右移<br>4.整数四则运算推倒略<br>5.IEEE浮点标准 $V=(-1)^s\times M\times2^E$</p>
+<p>3.无符号数逻辑右移，有符号数算术右移<br>4.整数四则运算推倒略<br>5.IEEE浮点标准 $V=(-1)^s\times M\times2^E$ (示例，8位浮点数，1位符号，k=4阶码位，n=3小数位)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">s(首位，浮点数正负)</th>
+<th style="text-align:center">M(尾码，)</th>
+<th style="text-align:center">E(指数)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">非规格化 (0~1 0000 000~111 ex:0 0000 011)</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">M=小数位 ex:3/8</td>
+<td style="text-align:center">$E=1-(2^{k-1}-1)$ ex:-6</td>
+</tr>
+<tr>
+<td style="text-align:center">规格化（0~1 0000~1110 000~111 ex:0 0110 110）</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">M=小数位+1 ex:6/8+1=14/8</td>
+<td style="text-align:center">E=整数位-($2^{k-1}$-1) ex:-1</td>
+</tr>
+<tr>
+<td style="text-align:center">无穷(0~1 1111 000)</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">/</td>
+</tr>
+<tr>
+<td style="text-align:center">NaN(0~1 1111 001~111)</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">/</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -374,6 +410,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/24/CSAPP-3/" rel="prev" title="CSAPP-3">
+                CSAPP-3 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -445,7 +485,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
