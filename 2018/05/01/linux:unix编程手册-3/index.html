@@ -1,0 +1,763 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="tips," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="linux/unix编程手册-2基本概念内核内核职责">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux/unix编程手册-3">
+<meta property="og:url" content="http://yoursite.com/2018/05/01/linux:unix编程手册-3/index.html">
+<meta property="og:site_name" content="One Alian">
+<meta property="og:description" content="linux/unix编程手册-2基本概念内核内核职责">
+<meta property="og:updated_time" content="2018-05-13T13:15:15.465Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux/unix编程手册-3">
+<meta name="twitter:description" content="linux/unix编程手册-2基本概念内核内核职责">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/01/linux:unix编程手册-3/"/>
+
+  <title> linux/unix编程手册-3 | One Alian </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">One Alian</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                linux/unix编程手册-3
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-05-01T11:53:07+08:00" content="2018-05-01">
+              2018-05-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/05/01/linux:unix编程手册-3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/01/linux:unix编程手册-3/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="linux-unix编程手册-2"><a href="#linux-unix编程手册-2" class="headerlink" title="linux/unix编程手册-2"></a>linux/unix编程手册-2</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><h4 id="内核"><a href="#内核" class="headerlink" title="内核"></a><strong>内核</strong></h4><h5 id="内核职责"><a href="#内核职责" class="headerlink" title="内核职责"></a>内核职责</h5><a id="more"></a>
+<ul>
+<li>进程调度（哪些进程获得CPU的使用，每个进程使用多久）</li>
+<li>内存管理（虚拟内存管理：进程之间，进程和内核之间相互隔离；只需将进程的一部分内容放在内存中，变相提高CPU使用率）</li>
+<li>提供文件系统</li>
+<li>创建终止进程</li>
+<li>对提供设备访问接口</li>
+<li>提供系统调用API</li>
+</ul>
+<blockquote>
+<p>用户态和核心态</p>
+<p>硬件执行之指令使CPU在两种状态间切换；用户态运行时只能访问用户态内存，操作系统位域内核空间（shell是用户进程）</p>
+<p>文件描述符：实际上是一个索引指向内核为每一个进程所维护的打开的文件记录表</p>
+</blockquote>
+<h4 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h4><h5 id="1进程内存布局"><a href="#1进程内存布局" class="headerlink" title="1进程内存布局"></a>1进程内存布局</h5><ul>
+<li>文本：进程的指令</li>
+<li>数据：程序静态变量</li>
+<li>堆：动态分配额外内存</li>
+<li>栈：（线程仅仅有自己的栈）</li>
+</ul>
+<h5 id="2进程的创建"><a href="#2进程的创建" class="headerlink" title="2进程的创建"></a>2进程的创建</h5><ul>
+<li>fork创建，子进程继承父进程数据段，堆段，栈段，在内存中创建副本，共享只读的程序文本</li>
+<li>execve加载新的程序，会销毁现有的文本，数据，堆，栈段</li>
+</ul>
+<blockquote>
+<p><a href="https://blog.csdn.net/gatieme/article/details/51484562" target="_blank" rel="external">特殊的进程</a></p>
+<p>0 — idel 进程 (第一个进程，N个处理器N个idle进程，cpu没事干的时候进入)</p>
+<p>1 — init进程</p>
+<p>2 — kthread进程</p>
+</blockquote>
+<h5 id="3内存映射"><a href="#3内存映射" class="headerlink" title="3内存映射"></a>3内存映射</h5><ul>
+<li>文件映射:将文件部分区域映射到进程的虚拟内存</li>
+<li>匿名映射:</li>
+</ul>
+<blockquote>
+<p>通过传入标志，决定映射的内容其他进程是否可见</p>
+</blockquote>
+<h3 id="linux-unix编程手册-3"><a href="#linux-unix编程手册-3" class="headerlink" title="linux/unix编程手册-3"></a>linux/unix编程手册-3</h3><h4 id="系统编程概念"><a href="#系统编程概念" class="headerlink" title="系统编程概念"></a>系统编程概念</h4><ol>
+<li>系统调用流程  (一般:应用程序—&gt;C外壳函数(异常正)—&gt;ststem_call()例程(异常负)—&gt;服务例程(异常正))</li>
+</ol>
+<blockquote>
+<ul>
+<li>通过C函数库的外壳函数发起系统调用</li>
+<li>外壳函数将调用参数复制到寄存器，同时将系统调用的编号复制到CPU寄存器(%eax)。</li>
+<li>外壳函数执行一条中断指令(int 0x80)，引发处理器从用户态切换到内核态，并执行(0x80)的中断矢量指向的代码。</li>
+<li>为响应0x80，内核会调用system_call()列程处理中断<ul>
+<li>内核栈保存寄存器值</li>
+<li>审核系统调用编号有效性，参数有效性，执行任务，将结果返回system_call()列程</li>
+<li>从内核栈恢复各寄存器值，将系统的调用返回值置于栈中。</li>
+<li>返回至外壳函数，切换到用户态。</li>
+</ul>
+</li>
+<li>若系统调用返回值表明有误，外壳函数会使用<strong>该值</strong>来设置全局变量errno，然后外壳函数返回调用程序，并同时返回<strong>一个整型值(ex:-1)</strong>，表明是否成功。</li>
+</ul>
+<p>tip:</p>
+<ol>
+<li><p>一些系统调用成功后还是返回-1(ex:getpriority()), 需要在调用前将errno至为0，便于排查(p39)；</p>
+</li>
+<li><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;    void jkstack(void)  __attribute__((noreturn));  </div><div class="line">&gt;    // 就是告诉编译器这个函数不会返回给调用者，以便编译器在优化时去掉不必要的函数返回代码。</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="meta">#<span class="meta-keyword">define</span>	LINUX_REBOOT_MAGIC1	0xfee1dead </span></div><div class="line">&gt; <span class="meta">#<span class="meta-keyword">define</span>	LINUX_REBOOT_MAGIC2	672274793</span></div><div class="line">&gt; <span class="meta">#<span class="meta-keyword">define</span>	LINUX_REBOOT_MAGIC2A	85072278</span></div><div class="line">&gt; <span class="meta">#<span class="meta-keyword">define</span>	LINUX_REBOOT_MAGIC2B	369367448</span></div><div class="line">&gt; <span class="meta">#<span class="meta-keyword">define</span>	LINUX_REBOOT_MAGIC2C	537993216</span></div><div class="line">&gt; <span class="comment">/*672274793 = 0x28121969</span></div><div class="line">&gt;  85072278 = 0x05121996</div><div class="line">&gt; 369367448 = 0x16041998</div><div class="line">&gt; 537993216 = 0x20112000*/</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+</blockquote>
+<h3 id="linux-unix编程手册-4-文件I-O"><a href="#linux-unix编程手册-4-文件I-O" class="headerlink" title="linux/unix编程手册-4 (文件I/O)"></a>linux/unix编程手册-4 (文件I/O)</h3><h4 id="I-O相关系统调用"><a href="#I-O相关系统调用" class="headerlink" title="I/O相关系统调用"></a><strong>I/O相关系统调用</strong></h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> buffer[BUFFER_SIZE]</div><div class="line"><span class="comment">//1</span></div><div class="line">fd = open(pathname,flags,mode)  <span class="comment">// flags指定文件打开方式以及是否创建, mode指定创建文件的权限</span></div><div class="line"><span class="comment">//2</span></div><div class="line">numread=read(fd, buffer, count) <span class="comment">// 从fd中读取至多count字节数据，存储到buffer</span></div><div class="line"><span class="comment">//3</span></div><div class="line">numwritten=write(fd,buffer,count) <span class="comment">//从buffer读取至多count，写入fd</span></div><div class="line"><span class="comment">//4</span></div><div class="line">status=close(fd) <span class="comment">//释放fd以及相应内核资源</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>/proc/$PID/fdinfo 获得系统内任意一进程所打开的fd</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;  pos:    0   //当前文件偏移量</div><div class="line">&gt;  flags:  0100002</div><div class="line">&gt;  mnt_id: 17 // represents mount ID of the file system containing the opened file</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// tee.c</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> BUF_SIZE</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> BUF_SIZE 1024</span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> append = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> opt;</div><div class="line">	<span class="keyword">while</span> ((opt=getopt(argc, argv, <span class="string">"a"</span>))!=<span class="number">1</span>)&#123;</div><div class="line">		<span class="keyword">if</span> ((<span class="keyword">unsigned</span> <span class="keyword">char</span>) opt ==<span class="string">'a'</span>)&#123; append=<span class="number">1</span>;&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (optind&gt;=argc) &#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%s [-a] file\n"</span>, argv[<span class="number">0</span>]);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> fd = open(argv[optind], O_CREAT|O_WRONLY|(append?O_APPEND:O_TRUNC), S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH);</div><div class="line">	<span class="keyword">if</span> (fd == <span class="number">-1</span>) &#123;<span class="built_in">printf</span>(<span class="string">"opening file %s"</span>, argv[optind]);&#125;</div><div class="line">	<span class="keyword">ssize_t</span> numRead;</div><div class="line">	<span class="keyword">char</span> buf[BUF_SIZE];</div><div class="line">	<span class="keyword">int</span> oFd[<span class="number">2</span>] = &#123;fd, STDOUT_FILENO&#125;;</div><div class="line">	<span class="keyword">while</span> ((numRead = read(STDIN_FILENO, buf, BUF_SIZE))&gt;<span class="number">0</span>)&#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;(<span class="keyword">int</span>)(<span class="keyword">sizeof</span>(oFd)/<span class="keyword">sizeof</span>(oFd[<span class="number">0</span>]));i++)&#123;</div><div class="line">		<span class="keyword">if</span> (write(fd, buf, numRead)!=numRead)&#123;<span class="built_in">printf</span>(<span class="string">"couldn't wirte whole buff"</span>);&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (numRead==<span class="number">-1</span>)&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"read error"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (close(fd)==<span class="number">-1</span>)&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"colse error"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="number">_</span><span class="built_in">exit</span>(<span class="number">-1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>###linux/unix编程手册-5 (深入探究文件I/O) </p>
+<h4 id="文件描述符和打开文件之间的关系"><a href="#文件描述符和打开文件之间的关系" class="headerlink" title="文件描述符和打开文件之间的关系"></a>文件描述符和打开文件之间的关系</h4><blockquote>
+<ul>
+<li>进程级的文件描述符表<ul>
+<li>控制文件描述符操作的一组标志(close-on-exec标志)</li>
+<li>打开文件句柄的引用</li>
+</ul>
+</li>
+<li>系统级的打开文件表<ul>
+<li>当前文件偏移量</li>
+<li>打开文件时使用的状态参数flags</li>
+<li>文件访问模式</li>
+<li>信号驱动I/O相关的设置</li>
+<li>对文件i-node的引用</li>
+</ul>
+</li>
+<li>文件系统的i-node表<ul>
+<li>文件类型（FIFO ,套接字，常规文件）</li>
+<li>指向文件所持有的锁的列表的指针</li>
+<li>文件的各种属性</li>
+</ul>
+</li>
+</ul>
+<p><strong>进程A,B的文件描述符指向同一文件句柄：可能是fork()继承或者是UNIX域套接字传递；</strong></p>
+<p><strong>进程A,B的文件描述符指向不同文件句柄，不同文件句柄指向i-node列表同一条目：对同一文件发起open()调用，（统一进程两次open()同一文件类似）</strong></p>
+</blockquote>
+<p>复制文件描述符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./myscripts &gt; t.log 2&gt;&amp;1</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">int</span> newfd;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup</span><span class="params">(<span class="keyword">int</span> oldfd)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup2</span><span class="params">(<span class="keyword">int</span> oldfd, <span class="keyword">int</span> newfd)</span></span>; <span class="comment">// 忽略close(newfd)的错误</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fcntl</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> cmd, ...)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//复制时 为 fcntl(oldfd, F_DUPFD, startfd) 大于等于startfd的最小未用值作为描述符编号</span></div><div class="line"></div><div class="line"><span class="comment">//下面三行成功时一致；oldfg不存在时dup2不会close(newfd),new=old时什么都不做</span></div><div class="line">close(<span class="number">2</span>); newfd=dup(<span class="number">1</span>)</div><div class="line">newfd=dup2(<span class="number">1</span>,<span class="number">2</span>)</div><div class="line">close(<span class="number">2</span>); newfd=fcntl(<span class="number">1</span>, F_DUPFD,<span class="number">2</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.d&gt;</span></span></div><div class="line"><span class="comment">//线程安全read，write</span></div><div class="line"><span class="keyword">ssize_t</span> pread(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count, <span class="keyword">off_t</span> offset);</div><div class="line"></div><div class="line"><span class="keyword">ssize_t</span> pwirte(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count, <span class="keyword">off_t</span> offset);</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/uio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">struct</span> iovec&#123;</div><div class="line">    <span class="keyword">void</span> *iov_base;</div><div class="line">    <span class="keyword">size_t</span> iov_len;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//多缓冲区读写</span></div><div class="line"></div><div class="line"><span class="keyword">ssize_t</span> readv(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">struct</span> iovec *iov, <span class="keyword">int</span> iovcnt);</div><div class="line"></div><div class="line"><span class="keyword">ssize_t</span> writev(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">struct</span> iovec *iov, <span class="keyword">int</span> iovcnt);</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tips/" rel="tag">#tips</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/05/GO杂记/" rel="next" title="GO杂">
+                <i class="fa fa-chevron-left"></i> GO杂
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/05/01/linux:unix编程手册-3/"
+           data-title="linux/unix编程手册-3" data-url="http://yoursite.com/2018/05/01/linux:unix编程手册-3/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="alian" />
+          <p class="site-author-name" itemprop="name">alian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-2"><span class="nav-number">1.</span> <span class="nav-text">linux/unix编程手册-2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内核"><span class="nav-number">1.2.</span> <span class="nav-text">内核</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#内核职责"><span class="nav-number">1.2.1.</span> <span class="nav-text">内核职责</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程"><span class="nav-number">1.3.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1进程内存布局"><span class="nav-number">1.3.1.</span> <span class="nav-text">1进程内存布局</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2进程的创建"><span class="nav-number">1.3.2.</span> <span class="nav-text">2进程的创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3内存映射"><span class="nav-number">1.3.3.</span> <span class="nav-text">3内存映射</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-3"><span class="nav-number">2.</span> <span class="nav-text">linux/unix编程手册-3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#系统编程概念"><span class="nav-number">2.1.</span> <span class="nav-text">系统编程概念</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-4-文件I-O"><span class="nav-number">3.</span> <span class="nav-text">linux/unix编程手册-4 (文件I/O)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#I-O相关系统调用"><span class="nav-number">3.1.</span> <span class="nav-text">I/O相关系统调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件描述符和打开文件之间的关系"><span class="nav-number">3.2.</span> <span class="nav-text">文件描述符和打开文件之间的关系</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">alian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"alian"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

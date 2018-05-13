@@ -255,6 +255,584 @@
             
               
                 
+                <a class="post-title-link" href="/2018/05/01/linux:unix编程手册-3/" itemprop="url">
+                  linux/unix编程手册-3
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-05-01T11:53:07+08:00" content="2018-05-01">
+              2018-05-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/05/01/linux:unix编程手册-3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/01/linux:unix编程手册-3/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="linux-unix编程手册-2"><a href="#linux-unix编程手册-2" class="headerlink" title="linux/unix编程手册-2"></a>linux/unix编程手册-2</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><h4 id="内核"><a href="#内核" class="headerlink" title="内核"></a><strong>内核</strong></h4><h5 id="内核职责"><a href="#内核职责" class="headerlink" title="内核职责"></a>内核职责</h5>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/05/01/linux:unix编程手册-3/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/04/05/GO杂记/" itemprop="url">
+                  GO杂
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-04-05T00:05:32+08:00" content="2018-04-05">
+              2018-04-05
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/04/05/GO杂记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/05/GO杂记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="goroutine"><a href="#goroutine" class="headerlink" title="goroutine"></a>goroutine</h3><blockquote>
+<ul>
+<li>Go的并发同步模型CSP</li>
+<li>Go的并发调度器是在操作系统之上，将操作系统的线程和语言运行时的逻辑处理器绑定，在逻辑处理器运行goroutine</li>
+</ul>
+<ol>
+<li>将goroutine 放在逻辑处理器的执行队列</li>
+<li>goroutine 执行了阻塞的系统调用时，调度器将线程与处理器分离，线程一边阻塞等待系统调用返回，同时创建新的线程绑定到逻辑处理器，分配新的goroutine。</li>
+<li>goroutine执行网络IO调用时，会将goroutine放到网络轮询器，当轮询器表明网络IO操作已经就绪，重新分配goroutine到逻辑处理器</li>
+</ol>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/04/05/GO杂记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/12/select和epoll/" itemprop="url">
+                  select和epoll
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-08-12T23:25:00+08:00" content="2017-08-12">
+              2017-08-12
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/08/12/select和epoll/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/12/select和epoll/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="SELECT-和EPOLL"><a href="#SELECT-和EPOLL" class="headerlink" title="SELECT 和EPOLL"></a>SELECT 和EPOLL</h3><ul>
+<li><p>一个流可以是文件，socket，pipe 等等可以进行I/O操作的内核对象。不管是文件，还是套接字，还是管道，我们都可以把他们看作流</p>
+</li>
+<li><p><strong>阻塞I/O模式下</strong>，一个线程只能处理一个流的I/O事件。如果想要同时处理多个流，要么多进程(fork)，要么多线程(pthread_create)，很不幸这两种方法效率都不高。</p>
+</li>
+<li><p><strong>非阻塞忙轮询的I/O方式</strong>,我们只要不停的把所有流从头到尾问一遍，又从头开始。这样就可以处理多个流了，但这样的做法显然不好，因为如果所有的流都没有数据，那么只会白白浪费CPU。这里要补充一点，阻塞模式下，内核对于I/O事件的处理是阻塞或者唤醒，而非阻塞模式下则把I/O事件交给其他对象（后文介绍的 select 以及 epoll）处理甚至直接忽略。</p>
+</li>
+<li><p>为了避免CPU空转，可以引进了一个<strong>代理</strong>(select,epoll)，代理可以同时观察许多流的I/O事件，在空闲的时候，<strong>会把当前线程阻塞掉</strong>，当有一个或多个流有I/O事件时，就从阻塞态中醒来</p>
+<p>​</p>
+</li>
+</ul>
+<h4 id="select"><a href="#select" class="headerlink" title="select:"></a>select:</h4><ul>
+<li>如果没有I/O事件产生，我们的程序就会阻塞在select处。但是依然有个问题，我们从select那里仅仅知道了，有I/O事件发生了，但却并不知道是那几个流（可能有一个，多个，甚至全部），我们只能<strong>无差别轮询</strong>所有流，找出能读出数据，或者写入数据的流，对他们进行操作</li>
+<li>我们有O(n)的<strong>无差别</strong>轮询复杂度，同时处理的流越多，每一次无差别轮询时间就越长。</li>
+</ul>
+<h4 id="epoll"><a href="#epoll" class="headerlink" title="epoll:"></a>epoll:</h4><ul>
+<li>​</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 忙轮询</span></div><div class="line"><span class="keyword">while</span> true &#123;</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> stream[]; &#123;</div><div class="line">		<span class="keyword">if</span> i has data</div><div class="line">			read until unavailable</div><div class="line">	&#125;</div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="comment">#无差别轮训select</span></div><div class="line"><span class="keyword">while</span> true &#123;</div><div class="line">	select(streams[])  <span class="comment">#都没有IO时阻塞</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> streams[] &#123;</div><div class="line">		<span class="keyword">if</span> i has data</div><div class="line">			read until unavailable</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment"># epoll</span></div><div class="line"><span class="keyword">while</span> true &#123;</div><div class="line">	active_stream[] = epoll_wait(epollfd)</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> active_stream[] &#123;</div><div class="line">		read <span class="keyword">or</span> write till unavailable</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/19/高性能mysql笔记/" itemprop="url">
+                  高性能MYSQL
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-07-19T22:53:54+08:00" content="2017-07-19">
+              2017-07-19
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/07/19/高性能mysql笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/19/高性能mysql笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="高性能MYSQL"><a href="#高性能MYSQL" class="headerlink" title="高性能MYSQL"></a>高性能MYSQL</h2><blockquote>
+<ul>
+<li>行级锁只在存储引擎层实现</li>
+<li>事务的隔离级别<ul>
+<li>read uncommited: 问题——脏读:<strong>一个事务会读进还没有被另一个事务提交的数据，所以你会看到一些最后被另一个事务回滚掉的数据</strong></li>
+<li>read commited:问题——不可重复读:<strong>一个事务读进一条记录，另一个事务更改了这条记录并提交完毕，这时候第一个事务再次读这条记录时，它已经改变了</strong>(解决：如果只有在修改事务完全提交之后才可以读取数据，可以避免该问题)</li>
+<li>repeatable read:问题——幻读:<strong>一个事务用Where子句来检索一个表的数据，另一个事务插入一条新的记录，并且符合Where条件，这样，第一个事务用同一个where条件来检索数据后，就会多出一条记录</strong>(解决:如果在操作事务完成数据处理之前，任何其他事务都不可以添加新数据，则可避免该问题)</li>
+<li>serializable</li>
+</ul>
+</li>
+<li>死锁:innodb的处理——将持有最少行级排他锁的事务回滚</li>
+<li>innodb下MVCC只在read commited 和 repeatable read 下适用</li>
+</ul>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/07/19/高性能mysql笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/06/机器学习鸡屎/" itemprop="url">
+                  机器学习鸡屎
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-06T00:05:32+08:00" content="2017-06-06">
+              2017-06-06
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/06/机器学习鸡屎/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/06/机器学习鸡屎/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="第二节"><a href="#第二节" class="headerlink" title="第二节"></a>第二节</h3><h5 id="data——-gt-ML——-gt-improve-performance-measure"><a href="#data——-gt-ML——-gt-improve-performance-measure" class="headerlink" title="data——&gt;ML——&gt;improve performance measure"></a>data——&gt;ML——&gt;improve performance measure</h5><h4 id="什么情况下需要机器学习"><a href="#什么情况下需要机器学习" class="headerlink" title="什么情况下需要机器学习"></a>什么情况下需要机器学习</h4><ul>
+<li>有潜在规则需要学习，用来提高某些表现</li>
+<li>很难写出定义程序。</li>
+<li>有数据</li>
+</ul>
+<blockquote>
+<p>数据，假设的集合，演算法——&gt;矩~=f</p>
+<p>模型是演算法加上假设的集合</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/17/sicp-4/" itemprop="url">
                   sicp-4
                 </a>
@@ -845,636 +1423,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/01/PCI-3/" itemprop="url">
-                  PCI-3
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-01T17:04:22+08:00" content="2016-12-01">
-              2016-12-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/programming/" itemprop="url" rel="index">
-                    <span itemprop="name">programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/12/01/PCI-3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/01/PCI-3/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="3-发现分组"><a href="#3-发现分组" class="headerlink" title="3.发现分组"></a>3.发现分组</h3><h4 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h4><p><strong>1.监督与无监督学习(Supervised versus Unsupervised Learning)</strong></p>
-<p>监督学习：通过一组输入和期望的输出进行学习：（神经网络?，决策树，支持矢量机， 贝叶斯过滤等）</p>
-<p>非监督学习：一组数据中找寻某种结构 ：（聚类，负矩阵因式分解，自组织映射等）</p>
-<p><strong>2.分级聚类</strong></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/01/PCI-3/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/25/sicp-3/" itemprop="url">
-                  sicp-3
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-25T09:54:24+08:00" content="2016-11-25">
-              2016-11-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/programming/" itemprop="url" rel="index">
-                    <span itemprop="name">programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/25/sicp-3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/25/sicp-3/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="Three-Modularity-Objects-and-State-objects-streams"><a href="#Three-Modularity-Objects-and-State-objects-streams" class="headerlink" title="Three.Modularity, Objects, and State(objects, streams)"></a>Three.Modularity, Objects, and State(objects, streams)</h4><h5 id="3-1Assignment-and-Local-State"><a href="#3-1Assignment-and-Local-State" class="headerlink" title="3.1Assignment and Local State"></a><strong>3.1Assignment and Local State</strong></h5><blockquote>
-<p>The trouble here is that substitution is based ultimately on the no-<br>tion that the symbols in our language are essentially names for values.<br>But as soon as we introduce set! and the idea that the value of a vari-<br>able can change, a variable can no longer be simply a name. Now a<br>variable somehow refers to a place where a value can be stored, and the<br>value stored at this place can change. In Section 3.2 we will see how<br>environments play this role of “place” in our computational model.</p>
-<p>简而言之(lambda (x) (set! x (+ x 1))) 没法将 值 x为5代入（替代模型失效）</p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">(define new-withdraw (let ((balance 100))</div><div class="line">(lambda (amount)</div><div class="line">(if (&gt;= balance amount)</div><div class="line">(begin (set! balance (- balance amount)) balance)</div><div class="line">          "Insufficient funds"))))</div><div class="line">//new-withdraw 首先创建一个local 环境，然后返回lambda函数，由于是在local中创建，其closure环境指针指向local,但new-withdraw是在global中创建的         </div><div class="line"></div><div class="line"></div><div class="line">(define (make-simplified-withdraw balance) (lambda (amount)</div><div class="line">(set! balance (- balance amount))</div><div class="line">balance))</div><div class="line"></div><div class="line">//(make-simplified-withdraw balance) 等效于new-withdraw 以替代模型理解，不要以传统的call理解，如下python</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">new-withdraw = ((<span class="keyword">lambda</span> .....) <span class="number">100</span>)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">make</span>-<span class="title">simplified</span>-<span class="title">withdraw</span><span class="params">(balance)</span>:</span></div><div class="line">	<span class="keyword">return</span> <span class="keyword">lambda</span>...</div></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/25/sicp-3/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/01/sicp-2/" itemprop="url">
-                  sicp-2
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-01T15:40:03+08:00" content="2016-11-01">
-              2016-11-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/programming/" itemprop="url" rel="index">
-                    <span itemprop="name">programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/01/sicp-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/01/sicp-2/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="Two-Building-Abstractions-with-Data"><a href="#Two-Building-Abstractions-with-Data" class="headerlink" title="Two.Building Abstractions with Data"></a>Two.Building Abstractions with Data</h4><p>2.1.3</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">(<span class="name">define</span> (<span class="name">cons</span> x y) (<span class="name">define</span> (<span class="name">dispatch</span> m)</div><div class="line">(<span class="name">cond</span> ((<span class="name">=</span> m <span class="number">0</span>) x) ((<span class="name">=</span> m <span class="number">1</span>) y)</div><div class="line">(<span class="name">else</span> (<span class="name">error</span> <span class="string">"Argument not 0 or 1: CONS"</span> m)))) dispatch)</div><div class="line">(<span class="name">define</span> (<span class="name">car</span> z) (<span class="name">z</span> <span class="number">0</span>)) (<span class="name">define</span> (<span class="name">cdr</span> z) (<span class="name">z</span> <span class="number">1</span>))</div><div class="line"></div><div class="line">// exercise <span class="number">2.4</span></div><div class="line">(<span class="name">define</span> (<span class="name">cons</span> a b)</div><div class="line">  (<span class="name">lambda</span> (<span class="name">x</span>) (<span class="name">x</span> a b))</div><div class="line"> )</div><div class="line">(<span class="name">define</span> (<span class="name">car</span> m)</div><div class="line"> 	(<span class="name">m</span> (<span class="name">lambda</span> (<span class="name">p</span> q) p) </div><div class="line">)</div><div class="line">(<span class="name">define</span> (<span class="name">cdr</span> m)</div><div class="line"> 	(<span class="name">m</span> (<span class="name">lambda</span> (<span class="name">p</span> q) q)) </div><div class="line"> )</div></pre></td></tr></table></figure>
-<p>map</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/01/sicp-2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/24/CSAPP-3/" itemprop="url">
-                  CSAPP-3
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-24T20:59:48+08:00" content="2016-10-24">
-              2016-10-24
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/programming/" itemprop="url" rel="index">
-                    <span itemprop="name">programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/24/CSAPP-3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/24/CSAPP-3/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="程序的机器级表示"><a href="#程序的机器级表示" class="headerlink" title="程序的机器级表示"></a>程序的机器级表示</h3><h4 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gcc -O1 -o p p1.c p2.c</div></pre></td></tr></table></figure>
-<p>-O1 告诉编译器第一级优化，提高优化级别，编译后运行快，编译时间长</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gcc -O1 -S code.c</div></pre></td></tr></table></figure>
-<p>以上会运行编译器，产生一个汇编文件 code.s。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gcc -O1 -c code.c</div></pre></td></tr></table></figure>
-<p>以上会编译并汇编该代码，生成目标代码文件code.o。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gobjdump -d code.o</div></pre></td></tr></table></figure>
-<p>以上在mac 下使用gobjdump(具体配置google), linux下为objdump， gobjdump 为反汇编指令。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pushl		%ebp</div><div class="line">movl		%esp, %ebp</div></pre></td></tr></table></figure>
-<p><strong>3.4.2 数据传送指令</strong></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/24/CSAPP-3/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/24/CSAPP-1-2/" itemprop="url">
-                  CSAPP 1~2
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-24T14:21:59+08:00" content="2016-10-24">
-              2016-10-24
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/programming/" itemprop="url" rel="index">
-                    <span itemprop="name">programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/24/CSAPP-1-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/24/CSAPP-1-2/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="系统漫游"><a href="#系统漫游" class="headerlink" title="系统漫游"></a>系统漫游</h3><h4 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h4><p>CSAPP1-2 和 standford 的 编程范式2，3笔记</p>
-<h4 id="小计"><a href="#小计" class="headerlink" title="小计"></a>小计</h4><p>1.硬件系统组成:总线，I/O设备，主存，CPU<br>2.操作系统：应用程序和硬件之间的软件；作用：防止硬件被滥用，向应用程序提供简单一致的接口；抽象概念：虚拟机-进程-虚拟存储器-文件（IO)主存)（处理器)操作系统）。<br>3.并发(concurrency)，杂技员玩球;并行(parallelism),多核。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/24/CSAPP-1-2/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1520,7 +1468,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">36</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1574,7 +1522,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
