@@ -1,0 +1,747 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="course," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="系统漫游主要内容CSAPP1-2 和 standford 的 编程范式2，3笔记
+小计1.硬件系统组成:总线，I/O设备，主存，CPU2.操作系统：应用程序和硬件之间的软件；作用：防止硬件被滥用，向应用程序提供简单一致的接口；抽象概念：虚拟机-进程-虚拟存储器-文件（IO)主存)（处理器)操作系统）。3.并发(concurrency)，杂技员玩球;并行(parallelism),多核。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSAPP 1~2">
+<meta property="og:url" content="http://yoursite.com/2016/10/24/CSAPP-1-2/index.html">
+<meta property="og:site_name" content="One Alian">
+<meta property="og:description" content="系统漫游主要内容CSAPP1-2 和 standford 的 编程范式2，3笔记
+小计1.硬件系统组成:总线，I/O设备，主存，CPU2.操作系统：应用程序和硬件之间的软件；作用：防止硬件被滥用，向应用程序提供简单一致的接口；抽象概念：虚拟机-进程-虚拟存储器-文件（IO)主存)（处理器)操作系统）。3.并发(concurrency)，杂技员玩球;并行(parallelism),多核。">
+<meta property="og:image" content="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSd_4yxkCMxQwSQt2S7tBdFw9eTqPS9I_Sl8GD3NarJwmz-bOUkIw">
+<meta property="og:updated_time" content="2017-02-09T15:10:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSAPP 1~2">
+<meta name="twitter:description" content="系统漫游主要内容CSAPP1-2 和 standford 的 编程范式2，3笔记
+小计1.硬件系统组成:总线，I/O设备，主存，CPU2.操作系统：应用程序和硬件之间的软件；作用：防止硬件被滥用，向应用程序提供简单一致的接口；抽象概念：虚拟机-进程-虚拟存储器-文件（IO)主存)（处理器)操作系统）。3.并发(concurrency)，杂技员玩球;并行(parallelism),多核。">
+<meta name="twitter:image" content="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSd_4yxkCMxQwSQt2S7tBdFw9eTqPS9I_Sl8GD3NarJwmz-bOUkIw">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/24/CSAPP-1-2/"/>
+
+  <title> CSAPP 1~2 | One Alian </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">One Alian</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CSAPP 1~2
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-24T14:21:59+08:00" content="2016-10-24">
+              2016-10-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/24/CSAPP-1-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/24/CSAPP-1-2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="系统漫游"><a href="#系统漫游" class="headerlink" title="系统漫游"></a>系统漫游</h3><h4 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h4><p>CSAPP1-2 和 standford 的 编程范式2，3笔记</p>
+<h4 id="小计"><a href="#小计" class="headerlink" title="小计"></a>小计</h4><p>1.硬件系统组成:总线，I/O设备，主存，CPU<br>2.操作系统：应用程序和硬件之间的软件；作用：防止硬件被滥用，向应用程序提供简单一致的接口；抽象概念：虚拟机-进程-虚拟存储器-文件（IO)主存)（处理器)操作系统）。<br>3.并发(concurrency)，杂技员玩球;并行(parallelism),多核。</p>
+<a id="more"></a>
+<h3 id="信息的表示和处理"><a href="#信息的表示和处理" class="headerlink" title="信息的表示和处理"></a>信息的表示和处理</h3><h4 id="主要内容-1"><a href="#主要内容-1" class="headerlink" title="主要内容"></a>主要内容</h4><p>略</p>
+<h4 id="小计-1"><a href="#小计-1" class="headerlink" title="小计"></a>小计</h4><p>1.字长 整数和指针数据的标称大小</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//假设short 2字节，int 4 字节</div><div class="line">short k=-1;</div><div class="line">int v=k;</div><div class="line">// v=-1 会将符号位</div></pre></td></tr></table></figure>
+<p>2.大端法(先存高有效位，及高位在低地址先存)和小端法：</p>
+<!--more-->
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#include &lt;stdio.h&gt;</span></div><div class="line">//查看为大端还是小端思路</div><div class="line">typedef unsigned char *byte_pointer;</div><div class="line">void show_bytes(byte_pointer start, int len)&#123;</div><div class="line">	int i;</div><div class="line">	<span class="keyword">for</span>(i=0;i&lt;len;i++)&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%.2x"</span>, start[i]);</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"\n"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void show_int(int x)&#123;</div><div class="line">	show_bytes((byte_pointer) &amp;x, sizeof(int));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3.无符号数逻辑右移，有符号数算术右移<br>4.整数四则运算推倒略<br>5.IEEE浮点标准 $V=(-1)^s\times M\times2^E$ (示例，8位浮点数，1位符号，k=4阶码位，n=3小数位)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">s(首位，浮点数正负)</th>
+<th style="text-align:center">M(尾码，)</th>
+<th style="text-align:center">E(指数)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">非规格化 (0~1 0000 000~111 ex:0 0000 011)</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">M=小数位 ex:3/8</td>
+<td style="text-align:center">$E=1-(2^{k-1}-1)$ ex:-6</td>
+</tr>
+<tr>
+<td style="text-align:center">规格化（0~1 0000~1110 000~111 ex:0 0110 110）</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">M=小数位+1 ex:6/8+1=14/8</td>
+<td style="text-align:center">E=整数位-($2^{k-1}$-1) ex:-1</td>
+</tr>
+<tr>
+<td style="text-align:center">无穷(0~1 1111 000)</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">/</td>
+</tr>
+<tr>
+<td style="text-align:center">NaN(0~1 1111 001~111)</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">/</td>
+</tr>
+</tbody>
+</table>
+<p>6.float浮点数表示</p>
+<p><code>假设short 2字节 int 4字节 float 4字节</code></p>
+<p>​    以4字节浮点数为例子。首位(31位)为符号位，30~23位为exp位，剩余为小数位d，从$2^{-1}$开始</p>
+<p>​    $f=s\times M\times2^E$        </p>
+<p>​    E :-127~128 由8位exp位决定 值为(exp-127)，当exp为0时，为非规格化E=1-127</p>
+<p>​    M:M=(1+d)，exp为0时，M=d，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">int i=5;</div><div class="line">float f = i;</div><div class="line">printf(&apos;%d&apos;,f) // 5</div><div class="line"></div><div class="line">float f = * (float *) &amp;i</div><div class="line">printf(&apos;%d&apos;, f) // very small</div></pre></td></tr></table></figure>
+<blockquote>
+<p>C语言中的struct的内存满足一下两个原则</p>
+<p>1.结构体变量中成员的偏移量必须是成员大小的整数倍（0被认为是任何数的整数倍）</p>
+<p>2.结构体大小必须是所有成员大小的整数倍。结构体中包含数组数组的大小按其成员大小。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span> <span class="params">(<span class="keyword">void</span> *vp1, <span class="keyword">void</span> * vp2, <span class="keyword">int</span> size)</span></span>&#123;</div><div class="line">  <span class="keyword">char</span> buffer[size];</div><div class="line">  <span class="built_in">memcpy</span> (buffer, vp1, size);</div><div class="line">  <span class="built_in">memcpy</span>(vp1, vp2, size);</div><div class="line">  <span class="built_in">memcpy</span>(vp2, buffer, size);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">lsearch</span><span class="params">(<span class="keyword">void</span> *key, <span class="keyword">void</span> *base, <span class="keyword">int</span> n, <span class="keyword">int</span> size)</span></span>&#123;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</div><div class="line">    <span class="keyword">void</span> *elemAddr = (<span class="keyword">char</span> *) base + i * size</div><div class="line">    <span class="keyword">if</span> (<span class="built_in">memcmp</span>(elemAddr, key, size)==<span class="number">0</span>) <span class="keyword">return</span> elemAddr;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意函数指针</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">void * example(int (*func) (void * base))&#123;&#125;;</div><div class="line">//传入函数指针</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span>&#123;</div><div class="line">  <span class="keyword">int</span> logicallen;</div><div class="line">  <span class="keyword">int</span> allocation;</div><div class="line">  <span class="keyword">void</span> * elems；</div><div class="line">  <span class="keyword">int</span> elemSize;</div><div class="line">&#125; <span class="built_in">stack</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">StackNew</span><span class="params">(<span class="built_in">stack</span> *s, <span class="keyword">int</span> elemSize)</span></span>&#123;</div><div class="line">  assert(elemSize&gt;<span class="number">0</span>);</div><div class="line">  s-&gt;logicallen=<span class="number">0</span>;</div><div class="line">  s-&gt;allocation=<span class="number">4</span>;</div><div class="line">  s-&gt;elemSize=elemSize;</div><div class="line">  s-&gt;elems=<span class="built_in">malloc</span>(<span class="number">4</span>*elemSize);</div><div class="line">  assert (s-&gt;elems!=<span class="literal">NULL</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">StackDispose</span><span class="params">(<span class="built_in">stack</span> *s)</span></span>&#123;</div><div class="line">  <span class="built_in">free</span>(s-&gt;elems);</div><div class="line">&#125;</div><div class="line"><span class="comment">//不能free s 因为不是动态申请的</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">StackPush</span><span class="params">(<span class="built_in">stack</span>*s, <span class="keyword">void</span> elemAddr)</span></span>&#123;</div><div class="line">  <span class="keyword">if</span> (s-&gt;logicallen==s-&gt;allocation)&#123;</div><div class="line">    StactGrow(s)</div><div class="line">    </div><div class="line">  &#125;</div><div class="line">  <span class="keyword">void</span> * target=(<span class="keyword">char</span> *) s-&gt;elems + s-&gt;logicallen * s-&gt;elemSize;</div><div class="line">  <span class="built_in">memcpy</span>(target, elemAddr, s-&gt;elemSize);</div><div class="line">  s-&gt;logicallen++;</div><div class="line">&#125;<span class="comment">//可以先将s-&gt;elems设置为NULL，之后可以用realloc代替malloc，因为不能在原有基础上括展则会重新malloc c++没有直接的realloc</span></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">StactGrow</span><span class="params">(<span class="built_in">stack</span> *s)</span></span>&#123;</div><div class="line">  	s-&gt;allocation *=<span class="number">2</span>;</div><div class="line">    s-&gt;elems = <span class="built_in">realloc</span>(s-&gt;elems, s-&gt;allocation * s-&gt;elemSize);</div><div class="line">    assert(s-&gt;elems!=<span class="literal">NULL</span>);</div><div class="line">&#125;<span class="comment">//static 函数只能在文件内访问</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">stackPop</span><span class="params">(<span class="built_in">stack</span> *s, <span class="keyword">void</span> * elemAddr)</span></span>&#123;</div><div class="line">  s-&gt;logicallen--;</div><div class="line">  <span class="keyword">void</span> * source=(<span class="keyword">char</span> *) s-&gt;elems + s-&gt;logicallen * s-&gt;elemSize;</div><div class="line">  <span class="built_in">memcpy</span>(elemAddr, source, s-&gt;elemSize);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>静态区：保存自动全局变量和static 变量（包括static 全局和局部变量）。静态区的内容在总个程序的生命周期内都存在，由编译器在编译的时候分配。字符串？<br>栈：保存局部变量。栈上的内容只在函数的范围内存在，当函数运行结束，这些内容也会自动被销毁。其特点是效率高，但空间大小有限。<br>堆：由malloc 系列函数或new 操作符分配的内存。其生命周期由free 或delete 决定。</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">//上段代码升级版</div><div class="line"></div><div class="line"></div><div class="line">typedef struct&#123;</div><div class="line">  int logicallen;</div><div class="line">  int allocation;</div><div class="line">  void * elems；</div><div class="line">  int elemSize;</div><div class="line">  void (*func)(void *);</div><div class="line">&#125; stack;</div><div class="line"></div><div class="line">void StackNew(stack *s, int elemSize, void (*func)(void * elem))&#123;</div><div class="line">  assert(elemSize&gt;0);</div><div class="line">  s-&gt;logicallen=0;</div><div class="line">  s-&gt;allocation=4;</div><div class="line">  s-&gt;elemSize=elemSize;</div><div class="line">  s-&gt;func = func;</div><div class="line">  s-&gt;elems=malloc(4*elemSize);</div><div class="line">  assert (s-&gt;elems!=NULL);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void StackDispose(stack *s)&#123;</div><div class="line">  if (func != NULL)&#123;</div><div class="line">    (for int i=0;i&lt;s-&gt;logicalen;i++)&#123;</div><div class="line">      s-&gt;func((char *) s-&gt;elems + i*s-&gt;elemSize);  //不在POP中加入free因为返回的东西会立刻清除</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  free(s-&gt;elems);</div><div class="line">&#125;</div><div class="line">//不能free s 因为不是动态申请的</div><div class="line"></div><div class="line">void StackPush(stack*s, void elemAddr)&#123;</div><div class="line">  if (s-&gt;logicallen==s-&gt;allocation)&#123;</div><div class="line">    StactGrow(s)</div><div class="line">    </div><div class="line">  &#125;</div><div class="line">  void * target=(char *) s-&gt;elems + s-&gt;logicallen * s-&gt;elemSize;</div><div class="line">  memcpy(target, elemAddr, s-&gt;elemSize);</div><div class="line">  s-&gt;logicallen++;</div><div class="line">&#125;//可以先将s-&gt;elems设置为NULL，之后可以用realloc代替malloc，因为不能在原有基础上括展则会重新malloc c++没有直接的realloc</div><div class="line">static void StactGrow(stack *s)&#123;</div><div class="line">  	s-&gt;allocation *=2;</div><div class="line">    s-&gt;elems = realloc(s-&gt;elems, s-&gt;allocation * s-&gt;elemSize);</div><div class="line">    assert(s-&gt;elems!=NULL);</div><div class="line">&#125;//static 函数只能在文件内访问</div><div class="line"></div><div class="line">void stackPop(stack *s, void * elemAddr)&#123;</div><div class="line">  s-&gt;logicallen--;</div><div class="line">  void * source=(char *) s-&gt;elems + s-&gt;logicallen * s-&gt;elemSize;</div><div class="line">  memcpy(elemAddr, source, s-&gt;elemSize);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void stringFree(void * elem)&#123;</div><div class="line">  free(* (char ** elem)); //注意</div><div class="line">&#125;</div><div class="line"></div><div class="line">//memmove(效率低) 和memcpy memmove可以处理有覆盖</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//指针相减返两个地址之间指针所指数据类型的数量</span></div></pre></td></tr></table></figure>
+<p><strong>编程范式8</strong></p>
+<p>内存地址从低到高 汇编代码—&gt;堆区—&gt;栈区</p>
+<p><img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSd_4yxkCMxQwSQt2S7tBdFw9eTqPS9I_Sl8GD3NarJwmz-bOUkIw" alt="无奈啊"></p>
+<p><strong>堆的实现</strong></p>
+<p><strong>栈</strong></p>
+<p>SP:STACK POINTER</p>
+<p>传入的参数第一个在最下面。（因为在不知道传入参数数量时，能确保访问）</p>
+<p><strong>编译</strong></p>
+<p>1.预处理器（只涉及文本的替换）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> A 10       </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> B 2*A</span></div><div class="line"><span class="comment">//会删除#开头的行，将A替换为10，B替换为2*10</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX(a,b) (((a)&gt;(b))?(a):(b))</span></div><div class="line"><span class="comment">//宏，减少函数调用的花费</span></div><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> NDEBUG</span></div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> assert(cond) (void) 0</span></div><div class="line"><span class="meta">#<span class="meta-keyword">else</span></span></div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> assert(cond) (cond)?((void) 0):fprintf(stderr, <span class="meta-string">"---"</span>),exit(0)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"root.h"</span></span></div><div class="line"></div><div class="line"><span class="comment">//尖括号表明是系统头文件文件 从类似/usr/bin/include /usr/include寻找，""则当前目录由make文件设置</span></div><div class="line"><span class="comment">//删除行替换为文件内容</span></div><div class="line"><span class="comment">//.h头文件大多只定义原型，不会如.c文件产生机器码，</span></div></pre></td></tr></table></figure>
+<p><strong>调试</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//c call &lt;malloc&gt;; c++ call &lt;malloc-int-p&gt; c++的函数的重构</div><div class="line"></div><div class="line">//seg fault : 一般对错误指针解引用</div><div class="line">//ex:</div><div class="line">*(NULL)</div><div class="line">//bus error : 解引用的地址不是应当的地址 </div><div class="line">//ex:</div><div class="line">void *p= xxxxx;</div><div class="line">*(short *) p = 7;  //short地址必须为偶地址</div><div class="line">*(int *) p=55;	//int 地址必须为4的倍数，除了short 和char 其他数据类型地址都为4的倍数</div></pre></td></tr></table></figure>
+<p>5个科学家吃饭问题，可以设置一个只允许4个人先吃的锁，保证有一个科学家可以先吃，避免死锁</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/course/" rel="tag">#course</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/20/sicp-1/" rel="next" title="sicp-1">
+                <i class="fa fa-chevron-left"></i> sicp-1
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/24/CSAPP-3/" rel="prev" title="CSAPP-3">
+                CSAPP-3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/24/CSAPP-1-2/"
+           data-title="CSAPP 1~2" data-url="http://yoursite.com/2016/10/24/CSAPP-1-2/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="alian" />
+          <p class="site-author-name" itemprop="name">alian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统漫游"><span class="nav-number">1.</span> <span class="nav-text">系统漫游</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要内容"><span class="nav-number">1.1.</span> <span class="nav-text">主要内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小计"><span class="nav-number">1.2.</span> <span class="nav-text">小计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息的表示和处理"><span class="nav-number">2.</span> <span class="nav-text">信息的表示和处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要内容-1"><span class="nav-number">2.1.</span> <span class="nav-text">主要内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小计-1"><span class="nav-number">2.2.</span> <span class="nav-text">小计</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">alian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"alian"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

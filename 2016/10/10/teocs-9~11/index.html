@@ -1,0 +1,675 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="course," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="从零开始构建现代计算机九.高级语言基本类型申明时会在内存中分配对应的内存单元
+对象类型申明时实际创建一个指向该对象的引用变量，内存单元只有在调用构造函数时才会分配">
+<meta property="og:type" content="article">
+<meta property="og:title" content="teocs-9~11">
+<meta property="og:url" content="http://yoursite.com/2016/10/10/teocs-9~11/index.html">
+<meta property="og:site_name" content="One Alian">
+<meta property="og:description" content="从零开始构建现代计算机九.高级语言基本类型申明时会在内存中分配对应的内存单元
+对象类型申明时实际创建一个指向该对象的引用变量，内存单元只有在调用构造函数时才会分配">
+<meta property="og:updated_time" content="2017-02-09T14:40:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="teocs-9~11">
+<meta name="twitter:description" content="从零开始构建现代计算机九.高级语言基本类型申明时会在内存中分配对应的内存单元
+对象类型申明时实际创建一个指向该对象的引用变量，内存单元只有在调用构造函数时才会分配">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/10/teocs-9~11/"/>
+
+  <title> teocs-9~11 | One Alian </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">One Alian</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                teocs-9~11
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-10T15:43:23+08:00" content="2016-10-10">
+              2016-10-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/10/teocs-9~11/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/10/teocs-9~11/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="从零开始构建现代计算机"><a href="#从零开始构建现代计算机" class="headerlink" title="从零开始构建现代计算机"></a>从零开始构建现代计算机</h3><h4 id="九-高级语言"><a href="#九-高级语言" class="headerlink" title="九.高级语言"></a>九.高级语言</h4><p><strong>基本类型</strong>申明时会在内存中分配对应的内存单元</p>
+<p><strong>对象类型</strong>申明时实际创建一个指向该对象的引用变量，内存单元只有在调用构造函数时才会分配</p>
+<a id="more"></a>
+<h4 id="十-十一-编译器"><a href="#十-十一-编译器" class="headerlink" title="十~十一.编译器"></a><strong>十~十一.编译器</strong></h4><h5 id="十："><a href="#十：" class="headerlink" title="十："></a>十：</h5><h5 id="1-语法分析—字元化-tokenizing-模块将输入的字符分组成语言原子元素；语法分析-parsing-模块将语言原子元素集合同语法规则相匹配"><a href="#1-语法分析—字元化-tokenizing-模块将输入的字符分组成语言原子元素；语法分析-parsing-模块将语言原子元素集合同语法规则相匹配" class="headerlink" title="1.语法分析—字元化(tokenizing)模块将输入的字符分组成语言原子元素；语法分析(parsing)模块将语言原子元素集合同语法规则相匹配"></a><strong>1.语法分析</strong>—字元化(tokenizing)模块将输入的字符分组成语言原子元素；语法分析(parsing)模块将语言原子元素集合同语法规则相匹配</h5><h5 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h5><p><strong>上下文无关语法</strong></p>
+<p><strong>语法分析树</strong></p>
+<p>LL(0)语法，每当一个非终结符有多重可选择导出规则时，其第一个字元足以确定该非终结符所属的表达式类型，而不会出现不确定的情况。</p>
+<p>测试过的代码（以为没问题，无聊测了下，BUG不少，以后还是保持感觉良好）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!usr/bin/env python</span></div><div class="line"><span class="comment"># -*-coding:utf-8-*-</span></div><div class="line"><span class="string">"""</span></div><div class="line">author:wubaichuan</div><div class="line"></div><div class="line">"""</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">from</span> xml.sax.saxutils <span class="keyword">import</span> escape</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">JackTokenizer</span><span class="params">(object)</span>:</span></div><div class="line">    SYMBOL = (<span class="string">'&#123;'</span>, <span class="string">'&#125;'</span>, <span class="string">'('</span>, <span class="string">')'</span>, <span class="string">'['</span>, <span class="string">']'</span>, <span class="string">'.'</span>, <span class="string">','</span>, <span class="string">';'</span>, <span class="string">'+'</span>, <span class="string">'-'</span>, <span class="string">'*'</span>, <span class="string">'/'</span>, <span class="string">'&amp;'</span>, <span class="string">'|'</span>, <span class="string">'&lt;'</span>, <span class="string">'&gt;'</span>, <span class="string">'='</span>, <span class="string">'~'</span>)</div><div class="line">    KEYWORD = (<span class="string">'class'</span>, <span class="string">'constructor'</span>, <span class="string">'function'</span>, <span class="string">'method'</span>, <span class="string">'field'</span>, <span class="string">'static'</span>, <span class="string">'var'</span>, <span class="string">'int'</span>, <span class="string">'char'</span>, <span class="string">'boolean'</span>,</div><div class="line">               <span class="string">'void'</span>, <span class="string">'true'</span>, <span class="string">'false'</span>, <span class="string">'null'</span>, <span class="string">'this'</span>, <span class="string">'let'</span>, <span class="string">'do'</span>, <span class="string">'if'</span>, <span class="string">'else'</span>, <span class="string">'while'</span>, <span class="string">'return'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.token_list = []</div><div class="line">        self.token = <span class="keyword">None</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">constructor</span><span class="params">(self, file_uri)</span>:</span></div><div class="line">        self.token_list = []</div><div class="line">        <span class="keyword">with</span> open(file_uri, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</div><div class="line">            temp_token = f.read(<span class="number">1</span>)</div><div class="line">            <span class="keyword">while</span> temp_token:</div><div class="line">                <span class="keyword">if</span> temp_token.isalpha() <span class="keyword">or</span> temp_token.isdigit() <span class="keyword">or</span> temp_token == <span class="string">'_'</span>:</div><div class="line">                    self.token_list.append(temp_token)</div><div class="line">                    temp_token = f.read(<span class="number">1</span>)</div><div class="line">                    <span class="keyword">while</span> temp_token.isalpha() <span class="keyword">or</span> temp_token.isdigit() <span class="keyword">or</span> temp_token == <span class="string">'_'</span>:</div><div class="line">                        self.token_list[<span class="number">-1</span>] += temp_token</div><div class="line">                        temp_token = f.read(<span class="number">1</span>)</div><div class="line">                    f.seek(<span class="number">-1</span>, <span class="number">1</span>)</div><div class="line">                <span class="keyword">elif</span> temp_token == <span class="string">'/'</span>:</div><div class="line">                    temp_token = f.read(<span class="number">1</span>)</div><div class="line">                    <span class="keyword">if</span> temp_token == <span class="string">'/'</span>:</div><div class="line">                        <span class="keyword">while</span> f.read(<span class="number">1</span>) != <span class="string">'\n'</span>:</div><div class="line">                            <span class="keyword">continue</span></div><div class="line">                    <span class="keyword">elif</span> temp_token == <span class="string">'*'</span>:</div><div class="line">                        <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">                            temp_token = f.read(<span class="number">1</span>)</div><div class="line">                            <span class="keyword">if</span> temp_token == <span class="string">'*'</span>:</div><div class="line">                                <span class="keyword">if</span> f.read(<span class="number">1</span>) == <span class="string">'/'</span>:</div><div class="line">                                    <span class="keyword">break</span></div><div class="line">                                <span class="keyword">else</span>:</div><div class="line">                                    f.seek(<span class="number">-1</span>, <span class="number">1</span>)</div><div class="line">                    <span class="keyword">else</span>:</div><div class="line">                        f.seek(<span class="number">-1</span>, <span class="number">1</span>)</div><div class="line">                        self.token_list.append(<span class="string">'/'</span>)</div><div class="line">                <span class="keyword">elif</span> temp_token <span class="keyword">in</span> JackTokenizer.SYMBOL:</div><div class="line">                    self.token_list.append(temp_token)</div><div class="line">                <span class="keyword">elif</span> temp_token == <span class="string">'"'</span>:</div><div class="line">                    self.token_list.append(temp_token)</div><div class="line">                    temp_token = <span class="keyword">None</span></div><div class="line">                    <span class="keyword">while</span> temp_token != <span class="string">'"'</span>:</div><div class="line">                        temp_token = f.read(<span class="number">1</span>)</div><div class="line">                        self.token_list[<span class="number">-1</span>] += temp_token</div><div class="line">                temp_token = f.read(<span class="number">1</span>)</div><div class="line">        <span class="keyword">print</span> self.token_list</div><div class="line">        self.token_list.reverse()</div><div class="line">        self.advance()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">has_more_tokens</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.token_list != []</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">advance</span><span class="params">(self)</span>:</span></div><div class="line">        self.token = self.token_list.pop()</div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">token_type</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.token <span class="keyword">in</span> JackTokenizer.KEYWORD:</div><div class="line">            <span class="keyword">return</span> <span class="string">'KEYWORD'</span></div><div class="line">        <span class="keyword">elif</span> self.token <span class="keyword">in</span> JackTokenizer.SYMBOL:</div><div class="line">            <span class="keyword">return</span> <span class="string">'SYMBOL'</span></div><div class="line">        <span class="keyword">elif</span> self.token[<span class="number">0</span>].isdigit():</div><div class="line">            <span class="keyword">return</span> <span class="string">'INT_CONST'</span></div><div class="line">        <span class="keyword">elif</span> self.token[<span class="number">0</span>] == <span class="string">'"'</span>:</div><div class="line">            <span class="keyword">return</span> <span class="string">'STRING_CONST'</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="string">'IDENTIFIER'</span></div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">keyword</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.token</div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">symbol</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.token</div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">int_val</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.token</div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">string_val</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.token.lstrip(<span class="string">'"'</span>).strip(<span class="string">'"'</span>)</div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">identifier</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.token</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CompilationEngine</span><span class="params">(object)</span>:</span></div><div class="line">    TYPE_MAP = &#123;<span class="string">'KEYWORD'</span>: <span class="string">'keyword'</span>, <span class="string">'SYMBOL'</span>: <span class="string">'symbol'</span>, <span class="string">'INT_CONST'</span>: <span class="string">'integerConstant'</span>,</div><div class="line">                <span class="string">'STRING_CONST'</span>: <span class="string">'stringConstant'</span>, <span class="string">'IDENTIFIER'</span>: <span class="string">'identifier'</span>&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_file_uri, out_file_uri)</span>:</span></div><div class="line">        self.tokenizer = JackTokenizer()</div><div class="line">        self.tokenizer.constructor(in_file_uri)</div><div class="line">        self.out_file = file(out_file_uri, <span class="string">'w'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__del__</span><span class="params">(self)</span>:</span></div><div class="line">        self.out_file.close()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">write_end_xml</span><span class="params">(self, tag)</span>:</span></div><div class="line">        self.out_file.write(<span class="string">'&lt;&#123;0&#125;&gt;&#123;1&#125;&lt;/&#123;0&#125;&gt;\n'</span>.format(</div><div class="line">            tag, escape(</div><div class="line">                self.tokenizer.token <span class="keyword">if</span> self.tokenizer.token_type != <span class="string">'STRING_CONST'</span> <span class="keyword">else</span> self.tokenizer.string_val)))</div><div class="line">        <span class="keyword">if</span> self.tokenizer.has_more_tokens():</div><div class="line">            self.tokenizer.advance()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_type</span><span class="params">(self)</span>:</span></div><div class="line">        self.write_end_xml(CompilationEngine.TYPE_MAP[self.tokenizer.token_type])</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_class</span><span class="params">(self)</span>:</span></div><div class="line">        self.out_file.write(<span class="string">'&lt;class&gt;\n'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'keyword'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'identifier'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        <span class="keyword">while</span> self.tokenizer.token <span class="keyword">in</span> [<span class="string">'static'</span>, <span class="string">'field'</span>]:</div><div class="line">            self.compile_class_var_dec()</div><div class="line">        <span class="keyword">while</span> self.tokenizer.token <span class="keyword">in</span> [<span class="string">'constructor'</span>, <span class="string">'function'</span>, <span class="string">'method'</span>]:</div><div class="line">            self.compile_subroutine()</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.out_file.write(<span class="string">'&lt;/class&gt;\n'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_class_var_dec</span><span class="params">(self)</span>:</span></div><div class="line">        self.out_file.write(<span class="string">'&lt;classVarDec&gt;\n'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'keyword'</span>)</div><div class="line">        self.compile_type()</div><div class="line">        self.write_end_xml(<span class="string">'identifier'</span>)</div><div class="line">        <span class="keyword">while</span> self.tokenizer.token != <span class="string">';'</span>:</div><div class="line">            self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">            self.write_end_xml(<span class="string">'identifier'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.out_file.write(<span class="string">'&lt;/classVarDec&gt;\n'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_subroutine</span><span class="params">(self)</span>:</span></div><div class="line">        self.out_file.write(<span class="string">'&lt;subroutineDec&gt;\n'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'keyword'</span>)</div><div class="line">        self.compile_type()</div><div class="line">        self.write_end_xml(<span class="string">'identifier'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.compile_parameter_list()</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.compile_subroutine_body()</div><div class="line">        self.out_file.write(<span class="string">'&lt;/subroutineDec&gt;\n'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_subroutine_body</span><span class="params">(self)</span>:</span></div><div class="line">        self.out_file.write(<span class="string">'&lt;subroutineBody&gt;\n'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        <span class="keyword">while</span> self.tokenizer.token == <span class="string">'var'</span>:</div><div class="line">            self.compile_var_dec()</div><div class="line">        self.compile_statements()</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.out_file.write(<span class="string">'&lt;/subroutineBody&gt;\n'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_parameter_list</span><span class="params">(self)</span>:</span></div><div class="line">        self.out_file.write(<span class="string">'&lt;parameterList&gt;\n'</span>)</div><div class="line">        <span class="keyword">if</span> self.tokenizer.token != <span class="string">')'</span>:</div><div class="line">            self.compile_type()</div><div class="line">            self.write_end_xml(<span class="string">'identifier'</span>)</div><div class="line">            <span class="keyword">while</span> self.tokenizer.token == <span class="string">','</span>:</div><div class="line">                self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">                self.compile_type()</div><div class="line">                self.write_end_xml(<span class="string">'identifier'</span>)</div><div class="line">        self.out_file.write(<span class="string">'&lt;/parameterList&gt;\n'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_var_dec</span><span class="params">(self)</span>:</span></div><div class="line">        self.out_file.write(<span class="string">'&lt;varDec&gt;\n'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'keyword'</span>)</div><div class="line">        self.compile_type()</div><div class="line">        self.write_end_xml(<span class="string">'identifier'</span>)</div><div class="line">        <span class="keyword">while</span> self.tokenizer.token != <span class="string">';'</span>:</div><div class="line">            self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">            self.write_end_xml(<span class="string">'identifier'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.out_file.write(<span class="string">'&lt;/varDec&gt;\n'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_statements</span><span class="params">(self)</span>:</span></div><div class="line">        self.out_file.write(<span class="string">'&lt;statements&gt;\n'</span>)</div><div class="line">        statement_map = &#123;<span class="string">'if'</span>: self.compile_if, <span class="string">'let'</span>: self.compile_let, <span class="string">'while'</span>: self.compile_while,</div><div class="line">                         <span class="string">'do'</span>: self.compile_do, <span class="string">'return'</span>: self.compile_return&#125;</div><div class="line">        <span class="keyword">while</span> self.tokenizer.token <span class="keyword">in</span> statement_map.keys():</div><div class="line">            statement_map[self.tokenizer.token]()</div><div class="line">        self.out_file.write(<span class="string">'&lt;/statements&gt;\n'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_do</span><span class="params">(self)</span>:</span></div><div class="line">        self.out_file.write(<span class="string">'&lt;doStatement&gt;\n'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'keyword'</span>)</div><div class="line">        self.compile_subroutine_call()</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.out_file.write(<span class="string">'&lt;/doStatement&gt;\n'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_subroutine_call</span><span class="params">(self)</span>:</span></div><div class="line">        self.write_end_xml(<span class="string">'identifier'</span>)</div><div class="line">        <span class="keyword">while</span> self.tokenizer.token == <span class="string">'.'</span>:</div><div class="line">            self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">            self.write_end_xml(<span class="string">'identifier'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.compile_expression_list()</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_let</span><span class="params">(self)</span>:</span></div><div class="line">        self.out_file.write(<span class="string">'&lt;letStatement&gt;\n'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'keyword'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'identifier'</span>)</div><div class="line">        <span class="keyword">while</span> self.tokenizer.token == <span class="string">'['</span>:</div><div class="line">            self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">            self.compile_expression()</div><div class="line">            self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.compile_expression()</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.out_file.write(<span class="string">'&lt;/letStatement&gt;\n'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_while</span><span class="params">(self)</span>:</span></div><div class="line">        self.out_file.write(<span class="string">'&lt;whileStatement&gt;\n'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'keyword'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.compile_expression()</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.compile_statements()</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.out_file.write(<span class="string">'&lt;/whileStatement&gt;\n'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_return</span><span class="params">(self)</span>:</span></div><div class="line">        self.out_file.write(<span class="string">'&lt;returnStatement&gt;\n'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'keyword'</span>)</div><div class="line">        <span class="keyword">if</span> self.tokenizer.token != <span class="string">';'</span>:</div><div class="line">            self.compile_expression()</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.out_file.write(<span class="string">'&lt;/returnStatement&gt;\n'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_if</span><span class="params">(self)</span>:</span></div><div class="line">        self.out_file.write(<span class="string">'&lt;ifStatement&gt;\n'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'keyword'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.compile_expression()</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.compile_statements()</div><div class="line">        self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        <span class="keyword">if</span> self.tokenizer.token == <span class="string">'else'</span>:</div><div class="line">            self.write_end_xml(<span class="string">'keyword'</span>)</div><div class="line">            self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">            self.compile_statements()</div><div class="line">            self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.out_file.write(<span class="string">'&lt;/ifStatement&gt;\n'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_expression</span><span class="params">(self)</span>:</span></div><div class="line">        self.out_file.write(<span class="string">'&lt;expression&gt;\n'</span>)</div><div class="line">        self.compile_term()</div><div class="line">        <span class="keyword">while</span> self.tokenizer.token <span class="keyword">in</span> <span class="string">"+-*/&amp;|&lt;&gt;="</span>:</div><div class="line">            self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">            self.compile_term()</div><div class="line">        self.out_file.write(<span class="string">'&lt;/expression&gt;\n'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_term</span><span class="params">(self)</span>:</span></div><div class="line">        self.out_file.write(<span class="string">'&lt;term&gt;\n'</span>)</div><div class="line">        <span class="keyword">if</span> self.tokenizer.token <span class="keyword">in</span> <span class="string">'-~'</span>:</div><div class="line">            self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">            self.compile_term()</div><div class="line">        <span class="keyword">elif</span> self.tokenizer.token == <span class="string">'('</span>:</div><div class="line">            self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">            self.compile_expression()</div><div class="line">            self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            store_token = self.tokenizer.token</div><div class="line">            self.tokenizer.advance()</div><div class="line">            <span class="keyword">if</span> self.tokenizer.token <span class="keyword">in</span> <span class="string">'(.'</span>:</div><div class="line">                self.tokenizer.token_list.append(self.tokenizer.token)</div><div class="line">                self.tokenizer.token = store_token</div><div class="line">                self.compile_subroutine_call()</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                self.tokenizer.token_list.append(self.tokenizer.token)</div><div class="line">                self.tokenizer.token = store_token</div><div class="line">                self.compile_type()</div><div class="line">                <span class="keyword">if</span> self.tokenizer.token == <span class="string">'['</span>:</div><div class="line">                    self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">                    self.compile_expression()</div><div class="line">                    self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">        self.out_file.write(<span class="string">'&lt;/term&gt;\n'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_expression_list</span><span class="params">(self)</span>:</span></div><div class="line">        self.out_file.write(<span class="string">'&lt;expression&gt;\n'</span>)</div><div class="line">        <span class="keyword">if</span> self.tokenizer.token != <span class="string">')'</span>:</div><div class="line">            self.compile_expression()</div><div class="line">            <span class="keyword">while</span> self.tokenizer.token == <span class="string">','</span>:</div><div class="line">                self.write_end_xml(<span class="string">'symbol'</span>)</div><div class="line">                self.compile_expression()</div><div class="line">        self.out_file.write(<span class="string">'&lt;/expression&gt;\n'</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">analyze</span><span class="params">(uri=None)</span>:</span></div><div class="line">    compile_obj = CompilationEngine(uri, uri.replace(<span class="string">'.jack'</span>, <span class="string">'1.xml'</span>))</div><div class="line">    <span class="keyword">while</span> compile_obj.tokenizer.has_more_tokens():</div><div class="line">        compile_obj.compile_class()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    analyze(<span class="string">'/Users/alian/Desktop/nand2tetris/projects/10/ExpressionlessSquare/SquareGame.jack'</span>)</div></pre></td></tr></table></figure>
+<h5 id="十一"><a href="#十一" class="headerlink" title="十一"></a>十一</h5><p><strong>数据的翻译</strong></p>
+<p><strong>命令的翻译</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div><div class="line">405</div><div class="line">406</div><div class="line">407</div><div class="line">408</div><div class="line">409</div><div class="line">410</div><div class="line">411</div><div class="line">412</div><div class="line">413</div><div class="line">414</div><div class="line">415</div><div class="line">416</div><div class="line">417</div><div class="line">418</div><div class="line">419</div><div class="line">420</div><div class="line">421</div><div class="line">422</div><div class="line">423</div><div class="line">424</div><div class="line">425</div><div class="line">426</div><div class="line">427</div><div class="line">428</div><div class="line">429</div><div class="line">430</div><div class="line">431</div><div class="line">432</div><div class="line">433</div><div class="line">434</div><div class="line">435</div><div class="line">436</div><div class="line">437</div><div class="line">438</div><div class="line">439</div><div class="line">440</div><div class="line">441</div><div class="line">442</div><div class="line">443</div><div class="line">444</div><div class="line">445</div><div class="line">446</div><div class="line">447</div><div class="line">448</div><div class="line">449</div><div class="line">450</div><div class="line">451</div><div class="line">452</div><div class="line">453</div><div class="line">454</div><div class="line">455</div><div class="line">456</div><div class="line">457</div><div class="line">458</div><div class="line">459</div><div class="line">460</div><div class="line">461</div><div class="line">462</div><div class="line">463</div><div class="line">464</div><div class="line">465</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!usr/bin/env python</span></div><div class="line"><span class="comment"># -*-coding:utf-8-*-</span></div><div class="line"><span class="string">"""</span></div><div class="line">author:wubaichuan</div><div class="line"></div><div class="line">"""</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">JackTokenizer</span><span class="params">(object)</span>:</span></div><div class="line">    SYMBOL = (<span class="string">'&#123;'</span>, <span class="string">'&#125;'</span>, <span class="string">'('</span>, <span class="string">')'</span>, <span class="string">'['</span>, <span class="string">']'</span>, <span class="string">'.'</span>, <span class="string">','</span>, <span class="string">';'</span>, <span class="string">'+'</span>, <span class="string">'-'</span>, <span class="string">'*'</span>, <span class="string">'/'</span>, <span class="string">'&amp;'</span>, <span class="string">'|'</span>, <span class="string">'&lt;'</span>, <span class="string">'&gt;'</span>, <span class="string">'='</span>, <span class="string">'~'</span>)</div><div class="line">    KEYWORD = (<span class="string">'class'</span>, <span class="string">'constructor'</span>, <span class="string">'function'</span>, <span class="string">'method'</span>, <span class="string">'field'</span>, <span class="string">'static'</span>, <span class="string">'var'</span>, <span class="string">'int'</span>, <span class="string">'char'</span>, <span class="string">'boolean'</span>,</div><div class="line">               <span class="string">'void'</span>, <span class="string">'true'</span>, <span class="string">'false'</span>, <span class="string">'null'</span>, <span class="string">'this'</span>, <span class="string">'let'</span>, <span class="string">'do'</span>, <span class="string">'if'</span>, <span class="string">'else'</span>, <span class="string">'while'</span>, <span class="string">'return'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.token_list = []</div><div class="line">        self.token = <span class="keyword">None</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">constructor</span><span class="params">(self, file_uri)</span>:</span></div><div class="line">        self.token_list = []</div><div class="line">        <span class="keyword">with</span> open(file_uri, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</div><div class="line">            temp_token = f.read(<span class="number">1</span>)</div><div class="line">            <span class="keyword">while</span> temp_token:</div><div class="line">                <span class="keyword">if</span> temp_token.isalpha() <span class="keyword">or</span> temp_token.isdigit() <span class="keyword">or</span> temp_token == <span class="string">'_'</span>:</div><div class="line">                    self.token_list.append(temp_token)</div><div class="line">                    temp_token = f.read(<span class="number">1</span>)</div><div class="line">                    <span class="keyword">while</span> temp_token.isalpha() <span class="keyword">or</span> temp_token.isdigit() <span class="keyword">or</span> temp_token == <span class="string">'_'</span>:</div><div class="line">                        self.token_list[<span class="number">-1</span>] += temp_token</div><div class="line">                        temp_token = f.read(<span class="number">1</span>)</div><div class="line">                    f.seek(<span class="number">-1</span>, <span class="number">1</span>)</div><div class="line">                <span class="keyword">elif</span> temp_token == <span class="string">'/'</span>:</div><div class="line">                    temp_token = f.read(<span class="number">1</span>)</div><div class="line">                    <span class="keyword">if</span> temp_token == <span class="string">'/'</span>:</div><div class="line">                        <span class="keyword">while</span> f.read(<span class="number">1</span>) != <span class="string">'\n'</span>:</div><div class="line">                            <span class="keyword">continue</span></div><div class="line">                    <span class="keyword">elif</span> temp_token == <span class="string">'*'</span>:</div><div class="line">                        <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">                            temp_token = f.read(<span class="number">1</span>)</div><div class="line">                            <span class="keyword">if</span> temp_token == <span class="string">'*'</span>:</div><div class="line">                                <span class="keyword">if</span> f.read(<span class="number">1</span>) == <span class="string">'/'</span>:</div><div class="line">                                    <span class="keyword">break</span></div><div class="line">                                <span class="keyword">else</span>:</div><div class="line">                                    f.seek(<span class="number">-1</span>, <span class="number">1</span>)</div><div class="line">                    <span class="keyword">else</span>:</div><div class="line">                        f.seek(<span class="number">-1</span>, <span class="number">1</span>)</div><div class="line">                        self.token_list.append(<span class="string">'/'</span>)</div><div class="line">                <span class="keyword">elif</span> temp_token <span class="keyword">in</span> JackTokenizer.SYMBOL:</div><div class="line">                    self.token_list.append(temp_token)</div><div class="line">                <span class="keyword">elif</span> temp_token == <span class="string">'"'</span>:</div><div class="line">                    self.token_list.append(temp_token)</div><div class="line">                    temp_token = <span class="keyword">None</span></div><div class="line">                    <span class="keyword">while</span> temp_token != <span class="string">'"'</span>:</div><div class="line">                        temp_token = f.read(<span class="number">1</span>)</div><div class="line">                        self.token_list[<span class="number">-1</span>] += temp_token</div><div class="line">                temp_token = f.read(<span class="number">1</span>)</div><div class="line">        <span class="keyword">print</span> self.token_list</div><div class="line">        self.token_list.reverse()</div><div class="line">        self.advance()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">has_more_tokens</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.token_list != []</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">advance</span><span class="params">(self)</span>:</span></div><div class="line">        self.token = self.token_list.pop()</div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">token_type</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.token <span class="keyword">in</span> JackTokenizer.KEYWORD:</div><div class="line">            <span class="keyword">return</span> <span class="string">'KEYWORD'</span></div><div class="line">        <span class="keyword">elif</span> self.token <span class="keyword">in</span> JackTokenizer.SYMBOL:</div><div class="line">            <span class="keyword">return</span> <span class="string">'SYMBOL'</span></div><div class="line">        <span class="keyword">elif</span> self.token[<span class="number">0</span>].isdigit():</div><div class="line">            <span class="keyword">return</span> <span class="string">'INT_CONST'</span></div><div class="line">        <span class="keyword">elif</span> self.token[<span class="number">0</span>] == <span class="string">'"'</span>:</div><div class="line">            <span class="keyword">return</span> <span class="string">'STRING_CONST'</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="string">'IDENTIFIER'</span></div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">keyword</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.token</div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">symbol</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.token</div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">int_val</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.token</div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">string_val</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.token.lstrip(<span class="string">'"'</span>).strip(<span class="string">'"'</span>)</div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">identifier</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.token</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SymbolTable</span><span class="params">(object)</span>:</span></div><div class="line">    CLASS_SCOPE = [<span class="string">'static'</span>, <span class="string">'field'</span>]</div><div class="line">    SUBROUTINE_SCOPE = [<span class="string">'argument'</span>, <span class="string">'var'</span>]</div><div class="line">    ALL_SCOPE = CLASS_SCOPE + SUBROUTINE_SCOPE</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self._symbol = &#123;<span class="string">'static'</span>: &#123;&#125;, <span class="string">'field'</span>: &#123;&#125;, <span class="string">'argument'</span>: &#123;&#125;, <span class="string">'var'</span>: &#123;&#125;&#125;</div><div class="line">        self.index = &#123;<span class="string">'static'</span>: <span class="number">0</span>, <span class="string">'field'</span>: <span class="number">0</span>, <span class="string">'argument'</span>: <span class="number">0</span>, <span class="string">'var'</span>: <span class="number">0</span>&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">start_subroutine</span><span class="params">(self)</span>:</span></div><div class="line">        self._symbol[<span class="string">'var'</span>].clear()</div><div class="line">        self._symbol[<span class="string">'argument'</span>].clear()</div><div class="line">        self.index[<span class="string">'argument'</span>] = self.index[<span class="string">'var'</span>] = <span class="number">0</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">define</span><span class="params">(self, name, type_, kind)</span>:</span></div><div class="line">        self._symbol[kind][name] = (type_, self.index[kind])</div><div class="line">        self.index[kind] += <span class="number">1</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">var_count</span><span class="params">(self, kind)</span>:</span></div><div class="line">        <span class="keyword">return</span> len(self._symbol[kind])</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">kind_of</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> SymbolTable.ALL_SCOPE:</div><div class="line">            <span class="keyword">if</span> self._symbol[i].get(name) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">                <span class="keyword">return</span> i</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">type_of</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> SymbolTable.ALL_SCOPE:</div><div class="line">            <span class="keyword">if</span> self._symbol[i].get(name) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">                <span class="keyword">return</span> self._symbol[i][name][<span class="number">0</span>]</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">index_of</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> SymbolTable.ALL_SCOPE:</div><div class="line">            <span class="keyword">if</span> self._symbol[i].get(name) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">                <span class="keyword">return</span> self._symbol[i][name][<span class="number">1</span>]</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">VMWriter</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, file_uri)</span>:</span></div><div class="line">        self.file = open(file_uri, <span class="string">'w'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__del__</span><span class="params">(self)</span>:</span></div><div class="line">        self.file.close()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">write_pop</span><span class="params">(self, segment, index)</span>:</span></div><div class="line">        <span class="keyword">if</span> segment == <span class="string">'var'</span>:</div><div class="line">            segment = <span class="string">'local'</span></div><div class="line">        self.file.write(<span class="string">'pop &#123;&#125; &#123;&#125;\n'</span>.format(segment, index))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">write_push</span><span class="params">(self, segment, index)</span>:</span></div><div class="line">        <span class="keyword">if</span> segment == <span class="string">'var'</span>:</div><div class="line">            segment = <span class="string">'local'</span></div><div class="line">        self.file.write(<span class="string">'push &#123;&#125; &#123;&#125;\n'</span>.format(segment, index))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">write_arithmetic</span><span class="params">(self, command)</span>:</span></div><div class="line">        self.file.write(<span class="string">'&#123;&#125;\n'</span>.format(command))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">write_label</span><span class="params">(self, label)</span>:</span></div><div class="line">        self.file.write(<span class="string">'label &#123;&#125;\n'</span>.format(label))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">write_goto</span><span class="params">(self, label)</span>:</span></div><div class="line">        self.file.write(<span class="string">'goto &#123;&#125;\n'</span>.format(label))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">write_if</span><span class="params">(self, label)</span>:</span></div><div class="line">        self.file.write(<span class="string">'if-goto &#123;&#125;\n'</span>.format(label))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">write_call</span><span class="params">(self, name, nargs)</span>:</span></div><div class="line">        self.file.write(<span class="string">'call &#123;&#125; &#123;&#125;\n'</span>.format(name, nargs))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">write_function</span><span class="params">(self, name, nargs)</span>:</span></div><div class="line">        self.file.write(<span class="string">'function &#123;&#125; &#123;&#125;\n'</span>.format(name, nargs))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">write_return</span><span class="params">(self)</span>:</span></div><div class="line">        self.file.write(<span class="string">'return\n'</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CompilationEngine</span><span class="params">(object)</span>:</span></div><div class="line">    TYPE_MAP = &#123;<span class="string">'KEYWORD'</span>: <span class="string">'keyword'</span>, <span class="string">'SYMBOL'</span>: <span class="string">'symbol'</span>, <span class="string">'INT_CONST'</span>: <span class="string">'integerConstant'</span>,</div><div class="line">                <span class="string">'STRING_CONST'</span>: <span class="string">'stringConstant'</span>, <span class="string">'IDENTIFIER'</span>: <span class="string">'identifier'</span>&#125;</div><div class="line"></div><div class="line">    OPS = &#123;<span class="string">'='</span>: <span class="string">'eq'</span>, <span class="string">'+'</span>: <span class="string">'add'</span>, <span class="string">'-'</span>: <span class="string">'sub'</span>, <span class="string">'&amp;'</span>: <span class="string">'and'</span>, <span class="string">'|'</span>: <span class="string">'or'</span>, <span class="string">'~'</span>: <span class="string">'not'</span>, <span class="string">'&lt;'</span>: <span class="string">'lt'</span>, <span class="string">'&gt;'</span>: <span class="string">'gt'</span>&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_file_uri, out_file_uri)</span>:</span></div><div class="line">        self.tokenizer = JackTokenizer()</div><div class="line">        self.tokenizer.constructor(in_file_uri)</div><div class="line">        self.symbols = SymbolTable()</div><div class="line">        self.vm = VMWriter(out_file_uri)</div><div class="line">        self.class_name = <span class="string">''</span></div><div class="line">        self._tmp_type = <span class="string">''</span></div><div class="line">        self._tmp_kind = <span class="string">''</span></div><div class="line">        self.if_num = <span class="number">0</span></div><div class="line">        self.while_num = <span class="number">0</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">abort_token</span><span class="params">(self, need_token, end_of_class=False)</span>:</span></div><div class="line">        <span class="keyword">if</span> isinstance(need_token, basestring):</div><div class="line">            <span class="keyword">assert</span> self.tokenizer.token == need_token, <span class="string">"wrong format of jack file"</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">assert</span> self.tokenizer.token <span class="keyword">in</span> need_token, <span class="string">"wrong format of jack file"</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> end_of_class <span class="keyword">or</span> (end_of_class <span class="keyword">and</span> self.tokenizer.token_list):</div><div class="line">            self.tokenizer.advance()</div><div class="line"></div><div class="line"><span class="meta">    @property</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">current_token</span><span class="params">(self)</span>:</span></div><div class="line">        tmp = self.tokenizer.token</div><div class="line">        self.tokenizer.advance()</div><div class="line">        <span class="keyword">return</span> tmp</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">define_symbol</span><span class="params">(self)</span>:</span></div><div class="line">        self.symbols.define(self.current_token, self._tmp_type, self._tmp_kind)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_class</span><span class="params">(self)</span>:</span></div><div class="line">        self.abort_token(<span class="string">'class'</span>)</div><div class="line">        self.class_name = self.current_token</div><div class="line">        self.abort_token(<span class="string">'&#123;'</span>)</div><div class="line">        <span class="keyword">while</span> self.tokenizer.token <span class="keyword">in</span> [<span class="string">'static'</span>, <span class="string">'field'</span>]:</div><div class="line">            self.compile_class_var_dec()</div><div class="line">        <span class="keyword">while</span> self.tokenizer.token <span class="keyword">in</span> [<span class="string">'constructor'</span>, <span class="string">'function'</span>, <span class="string">'method'</span>]:</div><div class="line">            self.compile_subroutine()</div><div class="line">        self.abort_token(<span class="string">'&#125;'</span>, <span class="keyword">True</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_class_var_dec</span><span class="params">(self)</span>:</span></div><div class="line">        self._tmp_kind = self.current_token</div><div class="line">        self._tmp_type = self.current_token</div><div class="line">        self.define_symbol()</div><div class="line">        <span class="keyword">while</span> self.tokenizer.token == <span class="string">','</span>:</div><div class="line">            self.abort_token(<span class="string">','</span>)</div><div class="line">            self.define_symbol()</div><div class="line">        self.abort_token(<span class="string">';'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_subroutine</span><span class="params">(self)</span>:</span></div><div class="line">        kind = self.current_token</div><div class="line">        type_ = self.current_token</div><div class="line">        name = self.current_token</div><div class="line">        self.symbols.start_subroutine()</div><div class="line">        self.abort_token(<span class="string">'('</span>)</div><div class="line">        self.compile_parameter_list(kind)</div><div class="line">        self.abort_token(<span class="string">')'</span>)</div><div class="line">        self.compile_subroutine_body(kind, name)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_subroutine_body</span><span class="params">(self, func_kind, func_name)</span>:</span></div><div class="line">        self.abort_token(<span class="string">'&#123;'</span>)</div><div class="line">        <span class="keyword">while</span> self.tokenizer.token == <span class="string">'var'</span>:</div><div class="line">            self.compile_var_dec()</div><div class="line">        self.vm.write_function(<span class="string">'&#123;0&#125;.&#123;1&#125;'</span>.format(self.class_name, func_name), self.symbols.var_count(<span class="string">'var'</span>))</div><div class="line">        <span class="keyword">if</span> func_kind == <span class="string">'constructor'</span>:</div><div class="line">            self.vm.write_push(<span class="string">'constant'</span>, self.symbols.var_count(<span class="string">'field'</span>))</div><div class="line">            self.vm.write_call(<span class="string">'Memory.alloc'</span>, <span class="number">1</span>)</div><div class="line">            self.vm.write_pop(<span class="string">'pointer'</span>, <span class="number">0</span>)</div><div class="line">        <span class="keyword">elif</span> func_kind == <span class="string">'method'</span>:</div><div class="line">            self.vm.write_push(<span class="string">'argument'</span>, <span class="number">0</span>)</div><div class="line">            self.vm.write_pop(<span class="string">'pointer'</span>, <span class="number">0</span>)</div><div class="line">        self.compile_statements()</div><div class="line">        self.abort_token(<span class="string">'&#125;'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_parameter_list</span><span class="params">(self, category)</span>:</span></div><div class="line">        self._tmp_kind = <span class="string">'argument'</span></div><div class="line">        <span class="keyword">if</span> category == <span class="string">'method'</span>:</div><div class="line">            self.symbols.define(<span class="string">'this'</span>, <span class="keyword">None</span>, self._tmp_kind)</div><div class="line">        <span class="keyword">if</span> self.tokenizer.token != <span class="string">')'</span>:</div><div class="line">            self._tmp_type = self.current_token</div><div class="line">            self.define_symbol()</div><div class="line">            <span class="keyword">while</span> self.tokenizer.token != <span class="string">')'</span>:</div><div class="line">                self.abort_token(<span class="string">','</span>)</div><div class="line">                self._tmp_type = self.current_token</div><div class="line">                self.define_symbol()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_var_dec</span><span class="params">(self)</span>:</span></div><div class="line">        self.abort_token(<span class="string">'var'</span>)</div><div class="line">        self._tmp_kind = <span class="string">'var'</span></div><div class="line">        self._tmp_type = self.current_token</div><div class="line">        self.define_symbol()</div><div class="line">        <span class="keyword">while</span> self.tokenizer.token != <span class="string">';'</span>:</div><div class="line">            self.abort_token(<span class="string">','</span>)</div><div class="line">            self.define_symbol()</div><div class="line">        self.abort_token(<span class="string">';'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_statements</span><span class="params">(self)</span>:</span></div><div class="line">        statement_map = &#123;<span class="string">'if'</span>: self.compile_if, <span class="string">'let'</span>: self.compile_let, <span class="string">'while'</span>: self.compile_while,</div><div class="line">                         <span class="string">'do'</span>: self.compile_do, <span class="string">'return'</span>: self.compile_return&#125;</div><div class="line">        <span class="keyword">while</span> self.tokenizer.token <span class="keyword">in</span> statement_map.keys():</div><div class="line">            statement_map[self.tokenizer.token]()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_do</span><span class="params">(self)</span>:</span></div><div class="line">        self.abort_token(<span class="string">'do'</span>)</div><div class="line">        self.compile_subroutine_call()</div><div class="line">        self.vm.write_pop(<span class="string">'temp'</span>, <span class="number">0</span>)</div><div class="line">        self.abort_token(<span class="string">';'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_subroutine_call</span><span class="params">(self)</span>:</span></div><div class="line">        count = <span class="number">0</span></div><div class="line">        name = self.current_token</div><div class="line">        kind, index = self.symbols.kind_of(name), self.symbols.index_of(name)</div><div class="line">        <span class="keyword">if</span> self.tokenizer.token == <span class="string">'.'</span>:</div><div class="line">            <span class="keyword">if</span> kind <span class="keyword">in</span> [<span class="string">'field'</span>, <span class="string">'var'</span>, <span class="string">'static'</span>]:</div><div class="line">                self.vm.write_push(kind, index)</div><div class="line">                count = <span class="number">1</span></div><div class="line">            pre_fix = self.symbols.type_of(name)</div><div class="line">            pre_fix = pre_fix <span class="keyword">if</span> pre_fix <span class="keyword">else</span> name</div><div class="line">            self.abort_token(<span class="string">'.'</span>)</div><div class="line">            func_name = self.current_token</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            self.vm.write_push(<span class="string">'pointer'</span>, <span class="number">0</span>)</div><div class="line">            pre_fix = self.class_name</div><div class="line">            func_name = name</div><div class="line">            count = <span class="number">1</span></div><div class="line">        self.abort_token(<span class="string">'('</span>)</div><div class="line">        count += self.compile_expression_list()</div><div class="line">        self.abort_token(<span class="string">')'</span>)</div><div class="line">        self.vm.write_call(<span class="string">'&#123;0&#125;.&#123;1&#125;'</span>.format(pre_fix, func_name), count)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_let</span><span class="params">(self)</span>:</span></div><div class="line">        self.abort_token(<span class="string">'let'</span>)</div><div class="line">        name = self.current_token</div><div class="line">        kind, type_, index = self.symbols.kind_of(name), self.symbols.type_of(name), self.symbols.index_of(name)</div><div class="line">        <span class="keyword">if</span> self.tokenizer.token == <span class="string">'['</span>:</div><div class="line">            self.abort_token(<span class="string">'['</span>)</div><div class="line">            self.compile_expression()</div><div class="line">            self.abort_token(<span class="string">']'</span>)</div><div class="line">            self.vm.write_push(kind, index)</div><div class="line">            self.vm.write_arithmetic(<span class="string">'add'</span>)</div><div class="line">            self.abort_token(<span class="string">'='</span>)</div><div class="line">            self.compile_expression()</div><div class="line">            self.vm.write_pop(<span class="string">'temp'</span>, <span class="number">0</span>)</div><div class="line">            self.vm.write_pop(<span class="string">'pointer'</span>, <span class="number">1</span>)</div><div class="line">            self.vm.write_push(<span class="string">'temp'</span>, <span class="number">0</span>)</div><div class="line">            self.vm.write_pop(<span class="string">'that'</span>, <span class="number">0</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            self.abort_token(<span class="string">'='</span>)</div><div class="line">            self.compile_expression()</div><div class="line">            self.vm.write_pop(kind, index)</div><div class="line">        self.abort_token(<span class="string">';'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_while</span><span class="params">(self)</span>:</span></div><div class="line">        self.abort_token(<span class="string">'while'</span>)</div><div class="line">        fit_label = <span class="string">'W_FIT%d'</span> % self.while_num</div><div class="line">        end_label = <span class="string">'W_END%d'</span> % self.while_num</div><div class="line">        self.while_num += <span class="number">1</span></div><div class="line">        self.vm.write_label(fit_label)</div><div class="line">        self.abort_token(<span class="string">'('</span>)</div><div class="line">        self.compile_expression()</div><div class="line">        self.abort_token(<span class="string">')'</span>)</div><div class="line">        self.vm.write_arithmetic(<span class="string">'not'</span>)</div><div class="line">        self.vm.write_if(end_label)</div><div class="line">        self.abort_token(<span class="string">'&#123;'</span>)</div><div class="line">        self.compile_statements()</div><div class="line">        self.abort_token(<span class="string">'&#125;'</span>)</div><div class="line">        self.vm.write_goto(fit_label)</div><div class="line">        self.vm.write_label(end_label)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_return</span><span class="params">(self)</span>:</span></div><div class="line">        self.abort_token(<span class="string">'return'</span>)</div><div class="line">        <span class="keyword">if</span> self.tokenizer.token != <span class="string">';'</span>:</div><div class="line">            self.compile_expression()</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            self.vm.write_push(<span class="string">'constant'</span>, <span class="number">0</span>)</div><div class="line">        self.abort_token(<span class="string">';'</span>)</div><div class="line">        self.vm.write_return()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_if</span><span class="params">(self)</span>:</span></div><div class="line">        self.abort_token(<span class="string">'if'</span>)</div><div class="line">        fit_label = <span class="string">'I_FIT%d'</span> % self.if_num</div><div class="line">        else_label = <span class="string">'I_ELSE%d'</span> % self.if_num</div><div class="line">        end_label = <span class="string">'I_END%d'</span> % self.if_num</div><div class="line">        self.if_num += <span class="number">1</span></div><div class="line">        self.abort_token(<span class="string">'('</span>)</div><div class="line">        self.compile_expression()</div><div class="line">        self.abort_token(<span class="string">')'</span>)</div><div class="line">        self.vm.write_if(fit_label)</div><div class="line">        self.vm.write_goto(else_label)</div><div class="line">        self.vm.write_label(fit_label)</div><div class="line">        self.abort_token(<span class="string">'&#123;'</span>)</div><div class="line">        self.compile_statements()</div><div class="line">        self.abort_token(<span class="string">'&#125;'</span>)</div><div class="line">        <span class="keyword">if</span> self.tokenizer.token == <span class="string">'else'</span>:</div><div class="line">            self.vm.write_goto(end_label)</div><div class="line">        self.vm.write_label(else_label)</div><div class="line">        <span class="keyword">if</span> self.tokenizer.token == <span class="string">'else'</span>:</div><div class="line">            self.abort_token(<span class="string">'else'</span>)</div><div class="line">            self.abort_token(<span class="string">'&#123;'</span>)</div><div class="line">            self.compile_statements()</div><div class="line">            self.abort_token(<span class="string">'&#125;'</span>)</div><div class="line">            self.vm.write_label(end_label)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_expression</span><span class="params">(self)</span>:</span></div><div class="line">        self.compile_term()</div><div class="line">        <span class="keyword">while</span> self.tokenizer.token <span class="keyword">in</span> <span class="string">"+-*/&amp;|&lt;&gt;="</span>:</div><div class="line">            token = self.current_token</div><div class="line">            self.compile_term()</div><div class="line">            <span class="keyword">if</span> token == <span class="string">'/'</span>:</div><div class="line">                self.vm.write_call(<span class="string">'Math.divide'</span>, <span class="number">2</span>)</div><div class="line">            <span class="keyword">elif</span> token == <span class="string">'*'</span>:</div><div class="line">                self.vm.write_call(<span class="string">'Math.multiply'</span>, <span class="number">2</span>)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                self.vm.write_arithmetic(CompilationEngine.OPS[token])</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_term</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.tokenizer.token_type == <span class="string">'INT_CONST'</span>:</div><div class="line">            self.vm.write_push(<span class="string">'constant'</span>, self.current_token)</div><div class="line">        <span class="keyword">elif</span> self.tokenizer.token_type == <span class="string">'STRING_CONST'</span>:</div><div class="line">            token = self.current_token.strip(<span class="string">'"'</span>).lstrip(<span class="string">'"'</span>)</div><div class="line">            self.vm.write_push(<span class="string">'constant'</span>, len(token))</div><div class="line">            self.vm.write_call(<span class="string">'String.new'</span>, <span class="number">1</span>)</div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> token:</div><div class="line">                self.vm.write_push(<span class="string">'constant'</span>, ord(i))</div><div class="line">                self.vm.write_call(<span class="string">'String.appendChar'</span>, <span class="number">2</span>)</div><div class="line">        <span class="keyword">elif</span> self.tokenizer.token_type == <span class="string">'KEYWORD'</span>:</div><div class="line">            token = self.current_token</div><div class="line">            <span class="keyword">if</span> token <span class="keyword">in</span> [<span class="string">'false'</span>, <span class="string">'null'</span>]:</div><div class="line">                self.vm.write_push(<span class="string">'constant'</span>, <span class="number">0</span>)</div><div class="line">            <span class="keyword">elif</span> token == <span class="string">'true'</span>:</div><div class="line">                self.vm.write_push(<span class="string">'constant'</span>, <span class="number">0</span>)</div><div class="line">                self.vm.write_arithmetic(<span class="string">'not'</span>)</div><div class="line">            <span class="keyword">elif</span> token == <span class="string">'this'</span>:</div><div class="line">                self.vm.write_push(<span class="string">'pointer'</span>, <span class="number">0</span>)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">raise</span> ValueError(<span class="string">'Wrong term'</span>)</div><div class="line">        <span class="keyword">elif</span> self.tokenizer.token_type == <span class="string">'SYMBOL'</span>:</div><div class="line">            token = self.current_token</div><div class="line">            <span class="keyword">if</span> token == <span class="string">'('</span>:</div><div class="line">                self.compile_expression()</div><div class="line">                self.abort_token(<span class="string">')'</span>)</div><div class="line">            <span class="keyword">elif</span> token <span class="keyword">in</span> <span class="string">'-~'</span>:</div><div class="line">                temp_dict = &#123;<span class="string">'-'</span>: <span class="string">'neg'</span>, <span class="string">'~'</span>: <span class="string">'not'</span>&#125;</div><div class="line">                self.compile_term()</div><div class="line">                self.vm.write_arithmetic(temp_dict[token])</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">raise</span> ValueError(<span class="string">'Wrong term'</span>)</div><div class="line">        <span class="keyword">elif</span> self.tokenizer.token_type == <span class="string">'IDENTIFIER'</span>:</div><div class="line">            store_token = self.current_token</div><div class="line">            kind = self.symbols.kind_of(store_token)</div><div class="line">            index = self.symbols.index_of(store_token)</div><div class="line">            <span class="keyword">if</span> self.tokenizer.token <span class="keyword">in</span> <span class="string">'(.'</span>:</div><div class="line">                self.tokenizer.token_list.append(self.tokenizer.token)</div><div class="line">                self.tokenizer.token = store_token</div><div class="line">                self.compile_subroutine_call()</div><div class="line">            <span class="keyword">elif</span> self.tokenizer.token == <span class="string">'['</span>:</div><div class="line">                self.abort_token(<span class="string">'['</span>)</div><div class="line">                self.compile_expression()</div><div class="line">                self.abort_token(<span class="string">']'</span>)</div><div class="line">                self.vm.write_push(kind, index)</div><div class="line">                self.vm.write_arithmetic(<span class="string">'add'</span>)</div><div class="line">                self.vm.write_pop(<span class="string">'pointer'</span>, <span class="number">1</span>)</div><div class="line">                self.vm.write_push(<span class="string">'that'</span>, <span class="number">0</span>)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                self.vm.write_push(kind, index)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'Wrong term'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compile_expression_list</span><span class="params">(self)</span>:</span></div><div class="line">        count = <span class="number">0</span></div><div class="line">        <span class="keyword">if</span> self.tokenizer.token != <span class="string">')'</span>:</div><div class="line">            self.compile_expression()</div><div class="line">            count += <span class="number">1</span></div><div class="line">            <span class="keyword">while</span> self.tokenizer.token == <span class="string">','</span>:</div><div class="line">                self.abort_token(<span class="string">','</span>)</div><div class="line">                self.compile_expression()</div><div class="line">                count += <span class="number">1</span></div><div class="line">        <span class="keyword">return</span> count</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">analyze</span><span class="params">(uri)</span>:</span></div><div class="line">    compile_obj = CompilationEngine(uri, uri.replace(<span class="string">'.jack'</span>, <span class="string">'1.vm'</span>))</div><div class="line">    <span class="keyword">while</span> compile_obj.tokenizer.has_more_tokens():</div><div class="line">        compile_obj.compile_class()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    analyze(<span class="string">'/Users/alian/Desktop/nand2tetris/projects/11/ConvertToBin/Main.jack'</span>)</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/course/" rel="tag">#course</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/08/teocs-7-8/" rel="next" title="teocs-7~8">
+                <i class="fa fa-chevron-left"></i> teocs-7~8
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/18/unix编程艺术/" rel="prev" title="unix编程艺术">
+                unix编程艺术 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/10/teocs-9~11/"
+           data-title="teocs-9~11" data-url="http://yoursite.com/2016/10/10/teocs-9~11/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="alian" />
+          <p class="site-author-name" itemprop="name">alian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#从零开始构建现代计算机"><span class="nav-number">1.</span> <span class="nav-text">从零开始构建现代计算机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#九-高级语言"><span class="nav-number">1.1.</span> <span class="nav-text">九.高级语言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十-十一-编译器"><span class="nav-number">1.2.</span> <span class="nav-text">十~十一.编译器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#十："><span class="nav-number">1.2.1.</span> <span class="nav-text">十：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-语法分析—字元化-tokenizing-模块将输入的字符分组成语言原子元素；语法分析-parsing-模块将语言原子元素集合同语法规则相匹配"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.语法分析—字元化(tokenizing)模块将输入的字符分组成语言原子元素；语法分析(parsing)模块将语言原子元素集合同语法规则相匹配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#词法分析"><span class="nav-number">1.2.3.</span> <span class="nav-text">词法分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#十一"><span class="nav-number">1.2.4.</span> <span class="nav-text">十一</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">alian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"alian"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

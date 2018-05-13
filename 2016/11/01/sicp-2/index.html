@@ -1,0 +1,712 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="course," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Two.Building Abstractions with Data2.1.3
+123456789101112131415(define (cons x y) (define (dispatch m)(cond ((= m 0) x) ((= m 1) y)(else (error &quot;Argument not 0 or 1: CONS&quot; m)))) dispatch)(define (car z">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sicp-2">
+<meta property="og:url" content="http://yoursite.com/2016/11/01/sicp-2/index.html">
+<meta property="og:site_name" content="One Alian">
+<meta property="og:description" content="Two.Building Abstractions with Data2.1.3
+123456789101112131415(define (cons x y) (define (dispatch m)(cond ((= m 0) x) ((= m 1) y)(else (error &quot;Argument not 0 or 1: CONS&quot; m)))) dispatch)(define (car z">
+<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/sicp/2-5MultilayerData.png">
+<meta property="og:updated_time" content="2017-02-09T14:52:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sicp-2">
+<meta name="twitter:description" content="Two.Building Abstractions with Data2.1.3
+123456789101112131415(define (cons x y) (define (dispatch m)(cond ((= m 0) x) ((= m 1) y)(else (error &quot;Argument not 0 or 1: CONS&quot; m)))) dispatch)(define (car z">
+<meta name="twitter:image" content="https://github.com/BaichuanWu/prictures/raw/master/sicp/2-5MultilayerData.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/01/sicp-2/"/>
+
+  <title> sicp-2 | One Alian </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">One Alian</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                sicp-2
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-01T15:40:03+08:00" content="2016-11-01">
+              2016-11-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/01/sicp-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/01/sicp-2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="Two-Building-Abstractions-with-Data"><a href="#Two-Building-Abstractions-with-Data" class="headerlink" title="Two.Building Abstractions with Data"></a>Two.Building Abstractions with Data</h4><p>2.1.3</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">(<span class="name">define</span> (<span class="name">cons</span> x y) (<span class="name">define</span> (<span class="name">dispatch</span> m)</div><div class="line">(<span class="name">cond</span> ((<span class="name">=</span> m <span class="number">0</span>) x) ((<span class="name">=</span> m <span class="number">1</span>) y)</div><div class="line">(<span class="name">else</span> (<span class="name">error</span> <span class="string">"Argument not 0 or 1: CONS"</span> m)))) dispatch)</div><div class="line">(<span class="name">define</span> (<span class="name">car</span> z) (<span class="name">z</span> <span class="number">0</span>)) (<span class="name">define</span> (<span class="name">cdr</span> z) (<span class="name">z</span> <span class="number">1</span>))</div><div class="line"></div><div class="line">// exercise <span class="number">2.4</span></div><div class="line">(<span class="name">define</span> (<span class="name">cons</span> a b)</div><div class="line">  (<span class="name">lambda</span> (<span class="name">x</span>) (<span class="name">x</span> a b))</div><div class="line"> )</div><div class="line">(<span class="name">define</span> (<span class="name">car</span> m)</div><div class="line"> 	(<span class="name">m</span> (<span class="name">lambda</span> (<span class="name">p</span> q) p) </div><div class="line">)</div><div class="line">(<span class="name">define</span> (<span class="name">cdr</span> m)</div><div class="line"> 	(<span class="name">m</span> (<span class="name">lambda</span> (<span class="name">p</span> q) q)) </div><div class="line"> )</div></pre></td></tr></table></figure>
+<p>map</p>
+<a id="more"></a>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(<span class="name">define</span> (<span class="name">map</span> proc items)</div><div class="line"> 	(<span class="name">if</span> (<span class="name">null</span>? items)</div><div class="line">        	<span class="literal">nil</span></div><div class="line">        (<span class="name">cons</span> (<span class="name">proc</span> (<span class="name">car</span> items))</div><div class="line">              (<span class="name">map</span> proc (<span class="name">cdr</span> items)))) </div><div class="line"> )</div></pre></td></tr></table></figure>
+<p>filter</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(<span class="name">define</span> (<span class="name">filter</span> predicate sequence) (<span class="name">cond</span> ((<span class="name">null</span>? sequence) <span class="literal">nil</span>)</div><div class="line">        ((<span class="name">predicate</span> (<span class="name">car</span> sequence))</div><div class="line">         (<span class="name">cons</span> (<span class="name">car</span> sequence)</div><div class="line">(<span class="name">filter</span> predicate (<span class="name">cdr</span> sequence)))) (<span class="name">else</span> (<span class="name">filter</span> predicate (<span class="name">cdr</span> sequence)))))</div></pre></td></tr></table></figure>
+<blockquote>
+<p>​<br>the value of expressing programs as sequence operations is that this<br>helps us make program designs that are modular, that is, designs that<br>are constructed by combining relatively independent pieces. We can en-<br>courage modular design by providing a library of standard components<br>together with a conventional interface for connecting the components<br>in flexible ways.</p>
+</blockquote>
+<p><strong>2.2层次性数据和闭包性质</strong></p>
+<p>某种数据对象，通过其组合起的数据对象本身可利用同样的操作在组合。闭包性质使我们建立起层次性的结构。</p>
+<p>2.2.3 序列作为一种约定的界面</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="name">define</span> (<span class="name">salary-of-highest-paid-programmer</span> records) (<span class="name">accumulate</span> max <span class="number">0</span> (<span class="name">map</span> salary (<span class="name">filter</span> programmer? records))))</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(define (accumulate op initial sequence) (if (null? sequence)</div><div class="line">      initial</div><div class="line">      (op (car sequence)</div><div class="line">          (accumulate op initial (cdr sequence)))))</div></pre></td></tr></table></figure>
+<p>用accumulate实现的之前的list方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(define f (lambda (x y . z) ⟨body⟩))</div><div class="line">(define (f x y . z) ⟨body⟩)</div><div class="line"></div><div class="line">(define g (lambda w ⟨body⟩))</div><div class="line">(define (g . w) ⟨body⟩)</div></pre></td></tr></table></figure>
+<p><strong>2.3符号数据</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(apply func '(a b))</div><div class="line"></div><div class="line">(func 'a 'b) // 与上面表达式相同</div></pre></td></tr></table></figure>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(<span class="name">define</span> (<span class="name">lookup</span> given-key set-of-records) (<span class="name">cond</span> ((<span class="name">null</span>? set-of-records) false)</div><div class="line">        ((<span class="name">equal</span>? given-key (<span class="name">key</span> (<span class="name">car</span> set-of-records)))</div><div class="line">         (<span class="name">car</span> set-of-records))</div><div class="line">(<span class="name">else</span> (<span class="name">lookup</span> given-key (<span class="name">cdr</span> set-of-records)))))   // key map pseudo-code</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>Huffman tree</strong></p>
+<p>​    The algorithm for generating a Huffman tree is very simple. e ideais to arrange the tree so that the symbols with the lowest frequencyappear farthest away from the root. Begin with the set of leaf nodes,containing symbols and their frequencies, as determined by the initialdata from which the code is to be constructed. Now find two leaves withthe lowest weights and merge them to produce a node that has thesetwo nodes as its le and right branches. e weight of the new node isthe sum of the two weights. Remove the two leaves from the originalset and replace them by this new node. Now continue this process. Ateach step, merge two nodes with the smallest weights, removing themfrom the set and replacing them with a node that has these two as itsle and right branches. e process stops when there is only one nodele, which is the root of the entire tree. Here is how the Huffman treeof Figure 2.18 was generated:</p>
+<p>Initialleaves {(A8)(B3)(C1)(D1)(E1)(F1)(G1)(H1)}</p>
+<p>Merge {(A8)(B3)({CD}2)(E1)(F1)(G1)(H1)}</p>
+<p>Merge {(A8)(B3)({CD}2)({EF}2)(G1)(H1)}</p>
+<p>Merge {(A8)(B3)({CD}2)({EF}2)({GH}2)}</p>
+<p>Merge {(A8)(B3)({CD}2)({EFGH}4)}</p>
+<p>Merge {(A8)({BCD}5)({EFGH}4)}</p>
+<p>Merge {(A8)({BCDEFGH}9)}</p>
+<p>Finalmerge {({ABCDEFGH}17)}</p>
+</blockquote>
+<p><strong>2.4抽象数据的多重表示</strong></p>
+<blockquote>
+<p>The general strategy of checking the type of a datum and calling an<br>appropriate procedure is called dispatching on type. is is a powerful<br>strategy for obtaining modularity in system design.    </p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">(define (tag x) (attach-tag 'rectangular x)) (put 'real-part '(rectangular) real-part) (put 'imag-part '(rectangular) imag-part) (put 'magnitude '(rectangular) magnitude) (put 'angle '(rectangular) angle)</div><div class="line">(put 'make-from-real-imag 'rectangular</div><div class="line">(lambda (x y) (tag (make-from-real-imag x y))))  // 给生成的对象添加tag</div><div class="line">(put 'make-from-mag-ang 'rectangular   </div><div class="line">(lambda (r a) (tag (make-from-mag-ang r a))))</div><div class="line">'done)  </div><div class="line"></div><div class="line">(apply op (list x y z)) //数组里每一项为参数</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显式分派： 这种策略在增加新操作时需要使用者避免命名冲突，而且每当增加新类型时，所有通用操作都需要做相应的改动，这种策略不具有可加性，因此无论是增加新操作还是增加新类型，这种策略都不适合。</p>
+<p>数据导向：数据导向可以很方便地通过包机制增加新类型和新的通用操作，因此无论是增加新类型还是增加新操作，这种策略都很适合。</p>
+<p>消息传递：消息传递将数据对象和数据对象所需的操作整合在一起，因此它可以很方便地增加新类型，但是这种策略不适合增加新操作，因为每次为某个数据对象增加新操作之后，这个数据对象已有的实例全部都要重新实例化才能使用新操作。</p>
+</blockquote>
+<p><strong>2.5带有通用型操作的系统</strong></p>
+<p><img src="https://github.com/BaichuanWu/prictures/raw/master/sicp/2-5MultilayerData.png" alt="2-5MultilayerData"></p>
+<p>2.5.2不同类型数据的组合</p>
+<p>将其先转换为同种</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/course/" rel="tag">#course</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/24/CSAPP-3/" rel="next" title="CSAPP-3">
+                <i class="fa fa-chevron-left"></i> CSAPP-3
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/25/sicp-3/" rel="prev" title="sicp-3">
+                sicp-3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/01/sicp-2/"
+           data-title="sicp-2" data-url="http://yoursite.com/2016/11/01/sicp-2/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="alian" />
+          <p class="site-author-name" itemprop="name">alian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Two-Building-Abstractions-with-Data"><span class="nav-number">1.</span> <span class="nav-text">Two.Building Abstractions with Data</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">alian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"alian"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

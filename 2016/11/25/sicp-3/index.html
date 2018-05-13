@@ -1,0 +1,711 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="course," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Three.Modularity, Objects, and State(objects, streams)3.1Assignment and Local State
+The trouble here is that substitution is based ultimately on the no-tion that the symbols in our language are essen">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sicp-3">
+<meta property="og:url" content="http://yoursite.com/2016/11/25/sicp-3/index.html">
+<meta property="og:site_name" content="One Alian">
+<meta property="og:description" content="Three.Modularity, Objects, and State(objects, streams)3.1Assignment and Local State
+The trouble here is that substitution is based ultimately on the no-tion that the symbols in our language are essen">
+<meta property="og:updated_time" content="2017-02-09T14:52:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sicp-3">
+<meta name="twitter:description" content="Three.Modularity, Objects, and State(objects, streams)3.1Assignment and Local State
+The trouble here is that substitution is based ultimately on the no-tion that the symbols in our language are essen">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/25/sicp-3/"/>
+
+  <title> sicp-3 | One Alian </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">One Alian</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                sicp-3
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-25T09:54:24+08:00" content="2016-11-25">
+              2016-11-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/25/sicp-3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/25/sicp-3/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="Three-Modularity-Objects-and-State-objects-streams"><a href="#Three-Modularity-Objects-and-State-objects-streams" class="headerlink" title="Three.Modularity, Objects, and State(objects, streams)"></a>Three.Modularity, Objects, and State(objects, streams)</h4><h5 id="3-1Assignment-and-Local-State"><a href="#3-1Assignment-and-Local-State" class="headerlink" title="3.1Assignment and Local State"></a><strong>3.1Assignment and Local State</strong></h5><blockquote>
+<p>The trouble here is that substitution is based ultimately on the no-<br>tion that the symbols in our language are essentially names for values.<br>But as soon as we introduce set! and the idea that the value of a vari-<br>able can change, a variable can no longer be simply a name. Now a<br>variable somehow refers to a place where a value can be stored, and the<br>value stored at this place can change. In Section 3.2 we will see how<br>environments play this role of “place” in our computational model.</p>
+<p>简而言之(lambda (x) (set! x (+ x 1))) 没法将 值 x为5代入（替代模型失效）</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">(define new-withdraw (let ((balance 100))</div><div class="line">(lambda (amount)</div><div class="line">(if (&gt;= balance amount)</div><div class="line">(begin (set! balance (- balance amount)) balance)</div><div class="line">          "Insufficient funds"))))</div><div class="line">//new-withdraw 首先创建一个local 环境，然后返回lambda函数，由于是在local中创建，其closure环境指针指向local,但new-withdraw是在global中创建的         </div><div class="line"></div><div class="line"></div><div class="line">(define (make-simplified-withdraw balance) (lambda (amount)</div><div class="line">(set! balance (- balance amount))</div><div class="line">balance))</div><div class="line"></div><div class="line">//(make-simplified-withdraw balance) 等效于new-withdraw 以替代模型理解，不要以传统的call理解，如下python</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">new-withdraw = ((<span class="keyword">lambda</span> .....) <span class="number">100</span>)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">make</span>-<span class="title">simplified</span>-<span class="title">withdraw</span><span class="params">(balance)</span>:</span></div><div class="line">	<span class="keyword">return</span> <span class="keyword">lambda</span>...</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>some concepts:</p>
+<blockquote>
+<p>In contrast to functional programming, programming that makes ex-<br>tensive use of assignment is known as imperative programming. </p>
+</blockquote>
+<p>3.7.scm</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">(<span class="name">define</span> (<span class="name">make-account</span> balance pwd) </div><div class="line">	(<span class="name">define</span> (<span class="name">withdraw</span> amount) </div><div class="line">			(<span class="name">if</span> (<span class="name">&gt;=</span> balance amount)</div><div class="line">					(<span class="name">begin</span> (<span class="name">set!</span> balance (<span class="name">-</span> balance amount)) balance)</div><div class="line">					<span class="string">"Insufficient funds"</span>)) </div><div class="line">	(<span class="name">define</span> (<span class="name">deposit</span> amount)</div><div class="line">			(<span class="name">set!</span> balance (<span class="name">+</span> balance amount))</div><div class="line">			balance)</div><div class="line"></div><div class="line">	(<span class="name">define</span> (<span class="name">dispatch</span> m)</div><div class="line">		(<span class="name">cond</span> </div><div class="line">			((<span class="name">not</span> (<span class="name">eq</span>? pass password)) (<span class="name">display</span> <span class="string">"wrong password"</span>))</div><div class="line">			((<span class="name">eq</span>? m 'withdraw) withdraw)</div><div class="line">			((<span class="name">eq</span>? m 'deposit) deposit)</div><div class="line">			(<span class="name">else</span> (<span class="name">error</span> <span class="string">"Unknown request: MAKE-ACCOUNT"</span></div><div class="line">			m))))</div><div class="line">	(<span class="name">define</span> (<span class="name">pwd-dispatch</span> password)</div><div class="line">			(<span class="name">lambda</span> (<span class="name">pass</span> m) </div><div class="line">				(<span class="name">cond</span> </div><div class="line">					((<span class="name">not</span> (<span class="name">eq</span>? pass password)) (<span class="name">display</span> <span class="string">"wrong password"</span>) #f)</div><div class="line">					((<span class="name">eq</span>? m 'withdraw) withdraw)</div><div class="line">					((<span class="name">eq</span>? m 'deposit) deposit)</div><div class="line">					((<span class="name">eq</span>? m 'new) (<span class="name">lambda</span> (<span class="name">psw</span>) (<span class="name">pwd-dispatch</span> psw)))</div><div class="line">					(<span class="name">else</span> (<span class="name">error</span> <span class="string">"Unknown request: MAKE-ACCOUNT"</span> m))))</div><div class="line"></div><div class="line">			)</div><div class="line">	(<span class="name">pwd-dispatch</span> pwd)</div><div class="line">	)</div><div class="line"></div><div class="line">(<span class="name">define</span> (<span class="name">make-joint</span> account old new)</div><div class="line">	((<span class="name">account</span> old 'new) new)</div><div class="line">)</div><div class="line">(<span class="name">define</span> a (<span class="name">make-account</span> <span class="number">100</span> '<span class="number">222</span>))</div><div class="line">(<span class="name">define</span> b (<span class="name">make-joint</span> a '<span class="number">222</span> '<span class="number">333</span>))</div><div class="line">((<span class="name">a</span> '<span class="number">222</span> 'deposit) <span class="number">40</span>)</div><div class="line">((<span class="name">b</span> '<span class="number">333</span> 'withdraw) <span class="number">30</span>)</div></pre></td></tr></table></figure>
+<h5 id="3-2The-Environment-Model-of-Evaluation"><a href="#3-2The-Environment-Model-of-Evaluation" class="headerlink" title="3.2The Environment Model of Evaluation"></a><strong>3.2The Environment Model of Evaluation</strong></h5><blockquote>
+<ul>
+<li>A procedure object is applied to a set of arguments by constructing a frame, binding the formal parameters of the procedure to the arguments of the call, and then evaluating the body of the procedure in the context of the new environment constructed. the newframe has as its enclosing environment the environment part of the procedure object being applied.</li>
+<li>A procedure is created by evaluating a λ-expression relative to a given environment. the resulting procedure object is a pair con-sisting of the text of the λ-expression and a pointer to the envi-ronment in which the procedure was created.</li>
+</ul>
+</blockquote>
+<p>一个python的例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">k=<span class="number">1</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">()</span>:</span></div><div class="line">	<span class="keyword">return</span> k</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib2</span><span class="params">()</span>:</span></div><div class="line">	k=<span class="number">11</span></div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">fib3</span><span class="params">()</span>:</span></div><div class="line">		<span class="keyword">return</span> k</div><div class="line">	<span class="keyword">return</span> fib3(), fib()</div><div class="line"></div><div class="line"><span class="keyword">print</span> fib2() <span class="comment"># (11,1)</span></div></pre></td></tr></table></figure>
+<p><strong>3.3    Modeling with Mutable Data</strong></p>
+<blockquote>
+<p>(eq? x y) tests whether x and y are the same object (that is, whether x and y are equal as pointers).</p>
+</blockquote>
+<p>​                                  <strong>scheme 不区分大小写</strong><br>​<br>3.3.4数字模拟电路</p>
+<p>功能块为wire添加procedure ，wire触发时procedure的作用是将具体动作加入agenda中，当agenda执行过程中wire值发生变化，wire会将调用procedure列表将具体动作添加到agenda中，agenda会继续执行下去。</p>
+<p><strong>3.4     Concurrency: Time Is of the Essence</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">(define (make-account balance) </div><div class="line">  (define (withdraw amount) </div><div class="line">    (if (&gt;= balance amount)</div><div class="line">		(begin (set! balance (- balance amount)) balance)</div><div class="line">		"Insufficient funds")) </div><div class="line">  (define (deposit amount)</div><div class="line">	(set! balance (+ balance amount))</div><div class="line">			balance)</div><div class="line">  (let ((protected (make-serializer)))</div><div class="line">	(define (dispatch m)</div><div class="line">		(cond ((eq? m 'withdraw) (protected withdraw))</div><div class="line">		      ((eq? m 'deposit) (protected deposit))</div><div class="line">          	   ((eq? m 'balance) balance)</div><div class="line">			  (else (error "Unknown request: MAKE-ACCOUNT" m))))</div><div class="line">dispatch)) //原版</div><div class="line"></div><div class="line"></div><div class="line">(define (make-account balance)</div><div class="line">  (define (withdraw amount)</div><div class="line">    (if (&gt;= balance amount)</div><div class="line">		(begin (set! balance (- balance amount)) balance)</div><div class="line">		"Insufficient funds"))</div><div class="line">  (define (deposit amount)</div><div class="line">	(set! balance (+ balance amount))</div><div class="line">	balance)</div><div class="line">	(let ((protected (make-serializer)))</div><div class="line">		(let ((protected-withdraw (protected withdraw)) (protected-deposit (protected deposit)))</div><div class="line">		(define (dispatch m)</div><div class="line">		(cond ((eq? m 'withdraw) protected-withdraw)</div><div class="line">		((eq? m 'deposit) protected-deposit)</div><div class="line">         ((eq? m 'balance) balance)</div><div class="line">		(else (error "Unknown request: MAKE-ACCOUNT" m))))</div><div class="line">	dispatch)))</div><div class="line">//改进版之后每次调用withdraw protected不会针对每个withdraw和deposit串行化。因为其串化结果已写定,不会分配新的空间，并发的命令会依次进行，会在同一空间调用运行。结果没有变化(可看之后的生成锁理解)</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">(define (make-serializer) (let ((mutex (make-mutex)))</div><div class="line">(lambda (p)</div><div class="line">	(define (serialized-p . args)</div><div class="line">		(mutex 'acquire)  //如果mutex已经为#t则会一直执行(mutex 'acquire)</div><div class="line">		(let ((val (apply p args)))</div><div class="line">          	(mutex 'release)</div><div class="line">          	 val))</div><div class="line">      serialized-p)))</div><div class="line">//创建serializer</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">(define (make-mutex)</div><div class="line">(let ((cell (list false)))</div><div class="line">(define (the-mutex m) </div><div class="line">  (cond ((eq? m 'acquire)</div><div class="line">	    	(if (test-and-set! cell) (the-mutex 'acquire))) </div><div class="line">        ((eq? m 'release)</div><div class="line">         	(clear! cell))))</div><div class="line">    the-mutex))</div><div class="line">//生成锁</div><div class="line">(define (clear! cell)</div><div class="line">	(set-car! cell false))</div><div class="line">(define (test-and-set! cell)</div><div class="line">	(if (car cell) true (begin (set-car! cell true) false)))</div><div class="line"></div><div class="line">//test-and-set! 必须为原子操作否则可能在set true之前被再次访问</div></pre></td></tr></table></figure>
+<p>代替串行的方式屏障同步？</p>
+<p><strong>3.5 stream</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">(define (memo-proc proc)</div><div class="line">  (let ((already-run? #f)) </div><div class="line">       ((result #f))</div><div class="line">       (lambda () </div><div class="line">               (if (not already-run?)</div><div class="line">                   (begin (set! already-run #t)</div><div class="line">                          (set! result (proc)))</div><div class="line">                   result))))</div><div class="line">(define (deny func) (memo-proc (lambda() func))) //会生成memo环境保存，memo只会在生成stream的时候调用</div><div class="line">(define (force func) (func))</div></pre></td></tr></table></figure>
+<p>素数流</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">(define (divisible? x y) (= (remainder x y) 0))</div><div class="line">(define (sieve stream) </div><div class="line">	(cons-stream</div><div class="line">         (stream-car stream)</div><div class="line">         (sieve </div><div class="line">         	 (stream-filter</div><div class="line">			(lambda (x) (not (divisible? x (stream-car stream))))</div><div class="line">			(stream-cdr stream)))))</div><div class="line">(define primes (sieve (integers-starting-from 2))) //发现一个int ，之后就过滤int的倍数</div></pre></td></tr></table></figure>
+<p>新版本的guess</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">(<span class="name">define</span> (<span class="name">sqrt-improve</span> guess x) </div><div class="line">  (<span class="name">average</span> guess (<span class="name">/</span> x guess)))</div><div class="line"></div><div class="line">(<span class="name">define</span> (<span class="name">sqrt-stream</span> x) (<span class="name">define</span> guesses</div><div class="line">    (<span class="name">cons-stream</span></div><div class="line">     <span class="number">1.0</span></div><div class="line">	(<span class="name">stream-map</span> (<span class="name">lambda</span> (<span class="name">guess</span>) (<span class="name">sqrt-improve</span> guess x)) guesses)))</div><div class="line">  guesses)</div></pre></td></tr></table></figure>
+<p>欧拉加速</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">(define (make-tableau transform s)</div><div class="line">	(cons-stream s (make-tableau transform (transform s)))</div><div class="line">)</div><div class="line">//生成多个stream的stream</div><div class="line">(define (accelerated-sequence transform s)</div><div class="line">	(stream-map stream-car (make-tableau transform s))</div><div class="line">)</div><div class="line">//取每个stream的第一项组成新的stream</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">// stream求导数</div><div class="line">(define (integral delayed-integrand initial-value dt) (define int</div><div class="line">	(cons-stream</div><div class="line">		initial-value</div><div class="line">		(let ((integrand (force delayed-integrand)))</div><div class="line">         (add-streams (scale-stream integrand dt) int))))  //y(t) = y(0)+f(y)*dt</div><div class="line">    int)</div><div class="line">//f为f(y)=dy/dt    ,(delay dy) 为了确保define 不出错，比一定适用于所有解释器</div><div class="line">(define (solve f y0 dt)</div><div class="line">  (define y (integral (delay dy) y0 dt))</div><div class="line">  (define dy (stream-map f y))</div><div class="line">  y)</div><div class="line">  </div><div class="line">//ex</div><div class="line"></div><div class="line">(stream-ref (solve (lambda (y) y) 1</div><div class="line">  0.001) 1000)</div><div class="line">  2.716924</div></pre></td></tr></table></figure>
+<p>3.5.5</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">(define (make-simplified-withdraw balance)</div><div class="line">	(lambda (amount)</div><div class="line">	(set! balance (- balance amount)) balance))</div><div class="line">	</div><div class="line">(define (stream-withdraw balance amount-stream) (cons-stream</div><div class="line">   balance</div><div class="line">   (stream-withdraw (- balance (stream-car amount-stream))</div><div class="line">                    (stream-cdr amount-stream))))</div><div class="line">// amount-stream 是取钱的金额流</div></pre></td></tr></table></figure>
+<blockquote>
+<p>We began this chapter with the goal of building computational mod-<br>els whose structure matches our perception of the real world we are<br>trying to model. We can model the world as a collection of separate,<br>time-bound, interacting objects with state, or we can model the world<br>as a single, timeless, stateless unity. Each view has powerful advantages,<br>but neither view alone is completely satisfactory. A grand unification<br>has yet to emerge.</p>
+</blockquote>
+<p>​<br>​<br>​    </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/course/" rel="tag">#course</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/01/sicp-2/" rel="next" title="sicp-2">
+                <i class="fa fa-chevron-left"></i> sicp-2
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/01/PCI-3/" rel="prev" title="PCI-3">
+                PCI-3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/25/sicp-3/"
+           data-title="sicp-3" data-url="http://yoursite.com/2016/11/25/sicp-3/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="alian" />
+          <p class="site-author-name" itemprop="name">alian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Three-Modularity-Objects-and-State-objects-streams"><span class="nav-number">1.</span> <span class="nav-text">Three.Modularity, Objects, and State(objects, streams)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1Assignment-and-Local-State"><span class="nav-number">1.1.</span> <span class="nav-text">3.1Assignment and Local State</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2The-Environment-Model-of-Evaluation"><span class="nav-number">1.2.</span> <span class="nav-text">3.2The Environment Model of Evaluation</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">alian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"alian"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

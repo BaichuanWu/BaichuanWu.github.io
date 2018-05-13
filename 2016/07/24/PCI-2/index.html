@@ -84,16 +84,24 @@
 
 
 
-<meta name="description" content="2.提供推荐主要内容1.相似度评价体系：1.1欧几里得距离评价（本书中，先取出共同评分的电影，将两个对象对于同一电影评分的差值的平方求和加一再取倒数，值越接近1越相关）1.2皮尔逊相关度评价 (修正了夸大分值（一方普遍比另一方评分高），本书中，先取出共同评分的电影，将各自的电影评分求和sum1,sum2，求平方和sp1,sp2，并求对同一电影的评分之积ps, 相关系数 r=(ps-(sum1sum">
+<meta name="description" content="2.提供推荐主要内容1.相似度评价体系：1.1欧几里得距离评价(Euclidean distance)
+本书中，先取出共同评分的电影，将两个对象对于同一电影评分的差值的平方求和加一再取倒数，值越接近1越相关。
+123456789101112def sim_distance(prefs,person1,person2):  # Get the list of shared_items  si=&amp;#1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PCI-2">
 <meta property="og:url" content="http://yoursite.com/2016/07/24/PCI-2/index.html">
 <meta property="og:site_name" content="One Alian">
-<meta property="og:description" content="2.提供推荐主要内容1.相似度评价体系：1.1欧几里得距离评价（本书中，先取出共同评分的电影，将两个对象对于同一电影评分的差值的平方求和加一再取倒数，值越接近1越相关）1.2皮尔逊相关度评价 (修正了夸大分值（一方普遍比另一方评分高），本书中，先取出共同评分的电影，将各自的电影评分求和sum1,sum2，求平方和sp1,sp2，并求对同一电影的评分之积ps, 相关系数 r=(ps-(sum1sum">
-<meta property="og:updated_time" content="2016-07-24T14:37:36.000Z">
+<meta property="og:description" content="2.提供推荐主要内容1.相似度评价体系：1.1欧几里得距离评价(Euclidean distance)
+本书中，先取出共同评分的电影，将两个对象对于同一电影评分的差值的平方求和加一再取倒数，值越接近1越相关。
+123456789101112def sim_distance(prefs,person1,person2):  # Get the list of shared_items  si=&amp;#1">
+<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/PCI/2-2png.png">
+<meta property="og:updated_time" content="2017-02-09T14:43:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PCI-2">
-<meta name="twitter:description" content="2.提供推荐主要内容1.相似度评价体系：1.1欧几里得距离评价（本书中，先取出共同评分的电影，将两个对象对于同一电影评分的差值的平方求和加一再取倒数，值越接近1越相关）1.2皮尔逊相关度评价 (修正了夸大分值（一方普遍比另一方评分高），本书中，先取出共同评分的电影，将各自的电影评分求和sum1,sum2，求平方和sp1,sp2，并求对同一电影的评分之积ps, 相关系数 r=(ps-(sum1sum">
+<meta name="twitter:description" content="2.提供推荐主要内容1.相似度评价体系：1.1欧几里得距离评价(Euclidean distance)
+本书中，先取出共同评分的电影，将两个对象对于同一电影评分的差值的平方求和加一再取倒数，值越接近1越相关。
+123456789101112def sim_distance(prefs,person1,person2):  # Get the list of shared_items  si=&amp;#1">
+<meta name="twitter:image" content="https://github.com/BaichuanWu/prictures/raw/master/PCI/2-2png.png">
 
 
 
@@ -322,7 +330,110 @@
       
 
       
-        <h3 id="2-提供推荐"><a href="#2-提供推荐" class="headerlink" title="2.提供推荐"></a>2.提供推荐</h3><h4 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h4><p>1.相似度评价体系：<br>1.1欧几里得距离评价（本书中，先取出共同评分的电影，将两个对象对于同一电影评分的差值的平方求和加一再取倒数，值越接近1越相关）<br>1.2皮尔逊相关度评价 (修正了夸大分值（一方普遍比另一方评分高），本书中，先取出共同评分的电影，将各自的电影评分求和sum1,sum2，求平方和sp1,sp2，并求对同一电影的评分之积ps, 相关系数 r=(ps-(sum1<em>sum2)/n))/(sqrt((sq1-$sum1^2$)/n)</em>(sqrt((sq2-$sum2^2$)/n))</p>
+        <h3 id="2-提供推荐"><a href="#2-提供推荐" class="headerlink" title="2.提供推荐"></a>2.提供推荐</h3><h4 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h4><p><strong>1.相似度评价体系：</strong><br><strong>1.1欧几里得距离评价(Euclidean distance)</strong></p>
+<p>本书中，先取出共同评分的电影，将两个对象对于同一电影评分的差值的平方求和加一再取倒数，值越接近1越相关。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sim_distance</span><span class="params">(prefs,person1,person2)</span>:</span></div><div class="line">  <span class="comment"># Get the list of shared_items</span></div><div class="line">  si=&#123;&#125; </div><div class="line">  <span class="keyword">for</span> item <span class="keyword">in</span> prefs[person1]:</div><div class="line">    <span class="keyword">if</span> item <span class="keyword">in</span> prefs[person2]:</div><div class="line">        si[item]=<span class="number">1</span></div><div class="line">  <span class="comment"># if they have no ratings in common, return 0</span></div><div class="line">  <span class="keyword">if</span> len(si)==<span class="number">0</span>: <span class="keyword">return</span> <span class="number">0</span></div><div class="line">  <span class="comment"># Add up the squares of all the differences</span></div><div class="line">  sum_of_squares=sum([pow(prefs[person1][item]-prefs[person2][item],<span class="number">2</span>)</div><div class="line">                      <span class="keyword">for</span> item <span class="keyword">in</span> prefs[person1] <span class="keyword">if</span> item <span class="keyword">in</span> prefs[person2]])</div><div class="line">  <span class="keyword">return</span> <span class="number">1</span>/(<span class="number">1</span>+sum_of_squares)</div></pre></td></tr></table></figure>
+<p><strong>1.2皮尔逊相关度评价(Pearson correlation)</strong></p>
+<a id="more"></a>
+<p> 修正了夸大分值（一方普遍比另一方评分高），本书中，先取出共同评分的电影，将各自的电影评分求和sum1,sum2，求平方和sp1,sp2，并求对同一电影的评分之积ps, </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">     <span class="comment"># Returns the Pearson correlation coefficient for p1 and p2</span></div><div class="line">     <span class="function"><span class="keyword">def</span> <span class="title">sim_pearson</span><span class="params">(prefs,p1,p2)</span>:</span></div><div class="line">       <span class="comment"># Get the list of mutually rated items</span></div><div class="line">       si=&#123;&#125;</div><div class="line">       <span class="keyword">for</span> item <span class="keyword">in</span> prefs[p1]:</div><div class="line">         <span class="keyword">if</span> item <span class="keyword">in</span> prefs[p2]: si[item]=<span class="number">1</span></div><div class="line">       <span class="comment"># Find the number of elements</span></div><div class="line">       n=len(si)</div><div class="line">       <span class="comment"># if they are no ratings in common, return 0</span></div><div class="line">       <span class="keyword">if</span> n==<span class="number">0</span>: <span class="keyword">return</span> <span class="number">0</span></div><div class="line">       <span class="comment"># Add up all the preferences</span></div><div class="line">       sum1=sum([prefs[p1][it] <span class="keyword">for</span> it <span class="keyword">in</span> si])</div><div class="line">       sum2=sum([prefs[p2][it] <span class="keyword">for</span> it <span class="keyword">in</span> si])</div><div class="line">       <span class="comment"># Sum up the squares</span></div><div class="line">       sum1Sq=sum([pow(prefs[p1][it],<span class="number">2</span>) <span class="keyword">for</span> it <span class="keyword">in</span> si])</div><div class="line">       sum2Sq=sum([pow(prefs[p2][it],<span class="number">2</span>) <span class="keyword">for</span> it <span class="keyword">in</span> si])</div><div class="line">       <span class="comment"># Sum up the products</span></div><div class="line">       pSum=sum([prefs[p1][it]*prefs[p2][it] <span class="keyword">for</span> it <span class="keyword">in</span> si])</div><div class="line">       <span class="comment"># Calculate Pearson score</span></div><div class="line">       num=pSum-(sum1*sum2/n)</div><div class="line">       den=sqrt((sum1Sq-pow(sum1,<span class="number">2</span>)/n)*(sum2Sq-pow(sum2,<span class="number">2</span>)/n))</div><div class="line">       <span class="keyword">if</span> den==<span class="number">0</span>: <span class="keyword">return</span> <span class="number">0</span></div><div class="line">r=num/den</div><div class="line"><span class="keyword">return</span> r</div></pre></td></tr></table></figure>
+<p><img src="https://github.com/BaichuanWu/prictures/raw/master/PCI/2-2png.png" alt="无奈啊"></p>
+<p>HEXO解析math出错无奈传图</p>
+<p><strong>2 协同过滤(Collaborative Filtering)是推荐系统中应用最为广泛的技术之一</strong>：</p>
+<p>2.1    基于用户协同过滤(user base Collaborative Filtering)</p>
+<p>​    找到和各个用户的相似度，推荐时，按下表</p>
+<table>
+<thead>
+<tr>
+<th>相似用户</th>
+<th>目标用户相似度</th>
+<th>对项目A评分</th>
+<th>计算项目A评分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户1</td>
+<td>0.1</td>
+<td>3</td>
+<td>0.3</td>
+</tr>
+<tr>
+<td>用户2</td>
+<td>0.2</td>
+<td>4</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>用户3</td>
+<td>0.3</td>
+<td>5</td>
+<td>1.5</td>
+</tr>
+<tr>
+<td>汇总</td>
+<td>0.6</td>
+<td></td>
+<td>2.7</td>
+</tr>
+<tr>
+<td>预计评分</td>
+<td></td>
+<td>2.7/0.6</td>
+<td>4.5</td>
+</tr>
+</tbody>
+</table>
+<p>2.2  基于项目协同过滤(item base Collaborative Filtering)</p>
+<p>​    找到各项目相似度，推荐时，按下表</p>
+<table>
+<thead>
+<tr>
+<th>已评分项目</th>
+<th>评分</th>
+<th>项目A相似度</th>
+<th>计算项目A评分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>项目1</td>
+<td>2</td>
+<td>0.1</td>
+<td>0.2</td>
+</tr>
+<tr>
+<td>项目2</td>
+<td>3</td>
+<td>0.2</td>
+<td>0.6</td>
+</tr>
+<tr>
+<td>项目3</td>
+<td>4</td>
+<td>0.3</td>
+<td>1.2</td>
+</tr>
+<tr>
+<td>汇总</td>
+<td></td>
+<td>0.6</td>
+<td>2</td>
+</tr>
+<tr>
+<td>预计评分</td>
+<td></td>
+<td>2/0.6</td>
+<td>3.333</td>
+</tr>
+</tbody>
+</table>
+<p>2.3 (model base)</p>
+<p>待补充</p>
+<blockquote>
+<p>Item-based filtering usually outperforms user-based filtering in sparse datasets, and the two per-<br>form about equally in dense datasets.</p>
+</blockquote>
+<p>​<br>​<br>​<br>​    </p>
 
       
     </div>
@@ -354,16 +465,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/24/CSAPP-3/" rel="next" title="CSAPP-3">
-                <i class="fa fa-chevron-left"></i> CSAPP-3
+              <a href="/2016/07/24/First-Article/" rel="next" title="First Article">
+                <i class="fa fa-chevron-left"></i> First Article
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/07/25/Nginx配置/" rel="prev" title="Nginx配置">
-                Nginx配置 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/07/26/magento2-0模块开发/" rel="prev" title="magento2.0模块开发">
+                magento2.0模块开发 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -436,7 +547,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -453,7 +564,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -501,7 +612,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

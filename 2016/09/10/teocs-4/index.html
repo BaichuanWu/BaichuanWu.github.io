@@ -1,0 +1,698 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="course," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="从零开始构建现代计算机四.机器语言tips:机器语言：看作一种约定的形式，利用处理器和寄存器操控内存。
+内存访问：内存访问命令分为两类：1）算术和逻辑命令。2）load和store命令
+内存寻址方式：
+​    1）直接寻址：直接表示一个指定内存单元的地址或者使用一个符号来表示这个指定的地址；
+1LOAD R1 67 // R1&amp;lt;-Memory[67]
+​    2）立即寻址：将指令数据域中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="teocs-4">
+<meta property="og:url" content="http://yoursite.com/2016/09/10/teocs-4/index.html">
+<meta property="og:site_name" content="One Alian">
+<meta property="og:description" content="从零开始构建现代计算机四.机器语言tips:机器语言：看作一种约定的形式，利用处理器和寄存器操控内存。
+内存访问：内存访问命令分为两类：1）算术和逻辑命令。2）load和store命令
+内存寻址方式：
+​    1）直接寻址：直接表示一个指定内存单元的地址或者使用一个符号来表示这个指定的地址；
+1LOAD R1 67 // R1&amp;lt;-Memory[67]
+​    2）立即寻址：将指令数据域中">
+<meta property="og:updated_time" content="2017-02-09T14:39:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="teocs-4">
+<meta name="twitter:description" content="从零开始构建现代计算机四.机器语言tips:机器语言：看作一种约定的形式，利用处理器和寄存器操控内存。
+内存访问：内存访问命令分为两类：1）算术和逻辑命令。2）load和store命令
+内存寻址方式：
+​    1）直接寻址：直接表示一个指定内存单元的地址或者使用一个符号来表示这个指定的地址；
+1LOAD R1 67 // R1&amp;lt;-Memory[67]
+​    2）立即寻址：将指令数据域中">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/10/teocs-4/"/>
+
+  <title> teocs-4 | One Alian </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">One Alian</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                teocs-4
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-10T20:24:42+08:00" content="2016-09-10">
+              2016-09-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/10/teocs-4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/10/teocs-4/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="从零开始构建现代计算机"><a href="#从零开始构建现代计算机" class="headerlink" title="从零开始构建现代计算机"></a>从零开始构建现代计算机</h3><h4 id="四-机器语言"><a href="#四-机器语言" class="headerlink" title="四.机器语言"></a>四.机器语言</h4><h5 id="tips"><a href="#tips" class="headerlink" title="tips:"></a>tips:</h5><p><strong>机器语言：</strong>看作一种约定的形式，利用处理器和寄存器操控内存。</p>
+<p><strong>内存访问：</strong>内存访问命令分为两类：1）算术和逻辑命令。2）load和store命令</p>
+<p><strong>内存寻址方式：</strong></p>
+<p>​    1）直接寻址：直接表示一个指定内存单元的地址或者使用一个符号来表示这个指定的地址；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">LOAD R1 67 // R1&lt;-Memory[67]</div></pre></td></tr></table></figure>
+<p>​    2）立即寻址：将指令数据域中的内容当做要操作的数据装入寄存器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">LOADI R1,67 //R1&lt;-67</div></pre></td></tr></table></figure>
+<p>​    3）间接寻址：处理类似指针的语言设施</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//x=foo[j]</div><div class="line">ADD R1, foo,j //R1&lt;-foo+j</div><div class="line">LOAD* R2,R1 //R2&lt;-Mem</div><div class="line">STR R2,X //X&lt;-R2</div></pre></td></tr></table></figure>
+<p><strong>HACK计算机：</strong></p>
+<a id="more"></a>
+<p>内存地址空间：指令地址空间（只读）；数据地址空间</p>
+<p>寄存器：D寄存器（仅用于存储数值）和A寄存器（存储数据和地址）</p>
+<p>A指令：二进制表示为(16位)0 v v v  v v v v  v v v v  v v v v </p>
+<p>v-位域表示数字即value值</p>
+<p>@value，M为Memory[A]</p>
+<p>C指令：二进制表示为(16位)1 1 1 a  c1 c2 c3 c4  c5 c6 d1 d2  d3 j1 j2 j3</p>
+<p>a-位域和c-位域表示函数编码，d位域表明结果存储位置(d1表示A寄存器，</p>
+<p>d2表示D寄存器，d3表示Memory[A])，j位域表明跳转条件(j1当ALU输出值小于0，跳转，j2为等于0，j3为大于0).</p>
+<h5 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h5><p>1.Mult.asm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">// Multiplies R0 and R1 and stores the result in R2.</div><div class="line">// (R0, R1, R2 refer to RAM[0], RAM[1], and RAM[2], respectively.)</div><div class="line"></div><div class="line">	@sum</div><div class="line">	M=0</div><div class="line">	@R0</div><div class="line">	D=M</div><div class="line">	@count</div><div class="line">	M=D</div><div class="line">	</div><div class="line">	(LOOP)</div><div class="line">	@count</div><div class="line">	D=M</div><div class="line">	@END</div><div class="line">	D;JLE</div><div class="line">	@R1</div><div class="line">	D=M</div><div class="line">	@sum</div><div class="line">	M=D+M</div><div class="line">	@count</div><div class="line">	M=M-1</div><div class="line">	@LOOP</div><div class="line">	0;JMP</div><div class="line">	(END)</div><div class="line">	@sum</div><div class="line">	D=M</div><div class="line">	@R2</div><div class="line">	M=D</div><div class="line">	(DONE)</div><div class="line">	@DONE</div><div class="line">	0;JMP</div></pre></td></tr></table></figure>
+<p>2.Fill.asm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">// Runs an infinite loop that listens to the keyboard input. </div><div class="line">// When a key is pressed (any key), the program blackens the screen,</div><div class="line">// i.e. writes &quot;black&quot; in every pixel. When no key is pressed, the</div><div class="line">// program clears the screen, i.e. writes &quot;white&quot; in every pixel.</div><div class="line"></div><div class="line"></div><div class="line">(RESTART)</div><div class="line">@SCREEN</div><div class="line">D=A</div><div class="line">@0</div><div class="line">M=D</div><div class="line"></div><div class="line">(KBDCHECK)</div><div class="line">@KBD</div><div class="line">D=M</div><div class="line">@BLACK</div><div class="line">D;JGT</div><div class="line">@WHITE</div><div class="line">D;JEQ  </div><div class="line"></div><div class="line">@KBDCHECK</div><div class="line">0;JMP</div><div class="line">(BLACK)</div><div class="line">@1</div><div class="line">M=-1 </div><div class="line">@CHANGE</div><div class="line">0;JMP</div><div class="line"></div><div class="line">(WHITE)</div><div class="line">@1</div><div class="line">M=0 </div><div class="line">@CHANGE</div><div class="line">0;JMP</div><div class="line">(CHANGE)</div><div class="line">@1</div><div class="line">D=M </div><div class="line"></div><div class="line">@0</div><div class="line">A=M</div><div class="line">M=D</div><div class="line"></div><div class="line">@0</div><div class="line">D=M+1</div><div class="line">M=M+1</div><div class="line">@KBD</div><div class="line">D=A-D </div><div class="line"></div><div class="line">@CHANGE</div><div class="line">D;JGT </div><div class="line"></div><div class="line">@RESTART</div><div class="line">0;JMP</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/course/" rel="tag">#course</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/10/teocs-3/" rel="next" title="teocs-3">
+                <i class="fa fa-chevron-left"></i> teocs-3
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/12/teocs-5/" rel="prev" title="teocs-5">
+                teocs-5 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/10/teocs-4/"
+           data-title="teocs-4" data-url="http://yoursite.com/2016/09/10/teocs-4/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="alian" />
+          <p class="site-author-name" itemprop="name">alian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#从零开始构建现代计算机"><span class="nav-number">1.</span> <span class="nav-text">从零开始构建现代计算机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#四-机器语言"><span class="nav-number">1.1.</span> <span class="nav-text">四.机器语言</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#tips"><span class="nav-number">1.1.1.</span> <span class="nav-text">tips:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#项目"><span class="nav-number">1.1.2.</span> <span class="nav-text">项目</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">alian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"alian"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

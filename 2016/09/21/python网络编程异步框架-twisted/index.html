@@ -1,0 +1,775 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="article," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="1 前言1.1 异步的编程模型和多线程模型
+
+多线程中每个任务都是单独在线程中完成，其调度有操作系统（或是更底层）管理，涉及互斥元，涉及线程中的调度的相关日后补充。
+异步中一个任务运行必须显示的放弃当前任务，由程序员调度。往往需要将一个任务拆分来交替小步完成；任务之间的切换要不是此任务完成，要不就是它被阻塞。
+
+
+1.2 异步模型适用场景
+
+有大量的任务，因此在一个时刻至少有一个任务要运行
+任务执">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python网络编程异步框架1-twisted">
+<meta property="og:url" content="http://yoursite.com/2016/09/21/python网络编程异步框架-twisted/index.html">
+<meta property="og:site_name" content="One Alian">
+<meta property="og:description" content="1 前言1.1 异步的编程模型和多线程模型
+
+多线程中每个任务都是单独在线程中完成，其调度有操作系统（或是更底层）管理，涉及互斥元，涉及线程中的调度的相关日后补充。
+异步中一个任务运行必须显示的放弃当前任务，由程序员调度。往往需要将一个任务拆分来交替小步完成；任务之间的切换要不是此任务完成，要不就是它被阻塞。
+
+
+1.2 异步模型适用场景
+
+有大量的任务，因此在一个时刻至少有一个任务要运行
+任务执">
+<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/python_info/network_frame/twisted_1.png">
+<meta property="og:updated_time" content="2017-02-09T15:04:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python网络编程异步框架1-twisted">
+<meta name="twitter:description" content="1 前言1.1 异步的编程模型和多线程模型
+
+多线程中每个任务都是单独在线程中完成，其调度有操作系统（或是更底层）管理，涉及互斥元，涉及线程中的调度的相关日后补充。
+异步中一个任务运行必须显示的放弃当前任务，由程序员调度。往往需要将一个任务拆分来交替小步完成；任务之间的切换要不是此任务完成，要不就是它被阻塞。
+
+
+1.2 异步模型适用场景
+
+有大量的任务，因此在一个时刻至少有一个任务要运行
+任务执">
+<meta name="twitter:image" content="https://github.com/BaichuanWu/prictures/raw/master/python_info/network_frame/twisted_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/21/python网络编程异步框架-twisted/"/>
+
+  <title> python网络编程异步框架1-twisted | One Alian </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">One Alian</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                python网络编程异步框架1-twisted
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-21T16:11:51+08:00" content="2016-09-21">
+              2016-09-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/21/python网络编程异步框架-twisted/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/21/python网络编程异步框架-twisted/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><h5 id="1-1-异步的编程模型和多线程模型"><a href="#1-1-异步的编程模型和多线程模型" class="headerlink" title="1.1 异步的编程模型和多线程模型"></a>1.1 异步的编程模型和多线程模型</h5><blockquote>
+<ul>
+<li>多线程中每个任务都是单独在线程中完成，其调度有操作系统（或是更底层）管理，涉及互斥元，涉及线程中的调度的相关日后补充。</li>
+<li>异步中一个任务运行必须显示的放弃当前任务，由程序员调度。往往需要将一个任务拆分来交替小步完成；任务之间的切换要不是此任务完成，要不就是它被阻塞。</li>
+</ul>
+</blockquote>
+<h5 id="1-2-异步模型适用场景"><a href="#1-2-异步模型适用场景" class="headerlink" title="1.2 异步模型适用场景"></a>1.2 异步模型适用场景</h5><blockquote>
+<ul>
+<li>有大量的任务，因此在一个时刻至少有一个任务要运行</li>
+<li>任务执行大量的I/O操作，这样同步模型就会在因为任务阻塞而浪费大量的时间</li>
+<li>任务之间相互独立，以至于任务内部的交互很少。</li>
+</ul>
+</blockquote>
+<h2 id="1-3-select实现的一个异步的socket客户端"><a href="#1-3-select实现的一个异步的socket客户端" class="headerlink" title="1.3 select实现的一个异步的socket客户端"></a>1.3 select实现的一个异步的socket客户端</h2><blockquote>
+<ul>
+<li>reactor模式: 利用循环体来等待事件发生，然后处理发生的事件的模型1</li>
+</ul>
+</blockquote>
+<p><strong>recator的功能：</strong></p>
+<blockquote>
+<ul>
+<li>.监视一系列与你I/O操作相关的文件描述符（description)</li>
+<li>.不停地向你汇报那些准备好I/O操作的文件描述符</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> datetime, errno, optparse, select, socket</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_args</span><span class="params">()</span>:</span></div><div class="line">    usage = <span class="string">"""usage: %prog [options] [hostname]:port ...</span></div><div class="line">This is the Get Poetry Now! client, asynchronous edition.</div><div class="line">Run it like this:</div><div class="line">  python get-poetry.py port1 port2 port3 ...</div><div class="line">If you are in the base directory of the twisted-intro package,</div><div class="line">you could run it like this:</div><div class="line">  python async-client/get-poetry.py 10001 10002 10003</div><div class="line">to grab poetry from servers on ports 10001, 10002, and 10003.</div><div class="line">Of course, there need to be servers listening on those ports</div><div class="line">for that to work.</div><div class="line">"""</div><div class="line">    parser = optparse.OptionParser(usage)</div><div class="line">    _, addresses = parser.parse_args()</div><div class="line"></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> addresses:</div><div class="line">        <span class="keyword">print</span> parser.format_help()</div><div class="line">        parser.exit()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_address</span><span class="params">(addr)</span>:</span></div><div class="line">        <span class="keyword">if</span> <span class="string">':'</span> <span class="keyword">not</span> <span class="keyword">in</span> addr:</div><div class="line">            host = <span class="string">'127.0.0.1'</span></div><div class="line">            port = addr</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            host, port = addr.split(<span class="string">':'</span>, <span class="number">1</span>)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> port.isdigit():</div><div class="line">            parser.error(<span class="string">'Ports must be integers.'</span>)</div><div class="line">        <span class="keyword">return</span> host, int(port)</div><div class="line">    <span class="keyword">return</span> map(parse_address, addresses)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_poetry</span><span class="params">(sockets)</span>:</span></div><div class="line">    <span class="string">"""Download poety from all the given sockets."""</span></div><div class="line">    poems = dict.fromkeys(sockets, <span class="string">''</span>) <span class="comment"># socket -&gt; accumulated poem</span></div><div class="line">    <span class="comment"># socket -&gt; task numbers</span></div><div class="line">    sock2task = dict([(s, i + <span class="number">1</span>) <span class="keyword">for</span> i, s <span class="keyword">in</span> enumerate(sockets)])</div><div class="line">    sockets = list(sockets) <span class="comment"># make a copy</span></div><div class="line">    <span class="comment"># we go around this loop until we've gotten all the poetry</span></div><div class="line">    <span class="comment"># from all the sockets. This is the 'reactor loop'.</span></div><div class="line">    <span class="keyword">while</span> sockets:</div><div class="line">        <span class="comment"># this select call blocks until one or more of the</span></div><div class="line">        <span class="comment"># sockets is ready for read I/O</span></div><div class="line">        rlist, _, _ = select.select(sockets, [], [])</div><div class="line">        <span class="comment"># 当有IO准备好的时才返回，rlist,_,_分别是可读，可写，可执行的IO  select.select(rlist, wlist, xlist, timeout=None) select模块中的select方法是用来识别是其监视的socket是否有完成数据接收的，如果没有它就处于阻塞状态</span></div><div class="line">        <span class="keyword">for</span> sock <span class="keyword">in</span> rlist:</div><div class="line">            data = <span class="string">''</span></div><div class="line">            <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">                <span class="keyword">try</span>:</div><div class="line">                    new_data = sock.recv(<span class="number">1024</span>)</div><div class="line">                <span class="keyword">except</span> socket.error, e:</div><div class="line">                    <span class="keyword">if</span> e.args[<span class="number">0</span>] == errno.EWOULDBLOCK:</div><div class="line">                        <span class="comment"># this error code means we would have</span></div><div class="line">                        <span class="comment"># blocked if the socket was blocking.</span></div><div class="line">                        <span class="comment"># instead we skip to the next socket</span></div><div class="line">                        <span class="keyword">break</span></div><div class="line">                    <span class="keyword">raise</span></div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    <span class="keyword">if</span> <span class="keyword">not</span> new_data:</div><div class="line">                        <span class="keyword">break</span></div><div class="line">                    <span class="keyword">else</span>:</div><div class="line">                        data += new_data</div><div class="line">            task_num = sock2task[sock]</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> data:</div><div class="line">                sockets.remove(sock)</div><div class="line">                sock.close()</div><div class="line">            poems[sock] += data</div><div class="line">    <span class="keyword">return</span> poems</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span><span class="params">(address)</span>:</span></div><div class="line">    <span class="string">"""Connect to the given server and return a non-blocking socket."""</span></div><div class="line">    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div><div class="line">    sock.connect(address)</div><div class="line">    sock.setblocking(<span class="number">0</span>) <span class="comment"># 设置了非阻塞模式</span></div><div class="line">    <span class="keyword">return</span> sock</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">format_address</span><span class="params">(address)</span>:</span></div><div class="line">    host, port = address</div><div class="line">    <span class="keyword">return</span> <span class="string">'%s:%s'</span> % (host <span class="keyword">or</span> <span class="string">'127.0.0.1'</span>, port)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    addresses = parse_args()</div><div class="line">    start = datetime.datetime.now()</div><div class="line">    sockets = map(connect, addresses)</div><div class="line">    poems = get_poetry(sockets)</div><div class="line">    elapsed = datetime.datetime.now() - start</div><div class="line">    <span class="keyword">for</span> i, sock <span class="keyword">in</span> enumerate(sockets):</div><div class="line">        <span class="keyword">print</span> <span class="string">'Task %d: %d bytes of poetry'</span> % (i + <span class="number">1</span>, len(poems[sock]))</div><div class="line">    <span class="keyword">print</span> <span class="string">'Got %d poems in %s'</span> % (len(addresses), elapsed)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    main()</div><div class="line">    </div><div class="line"><span class="comment"># 将处理业务混杂到循环，非标准reactor</span></div></pre></td></tr></table></figure>
+<h2 id="2-twisted"><a href="#2-twisted" class="headerlink" title="2 twisted"></a>2 twisted</h2><h5 id="2-1-twisted基本操作"><a href="#2-1-twisted基本操作" class="headerlink" title="2.1 twisted基本操作"></a>2.1 twisted基本操作</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> twited.internet <span class="keyword">import</span> pollreactor</div><div class="line">pollreactor.install()  <span class="comment"># 决定了reactor 系统调用使用poll 默认select</span></div><div class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'Hello from the reactor loop!'</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'Lately I feel like I\'m stuck in a rut.'</span></div><div class="line">reactor.callWhenRunning(hello) <span class="comment"># 不要调用阻塞的函数影响性能，reactor不会因为回调函数的错误而中断运行</span></div><div class="line">reactor.run()</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>我们的代码与Twisted代码运行在同一个进程中</li>
+<li>当我们的代码运行时，Twisted代码是处于暂停状态的。</li>
+<li>同样，当Twisted代码处于运行状态时，我们的代码处于暂停状态。</li>
+<li>reactor事件循环会在我们的回调函数返回后恢复运行。</li>
+</ul>
+</blockquote>
+<h5 id="2-2-twisted的基本运用"><a href="#2-2-twisted的基本运用" class="headerlink" title="2.2 twisted的基本运用"></a>2.2 twisted的基本运用</h5><blockquote>
+<p><strong>reactor是twisted的核心</strong></p>
+<ul>
+<li>Twisted的reactor只有通过调用reactor.run()才启动。</li>
+<li>reactor循环是在其开始的线程中运行，也就是运行在主线程中。</li>
+<li>一旦启动，reactor就会在程序的控制下（或者具体在一个启动它的线程的控制下）一直运行下去。</li>
+<li>reactor空转时并不会消耗任何CPU的资源。</li>
+<li>并不需要显式的创建reactor，只需要引入就OK了。</li>
+</ul>
+<ul>
+<li><p>Transports 抽象是通过Twisted中interfaces模块中ITransport接口定义的。一个Twisted的Transport代表一个可以收发字节的单条连接。twisted会根据传递的host和port 生成一个twisted.internet.tcp.Client为transport并绑定到之后的protocol</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&gt;   <span class="class"><span class="keyword">class</span> <span class="title">BaseProtocol</span>:</span></div><div class="line">&gt;       <span class="string">"""</span></div><div class="line">&gt;       This is the abstract superclass of all protocols.</div><div class="line">&gt;</div><div class="line">&gt;       Some methods have helpful default implementations here so that they can</div><div class="line">&gt;       easily be shared, but otherwise the direct subclasses of this class are more</div><div class="line">&gt;       interesting, L&#123;Protocol&#125; and L&#123;ProcessProtocol&#125;.</div><div class="line">&gt;       """</div><div class="line">&gt;       connected = <span class="number">0</span></div><div class="line">&gt;       transport = <span class="keyword">None</span></div><div class="line">&gt;</div><div class="line">&gt;       <span class="function"><span class="keyword">def</span> <span class="title">makeConnection</span><span class="params">(self, transport)</span>:</span></div><div class="line">&gt;           <span class="string">"""Make a connection to a transport and a server.</span></div><div class="line">&gt;</div><div class="line">&gt;           This sets the 'transport' attribute of this Protocol, and calls the</div><div class="line">&gt;           connectionMade() callback.</div><div class="line">&gt;           """</div><div class="line">&gt;           self.connected = <span class="number">1</span></div><div class="line">&gt;           self.transport = transport</div><div class="line">&gt;           self.connectionMade()</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<ul>
+<li><p>Protocols 抽象由interfaces模块中的IProtocol定义，Protocol对象实现协议内容；严格意义上讲，每一个Twisted的Protocols类实例都为一个具体的连接提供协议解析。因此我们的程序每建立一条连接（对于服务方就是每接受一条连接），都需要一个协议实例。这就意味着，Protocol实例是存储协议状态与间断性（由于我们是通过异步I/O方式以任意大小来接收数据的）接收并累积数据的地方。</p>
+<p>因此，Protocol实例如何得知它为哪条连接服务呢？如果你阅读IProtocol定义会发现一个makeConnection函数。这是一个回调函数，Twisted会在调用它时传递给其一个也是仅有的一个参数，即Transport实例。这个Transport实例就代表Protocol将要使用的连接。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&gt;       <span class="function"><span class="keyword">def</span> <span class="title">buildProtocol</span><span class="params">(self, addr)</span>:</span></div><div class="line">&gt;           <span class="string">"""</span></div><div class="line">&gt;           Create an instance of a subclass of Protocol.</div><div class="line">&gt;</div><div class="line">&gt;           The returned instance will handle input on an incoming server</div><div class="line">&gt;           connection, and an attribute "factory" pointing to the creating</div><div class="line">&gt;           factory.</div><div class="line">&gt;</div><div class="line">&gt;           Alternatively, C&#123;None&#125; may be returned to immediately close the</div><div class="line">&gt;           new connection.</div><div class="line">&gt;</div><div class="line">&gt;           Override this method to alter how Protocol instances get created.</div><div class="line">&gt;</div><div class="line">&gt;           @param addr: an object implementing L&#123;twisted.internet.interfaces.IAddress&#125;</div><div class="line">&gt;           """</div><div class="line">&gt;           p = self.protocol()   <span class="comment"># protocal 一般为 Protocol或其子类的引用</span></div><div class="line">&gt;           p.factory = self</div><div class="line">&gt;           <span class="keyword">return</span> p</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<ul>
+<li>Protocol Factories 抽象由IProtocolFactory来定义 ；buildProtocol方法在每次被调用时返回一个新Protocol实例，它就是Twisted用来为新连接创建新Protocol实例的方法。</li>
+</ul>
+</blockquote>
+<h5 id="2-3-deferred"><a href="#2-3-deferred" class="headerlink" title="2.3 deferred"></a>2.3 deferred</h5><blockquote>
+<p>deferred是twisted处理回调的抽象：一个Deferred有一对回调链，一个是为针对正确结果，另一个针对错误结果。</p>
+<ul>
+<li>每个deferred链每一节都会返回一个defer对象</li>
+</ul>
+<p>deferred 的流程</p>
+<ol>
+<li><p>一个deferred有一个callback/errback对链，它们以添加到deferred中的顺序依次排列</p>
+</li>
+<li><p>stage 0，即第一对callback/errback，会在deferred激活时调用，具体调用那个看激活deferred的方式，若是通过.errback激活，则调用errback；若是通过.callback激活则调用callback。</p>
+</li>
+<li><p>如果stage N执行出现异常，则stage N+1的errback被调用，并且其参数即为stage N出现的异常</p>
+</li>
+<li><p>同样，如果stage N成功，即没有抛出异常，则N+1的callback被调用，其第一个参数为stage N的返回值。(类似js里的promise，都是抽象了层层嵌套的回调函数？jquery也有deferred，<strong>deferred的中间值存在哪里？</strong>)<img src="https://github.com/BaichuanWu/prictures/raw/master/python_info/network_frame/twisted_1.png" alt="twisted流程"></p>
+<p>tips:</p>
+<p>addCallback向链中添加一个显式的callback函数与一个隐式的”pass-through”函数。一个pass-through函数只是虚设的函数，只将其第一个参数返回。由于errback回调函数的第一个参数是Failure，因此一个”path-through”的errback总是执行”失败”，即将异常传给下个errback回调。</p>
+</li>
+</ol>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/article/" rel="tag">#article</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/18/scipy学习二（Numpy）/" rel="next" title="scipy学习二（Numpy）">
+                <i class="fa fa-chevron-left"></i> scipy学习二（Numpy）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/08/teocs-7-8/" rel="prev" title="teocs-7~8">
+                teocs-7~8 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/21/python网络编程异步框架-twisted/"
+           data-title="python网络编程异步框架1-twisted" data-url="http://yoursite.com/2016/09/21/python网络编程异步框架-twisted/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="alian" />
+          <p class="site-author-name" itemprop="name">alian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-前言"><span class="nav-number">1.</span> <span class="nav-text">1 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-异步的编程模型和多线程模型"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">1.1 异步的编程模型和多线程模型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-异步模型适用场景"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">1.2 异步模型适用场景</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-select实现的一个异步的socket客户端"><span class="nav-number">2.</span> <span class="nav-text">1.3 select实现的一个异步的socket客户端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-twisted"><span class="nav-number">3.</span> <span class="nav-text">2 twisted</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-twisted基本操作"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">2.1 twisted基本操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-twisted的基本运用"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">2.2 twisted的基本运用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-deferred"><span class="nav-number">3.0.0.3.</span> <span class="nav-text">2.3 deferred</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">alian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"alian"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
