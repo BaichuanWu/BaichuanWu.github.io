@@ -84,31 +84,16 @@
 
 
 
-<meta name="description" content="SELECT 和EPOLL
-一个流可以是文件，socket，pipe 等等可以进行I/O操作的内核对象。不管是文件，还是套接字，还是管道，我们都可以把他们看作流
-
-阻塞I/O模式下，一个线程只能处理一个流的I/O事件。如果想要同时处理多个流，要么多进程(fork)，要么多线程(pthread_create)，很不幸这两种方法效率都不高。
-
-非阻塞忙轮询的I/O方式,我们只要不停的把所有流从头到尾问">
+<meta name="description" content="SELECT 和EPOLL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="select和epoll">
 <meta property="og:url" content="http://yoursite.com/2017/08/12/select和epoll/index.html">
 <meta property="og:site_name" content="One Alian">
-<meta property="og:description" content="SELECT 和EPOLL
-一个流可以是文件，socket，pipe 等等可以进行I/O操作的内核对象。不管是文件，还是套接字，还是管道，我们都可以把他们看作流
-
-阻塞I/O模式下，一个线程只能处理一个流的I/O事件。如果想要同时处理多个流，要么多进程(fork)，要么多线程(pthread_create)，很不幸这两种方法效率都不高。
-
-非阻塞忙轮询的I/O方式,我们只要不停的把所有流从头到尾问">
-<meta property="og:updated_time" content="2017-08-12T15:38:38.000Z">
+<meta property="og:description" content="SELECT 和EPOLL">
+<meta property="og:updated_time" content="2018-05-13T13:19:58.385Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="select和epoll">
-<meta name="twitter:description" content="SELECT 和EPOLL
-一个流可以是文件，socket，pipe 等等可以进行I/O操作的内核对象。不管是文件，还是套接字，还是管道，我们都可以把他们看作流
-
-阻塞I/O模式下，一个线程只能处理一个流的I/O事件。如果想要同时处理多个流，要么多进程(fork)，要么多线程(pthread_create)，很不幸这两种方法效率都不高。
-
-非阻塞忙轮询的I/O方式,我们只要不停的把所有流从头到尾问">
+<meta name="twitter:description" content="SELECT 和EPOLL">
 
 
 
@@ -318,9 +303,11 @@
       
 
       
-        <h3 id="SELECT-和EPOLL"><a href="#SELECT-和EPOLL" class="headerlink" title="SELECT 和EPOLL"></a>SELECT 和EPOLL</h3><ul>
+        <h3 id="SELECT-和EPOLL"><a href="#SELECT-和EPOLL" class="headerlink" title="SELECT 和EPOLL"></a>SELECT 和EPOLL</h3><a id="more"></a>
+<ul>
 <li><p>一个流可以是文件，socket，pipe 等等可以进行I/O操作的内核对象。不管是文件，还是套接字，还是管道，我们都可以把他们看作流</p>
 </li>
+<li></li>
 <li><p><strong>阻塞I/O模式下</strong>，一个线程只能处理一个流的I/O事件。如果想要同时处理多个流，要么多进程(fork)，要么多线程(pthread_create)，很不幸这两种方法效率都不高。</p>
 </li>
 <li><p><strong>非阻塞忙轮询的I/O方式</strong>,我们只要不停的把所有流从头到尾问一遍，又从头开始。这样就可以处理多个流了，但这样的做法显然不好，因为如果所有的流都没有数据，那么只会白白浪费CPU。这里要补充一点，阻塞模式下，内核对于I/O事件的处理是阻塞或者唤醒，而非阻塞模式下则把I/O事件交给其他对象（后文介绍的 select 以及 epoll）处理甚至直接忽略。</p>

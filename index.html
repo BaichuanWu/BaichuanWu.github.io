@@ -255,7 +255,7 @@
             
               
                 
-                <a class="post-title-link" href="/2018/05/01/linux:unix编程手册-3/" itemprop="url">
+                <a class="post-title-link" href="/2018/05/01/linux:unix编程手册-1_5/" itemprop="url">
                   linux/unix编程手册-3
                 </a>
               
@@ -299,8 +299,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2018/05/01/linux:unix编程手册-3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/01/linux:unix编程手册-3/" itemprop="commentsCount"></span>
+                <a href="/2018/05/01/linux:unix编程手册-1_5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/01/linux:unix编程手册-1_5/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -326,7 +326,7 @@
         
           <h3 id="linux-unix编程手册-2"><a href="#linux-unix编程手册-2" class="headerlink" title="linux/unix编程手册-2"></a>linux/unix编程手册-2</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><h4 id="内核"><a href="#内核" class="headerlink" title="内核"></a><strong>内核</strong></h4><h5 id="内核职责"><a href="#内核职责" class="headerlink" title="内核职责"></a>内核职责</h5>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2018/05/01/linux:unix编程手册-3/#more" rel="contents">
+            <a class="btn" href="/2018/05/01/linux:unix编程手册-1_5/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -540,27 +540,12 @@
 
       
         
-          
-            <h3 id="SELECT-和EPOLL"><a href="#SELECT-和EPOLL" class="headerlink" title="SELECT 和EPOLL"></a>SELECT 和EPOLL</h3><ul>
-<li><p>一个流可以是文件，socket，pipe 等等可以进行I/O操作的内核对象。不管是文件，还是套接字，还是管道，我们都可以把他们看作流</p>
-</li>
-<li><p><strong>阻塞I/O模式下</strong>，一个线程只能处理一个流的I/O事件。如果想要同时处理多个流，要么多进程(fork)，要么多线程(pthread_create)，很不幸这两种方法效率都不高。</p>
-</li>
-<li><p><strong>非阻塞忙轮询的I/O方式</strong>,我们只要不停的把所有流从头到尾问一遍，又从头开始。这样就可以处理多个流了，但这样的做法显然不好，因为如果所有的流都没有数据，那么只会白白浪费CPU。这里要补充一点，阻塞模式下，内核对于I/O事件的处理是阻塞或者唤醒，而非阻塞模式下则把I/O事件交给其他对象（后文介绍的 select 以及 epoll）处理甚至直接忽略。</p>
-</li>
-<li><p>为了避免CPU空转，可以引进了一个<strong>代理</strong>(select,epoll)，代理可以同时观察许多流的I/O事件，在空闲的时候，<strong>会把当前线程阻塞掉</strong>，当有一个或多个流有I/O事件时，就从阻塞态中醒来</p>
-<p>​</p>
-</li>
-</ul>
-<h4 id="select"><a href="#select" class="headerlink" title="select:"></a>select:</h4><ul>
-<li>如果没有I/O事件产生，我们的程序就会阻塞在select处。但是依然有个问题，我们从select那里仅仅知道了，有I/O事件发生了，但却并不知道是那几个流（可能有一个，多个，甚至全部），我们只能<strong>无差别轮询</strong>所有流，找出能读出数据，或者写入数据的流，对他们进行操作</li>
-<li>我们有O(n)的<strong>无差别</strong>轮询复杂度，同时处理的流越多，每一次无差别轮询时间就越长。</li>
-</ul>
-<h4 id="epoll"><a href="#epoll" class="headerlink" title="epoll:"></a>epoll:</h4><ul>
-<li>​</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 忙轮询</span></div><div class="line"><span class="keyword">while</span> true &#123;</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> stream[]; &#123;</div><div class="line">		<span class="keyword">if</span> i has data</div><div class="line">			read until unavailable</div><div class="line">	&#125;</div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="comment">#无差别轮训select</span></div><div class="line"><span class="keyword">while</span> true &#123;</div><div class="line">	select(streams[])  <span class="comment">#都没有IO时阻塞</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> streams[] &#123;</div><div class="line">		<span class="keyword">if</span> i has data</div><div class="line">			read until unavailable</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment"># epoll</span></div><div class="line"><span class="keyword">while</span> true &#123;</div><div class="line">	active_stream[] = epoll_wait(epollfd)</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> active_stream[] &#123;</div><div class="line">		read <span class="keyword">or</span> write till unavailable</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
+          <h3 id="SELECT-和EPOLL"><a href="#SELECT-和EPOLL" class="headerlink" title="SELECT 和EPOLL"></a>SELECT 和EPOLL</h3>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/08/12/select和epoll/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
