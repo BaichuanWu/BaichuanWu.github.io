@@ -1,0 +1,851 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="tips," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="linux/unix编程手册-6(进程)进程和程序
+程序：
+
+二进制格式标志：最初:a.out,COFF; 现:UNIX实现采用ELF(可执行链接格式)
+机器语言指令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux/unix编程手册-6_10">
+<meta property="og:url" content="http://yoursite.com/2018/05/15/linux:unix编程手册-6_10的/index.html">
+<meta property="og:site_name" content="One Alian">
+<meta property="og:description" content="linux/unix编程手册-6(进程)进程和程序
+程序：
+
+二进制格式标志：最初:a.out,COFF; 现:UNIX实现采用ELF(可执行链接格式)
+机器语言指令">
+<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/6_1.png">
+<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/7_1.png">
+<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/7_2.png">
+<meta property="og:updated_time" content="2018-05-28T16:47:37.816Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux/unix编程手册-6_10">
+<meta name="twitter:description" content="linux/unix编程手册-6(进程)进程和程序
+程序：
+
+二进制格式标志：最初:a.out,COFF; 现:UNIX实现采用ELF(可执行链接格式)
+机器语言指令">
+<meta name="twitter:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/6_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/15/linux:unix编程手册-6_10的/"/>
+
+  <title> linux/unix编程手册-6_10 | One Alian </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">One Alian</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                linux/unix编程手册-6_10
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-05-15T11:53:07+08:00" content="2018-05-15">
+              2018-05-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/05/15/linux:unix编程手册-6_10的/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/15/linux:unix编程手册-6_10的/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="linux-unix编程手册-6-进程"><a href="#linux-unix编程手册-6-进程" class="headerlink" title="linux/unix编程手册-6(进程)"></a>linux/unix编程手册-6(进程)</h3><h4 id="进程和程序"><a href="#进程和程序" class="headerlink" title="进程和程序"></a>进程和程序</h4><ul>
+<li><p>程序：</p>
+<ul>
+<li>二进制格式标志：最初:a.out,COFF; 现:UNIX实现采用ELF(可执行链接格式)</li>
+<li>机器语言指令</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li>程序入口地址</li>
+<li>数据</li>
+<li>符号表及重定位表</li>
+<li>共享库和动态链接信息</li>
+<li>其他</li>
+</ul>
+</li>
+<li><p>进程</p>
+<ul>
+<li>内核定义的抽象实体，并为该实体分配用以执行程序的各项系统资源</li>
+<li>用户内存空间（代码和使用的变量）</li>
+<li>一系列内核数据结构构成（维护进程状态的信息）</li>
+</ul>
+</li>
+</ul>
+<h4 id="进程号"><a href="#进程号" class="headerlink" title="进程号"></a>进程号</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">pid_t</span> getpid(<span class="keyword">void</span>);</div><div class="line"></div><div class="line"><span class="keyword">pid_t</span> getppid(<span class="keyword">void</span>);</div><div class="line"></div><div class="line"><span class="comment">//pid 的最大值为32767， 一旦分配到32767 计数器会置为300重新分配 </span></div><div class="line"><span class="comment">//pid_max:/proc/sys/kernel/pid_max</span></div><div class="line"></div><div class="line"><span class="comment">// /proc/$PID/status</span></div><div class="line"></div><div class="line"><span class="comment">//pstree</span></div></pre></td></tr></table></figure>
+<h4 id="进程的内存布局"><a href="#进程的内存布局" class="headerlink" title="进程的内存布局"></a>进程的内存布局</h4><blockquote>
+<ul>
+<li>文本段(text)：包含进程运行的程序指令，只读，文本段共享，映射到所有使用进程的虚拟地址空间</li>
+<li>初始化数据包段(data)：包含显式初始化的全局变量和静态变量</li>
+<li>未初始化数据包段(BSS段)：未初始化的全局变量和静态变量，启动前，本段所有内存初始化0；和前者分开的原因是程序在磁盘存储时，不需要为未初始化的变量分配存储空间</li>
+<li>栈</li>
+<li>堆</li>
+</ul>
+</blockquote>
+<p><img src="https://github.com/BaichuanWu/prictures/raw/master/TLPI/6_1.png" alt=""></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ size a.out  </div><div class="line">   text    data     bss     dec     hex filename  </div><div class="line">   <span class="number">1317</span>     <span class="number">500</span>      <span class="number">24</span>    <span class="number">1841</span>     <span class="number">731</span> a.out</div><div class="line"><span class="comment">//       +       +       =</span></div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">extern</span> <span class="keyword">char</span> etext, edata, end;</div></pre></td></tr></table></figure>
+<h4 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h4><blockquote>
+<p>程序的局部性</p>
+<ul>
+<li>空间局部性：程序倾向访问访问过内存地址附近的内存</li>
+<li>时间局部性：程序倾向访问已经访问过的内存</li>
+</ul>
+<p>内核为进程分配和释放页表</p>
+<p>进程虚拟地址空间页——页表——RAM页帧</p>
+<p>32位一般虚拟内存每页4K, 64位？</p>
+</blockquote>
+<h4 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h4><blockquote>
+<p>子进程继承父进程环境变量，并隔离</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; /proc/$PID/environ </div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line">&gt; </div><div class="line">&gt; <span class="keyword">extern</span> <span class="keyword">char</span> **environ;</div><div class="line">&gt; </div><div class="line">&gt; <span class="function"><span class="keyword">char</span> *<span class="title">getenv</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>;</div><div class="line">&gt;     </div><div class="line">&gt; <span class="function"><span class="keyword">int</span> <span class="title">putenv</span><span class="params">(<span class="keyword">char</span> *<span class="built_in">string</span>)</span></span>;</div><div class="line">&gt; <span class="comment">// string 指向 'name=value'的字符串  修改string 会影响environ</span></div><div class="line">&gt;     </div><div class="line">&gt; <span class="function"><span class="keyword">int</span> <span class="title">setenv</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">const</span> <span class="keyword">char</span> *value, <span class="keyword">int</span> overwrite)</span></span>;</div><div class="line">&gt; <span class="comment">// 将 name, value 分配至内存缓冲区，之后修改不会影响environ</span></div><div class="line">&gt; </div><div class="line">&gt; <span class="function"><span class="keyword">int</span> <span class="title">unsetenv</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>;</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>环境不仅可以作为进程间通讯；还可以作为程序间通讯的方式</p>
+</blockquote>
+<h4 id="非局部跳转"><a href="#非局部跳转" class="headerlink" title="非局部跳转"></a>非局部跳转</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;setjmp.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">setjmp</span><span class="params">(jmp_buf env)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">longjmp</span><span class="params">(jmp_buf env, <span class="keyword">int</span> val)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">// 调用setjmp 时,把当前进程环境的各种信息，和程序计数器(指向代码)和栈指针寄存器的信息的副本保存到env</span></div><div class="line"></div><div class="line"><span class="keyword">register</span> <span class="keyword">int</span> rvar;</div><div class="line"><span class="keyword">volatile</span> <span class="keyword">int</span> vvar;</div></pre></td></tr></table></figure>
+<h3 id="linux-unix编程手册-7-内存分配"><a href="#linux-unix编程手册-7-内存分配" class="headerlink" title="linux/unix编程手册-7(内存分配)"></a>linux/unix编程手册-7(内存分配)</h3><h4 id="堆内存"><a href="#堆内存" class="headerlink" title="堆内存"></a>堆内存</h4><blockquote>
+<ul>
+<li>program break 开始位于 &amp;end</li>
+</ul>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">brk</span><span class="params">(<span class="keyword">void</span> *end_data_segment)</span></span>;</div><div class="line"><span class="comment">//Returns 0 on success, or –1 on error</span></div><div class="line"><span class="comment">//设置 program break 到 end_data_segment 会根据页四舍五入取整</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">sbrk</span><span class="params">(<span class="keyword">intptr_t</span> increment)</span></span>;</div><div class="line"><span class="comment">//Returns previous program break on success, or (void *) –1 on error</span></div><div class="line"><span class="comment">//设置 program break 增加 increment</span></div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;malloc.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">malloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</div><div class="line"><span class="comment">//Returns pointer to allocated memory on success, or NULL on error 不初始化内存</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">free</span><span class="params">(<span class="keyword">void</span> *ptr)</span></span>;</div><div class="line"><span class="comment">// free一般不会降低program break, 但是当栈顶的空闲内存足够大,free的glibc实现会调用sbrk来降低program break</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">calloc</span><span class="params">(<span class="keyword">size_t</span> numitems, <span class="keyword">size_t</span> size)</span></span>;</div><div class="line"><span class="comment">//Returns pointer to allocated memory on success, or NULL on error 初始化为0</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">realloc</span><span class="params">(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size)</span></span>;</div><div class="line"><span class="comment">//Returns pointer to allocated memory on success, or NULL on error 无连续的内存，拷贝至新内存</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">memalign</span><span class="params">(<span class="keyword">size_t</span> boundary, <span class="keyword">size_t</span> size)</span></span>;</div><div class="line"><span class="comment">//Returns pointer to allocated memory on success, or NULL on error 起始地址参数是boundary的整数倍</span></div></pre></td></tr></table></figure>
+<p><img src="https://github.com/BaichuanWu/prictures/raw/master/TLPI/7_1.png" alt=""></p>
+<p><img src="https://github.com/BaichuanWu/prictures/raw/master/TLPI/7_2.png" alt=""></p>
+<h4 id="栈内存"><a href="#栈内存" class="headerlink" title="栈内存"></a>栈内存</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;alloca.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">alloca</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</div><div class="line"><span class="comment">//Returns pointer to allocated block of memory</span></div></pre></td></tr></table></figure>
+<h3 id="linux-unix编程手册-8-用户和组"><a href="#linux-unix编程手册-8-用户和组" class="headerlink" title="linux/unix编程手册-8(用户和组)"></a>linux/unix编程手册-8(用户和组)</h3><blockquote>
+<p>Linux 用户ID可以不唯一对应多个用户名</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pwd.h&gt;</span></span></div><div class="line"><span class="keyword">struct</span> passwd &#123;</div><div class="line">        <span class="keyword">char</span> *pw_name;</div><div class="line">        <span class="keyword">char</span> *pw_passwd;</div><div class="line">        <span class="keyword">uid_t</span> pw_uid;</div><div class="line">        <span class="keyword">gid_t</span> pw_gid;</div><div class="line">        <span class="keyword">char</span> *pw_gecos;</div><div class="line">        <span class="keyword">char</span> *pw_dir;</div><div class="line">        <span class="keyword">char</span> *pw_shell;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">struct</span> passwd *<span class="title">getpwnam</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>;</div><div class="line"><span class="function"><span class="keyword">struct</span> passwd *<span class="title">getpwuid</span><span class="params">(<span class="keyword">uid_t</span> uid)</span></span>;</div><div class="line"><span class="comment">//Both return a pointer on success, or NULL on error; see main text for description of the “not found” case</span></div><div class="line"><span class="comment">// 返回的指针指向静态内存，不可重入(not reentrant)</span></div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;grp.h&gt;</span></span></div><div class="line"><span class="keyword">struct</span> group &#123;</div><div class="line">    <span class="keyword">char</span>  *gr_name;</div><div class="line">    <span class="keyword">char</span>  *gr_passwd;</div><div class="line">	<span class="keyword">gid_t</span>  gr_gid;</div><div class="line">	<span class="keyword">char</span> **gr_mem;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">struct</span> group *<span class="title">getgrnam</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name)</span></span>;</div><div class="line"><span class="function"><span class="keyword">struct</span> group *<span class="title">getgrgid</span><span class="params">(<span class="keyword">gid_t</span> gid)</span></span>;</div><div class="line"><span class="comment">//Both return a pointer on success, or NULL on error; see main text for description of the “not found” case</span></div><div class="line"><span class="comment">// 返回的指针指向静态内存，不可重入(not reentrant)</span></div></pre></td></tr></table></figure>
+<h3 id="linux-unix编程手册-9-进程凭证"><a href="#linux-unix编程手册-9-进程凭证" class="headerlink" title="linux/unix编程手册-9(进程凭证)"></a>linux/unix编程手册-9(进程凭证)</h3><blockquote>
+<ul>
+<li><p>实际用户/组ID(real xx id)</p>
+<ul>
+<li>进程所属的用户组，子进程继承自父进程</li>
+</ul>
+</li>
+<li><p>有效用户/组ID(effective xx id)</p>
+<ul>
+<li><p>通常有效用户/组ID和实际用户/组ID相同，但是有两种方法导致不同</p>
+<ul>
+<li><p>xxx</p>
+</li>
+<li><p>执行set-user-ID 和 set-group-ID的程序</p>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;         # ls -l prog</div><div class="line">&gt;         -rwxr-xr-x 1 root root 302585 Jun 26 15:05 prog</div><div class="line">&gt;         # chmod u+s prog   //Turn on set-user-ID permission bit</div><div class="line">&gt;         # chmod g+s prog   //Turn on set-group-ID permission bit</div><div class="line">&gt;         # ls -l prog</div><div class="line">&gt;         -rwsr-sr-x 1 root root 302585 Jun 26 15:05 prog</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<pre><code>- 会将可执行权限x标识改为s
+
+- 对于shell脚本无效(38.3补充)
+</code></pre><ul>
+<li>有效用户ID=0的进程拥有root权限，称之为特权级进程</li>
+</ul>
+<ul>
+<li><p>保存的用户/组ID(saved set-xx-id)</p>
+<ul>
+<li>配合set-user-ID 和 set-group-ID使用</li>
+<li>其值为复制的有效用户/组ID</li>
+<li>一些系统调用将标识S的进程的有效用户ID在实际和保存ID间切换</li>
+</ul>
+</li>
+<li><p>文件系统用户/组ID(file-system xx id)</p>
+<ul>
+<li>linux中对于文件的系统操作的权限是由文件系统ID(结合辅助组ID)决定的</li>
+</ul>
+</li>
+<li><p>辅助组ID</p>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="keyword">uid_t</span> getuid(<span class="keyword">void</span>);</div><div class="line"><span class="keyword">uid_t</span> geteuid(<span class="keyword">void</span>);</div><div class="line"><span class="keyword">gid_t</span> getgid(<span class="keyword">void</span>);</div><div class="line"><span class="keyword">gid_t</span> getegid(<span class="keyword">void</span>);</div><div class="line"></div><div class="line"><span class="comment">// 修改有效xxID 调用 ,均返回0:success, -1:fail</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">setuid</span><span class="params">(<span class="keyword">uid_t</span> uid)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">setgid</span><span class="params">(<span class="keyword">gid_t</span> gid)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">seteuid</span><span class="params">(<span class="keyword">uid_t</span> uid)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">setegid</span><span class="params">(<span class="keyword">gid_t</span> gid)</span></span>;</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>非特权进程调用setuid<ul>
+<li>仅能修改有效用户ID，</li>
+<li>且仅能修改为实际的用户ID和保存用户ID</li>
+<li>setuid等效于seteuid</li>
+</ul>
+</li>
+<li>特权进程调用以一个非0参数x调用setuid，<ul>
+<li>用户的3个id均会变为x，且不再是特权进程，不可逆</li>
+<li>调用seteuid只改变euid，可以以非特权的规则恢复</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="comment">// uid, euid为-1是不修改</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">setreuid</span><span class="params">(<span class="keyword">uid_t</span> ruid, <span class="keyword">uid_t</span> euid)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">setregid</span><span class="params">(<span class="keyword">gid_t</span> rgid, <span class="keyword">gid_t</span> egid)</span></span>;</div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>非特权进程可<ul>
+<li>将ruid 设为 当前ruid, euid</li>
+<li>将euid设为 当前ruid, euid, suid</li>
+</ul>
+</li>
+<li>特权进程可<ul>
+<li>将ruid设为任意值</li>
+<li>将euid设为任意值</li>
+</ul>
+</li>
+<li>满足以下之一suid会设为euid:<ul>
+<li>ruid不为-1</li>
+<li>euid值不等于原ruid值</li>
+</ul>
+</li>
+<li>注意调用顺序，修改了uid之后gid可能无法修改</li>
+</ul>
+</blockquote>
+<p>类似略</p>
+<h3 id="linux-unix编程手册-10-时间"><a href="#linux-unix编程手册-10-时间" class="headerlink" title="linux/unix编程手册-10(时间)"></a>linux/unix编程手册-10(时间)</h3><blockquote>
+<ul>
+<li>真实时间</li>
+<li>进程时间(进程创建后使用cpu的时间)<ul>
+<li>用户CPU时间</li>
+<li>系统CPU时间</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//系统时区 链接到/usr/share/zoninfo的某文件</div><div class="line">$ ll /etc/localtime</div><div class="line">lrwxrwxrwx 1 root root 25 5月   2 22:36 /etc/localtime -&gt; ../usr/share/zoneinfo/UTC</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$ locale</div><div class="line">LANG=en_US.UTF-8</div><div class="line">LC_CTYPE=zh_CN.UTF-8</div><div class="line">LC_NUMERIC=&quot;en_US.UTF-8&quot;</div><div class="line">LC_TIME=&quot;en_US.UTF-8&quot;</div><div class="line">LC_COLLATE=&quot;en_US.UTF-8&quot;</div><div class="line">LC_MONETARY=&quot;en_US.UTF-8&quot;</div><div class="line">LC_MESSAGES=&quot;en_US.UTF-8&quot;</div><div class="line">LC_PAPER=&quot;en_US.UTF-8&quot;</div><div class="line">LC_NAME=&quot;en_US.UTF-8&quot;</div><div class="line">LC_ADDRESS=&quot;en_US.UTF-8&quot;</div><div class="line">LC_TELEPHONE=&quot;en_US.UTF-8&quot;</div><div class="line">LC_MEASUREMENT=&quot;en_US.UTF-8&quot;</div><div class="line">LC_IDENTIFICATION=&quot;en_US.UTF-8&quot;</div><div class="line">LC_ALL=</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//修改环境变量执行</span></div><div class="line">$ LANG=de_DE ./show_time</div></pre></td></tr></table></figure>
+<blockquote>
+<p>软件时钟(jiffies), linux时间精度取决于jiffies 时钟频率100,250,1000Hz 对应jiffies(10,4,1ms)</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tips/" rel="tag">#tips</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/01/linux:unix编程手册-1_5/" rel="next" title="linux/unix编程手册-1_5">
+                <i class="fa fa-chevron-left"></i> linux/unix编程手册-1_5
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/05/15/linux:unix编程手册-6_10的/"
+           data-title="linux/unix编程手册-6_10" data-url="http://yoursite.com/2018/05/15/linux:unix编程手册-6_10的/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="alian" />
+          <p class="site-author-name" itemprop="name">alian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-6-进程"><span class="nav-number">1.</span> <span class="nav-text">linux/unix编程手册-6(进程)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进程和程序"><span class="nav-number">1.1.</span> <span class="nav-text">进程和程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程号"><span class="nav-number">1.2.</span> <span class="nav-text">进程号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程的内存布局"><span class="nav-number">1.3.</span> <span class="nav-text">进程的内存布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#虚拟内存"><span class="nav-number">1.4.</span> <span class="nav-text">虚拟内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#环境变量"><span class="nav-number">1.5.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非局部跳转"><span class="nav-number">1.6.</span> <span class="nav-text">非局部跳转</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-7-内存分配"><span class="nav-number">2.</span> <span class="nav-text">linux/unix编程手册-7(内存分配)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#堆内存"><span class="nav-number">2.1.</span> <span class="nav-text">堆内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#栈内存"><span class="nav-number">2.2.</span> <span class="nav-text">栈内存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-8-用户和组"><span class="nav-number">3.</span> <span class="nav-text">linux/unix编程手册-8(用户和组)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-9-进程凭证"><span class="nav-number">4.</span> <span class="nav-text">linux/unix编程手册-9(进程凭证)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-10-时间"><span class="nav-number">5.</span> <span class="nav-text">linux/unix编程手册-10(时间)</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">alian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"alian"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
