@@ -90,10 +90,12 @@
 <meta property="og:url" content="http://yoursite.com/2018/05/01/linux:unix编程手册-1_5/index.html">
 <meta property="og:site_name" content="One Alian">
 <meta property="og:description" content="linux/unix编程手册-2基本概念内核内核职责">
-<meta property="og:updated_time" content="2018-05-13T13:46:54.181Z">
+<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/5_2.png">
+<meta property="og:updated_time" content="2018-06-02T05:32:51.848Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux/unix编程手册-1_5">
 <meta name="twitter:description" content="linux/unix编程手册-2基本概念内核内核职责">
+<meta name="twitter:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/5_2.png">
 
 
 
@@ -423,6 +425,7 @@
 </ul>
 <p><strong>进程A,B的文件描述符指向同一文件句柄：可能是fork()继承或者是UNIX域套接字传递；</strong></p>
 <p><strong>进程A,B的文件描述符指向不同文件句柄，不同文件句柄指向i-node列表同一条目：对同一文件发起open()调用，（统一进程两次open()同一文件类似）</strong></p>
+<p><img src="https://github.com/BaichuanWu/prictures/raw/master/TLPI/5_2.png" alt=""></p>
 </blockquote>
 <h4 id="复制文件描述符"><a href="#复制文件描述符" class="headerlink" title="复制文件描述符"></a>复制文件描述符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./myscripts &gt; t.log 2&gt;&amp;1</div></pre></td></tr></table></figure>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">int</span> newfd;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup</span><span class="params">(<span class="keyword">int</span> oldfd)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup2</span><span class="params">(<span class="keyword">int</span> oldfd, <span class="keyword">int</span> newfd)</span></span>; <span class="comment">// 忽略close(newfd)的错误</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fcntl</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> cmd, ...)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//复制时 为 fcntl(oldfd, F_DUPFD, startfd) 大于等于startfd的最小未用值作为描述符编号</span></div><div class="line"></div><div class="line"><span class="comment">//下面三行成功时一致；oldfg不存在时dup2不会close(newfd),new=old时什么都不做</span></div><div class="line">close(<span class="number">2</span>); newfd=dup(<span class="number">1</span>)</div><div class="line">newfd=dup2(<span class="number">1</span>,<span class="number">2</span>)</div><div class="line">close(<span class="number">2</span>); newfd=fcntl(<span class="number">1</span>, F_DUPFD,<span class="number">2</span>)</div></pre></td></tr></table></figure>
@@ -559,7 +562,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-count">38</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

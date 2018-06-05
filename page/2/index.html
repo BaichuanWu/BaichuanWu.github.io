@@ -255,6 +255,132 @@
             
               
                 
+                <a class="post-title-link" href="/2016/12/09/docker/" itemprop="url">
+                  docker
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-09T09:28:51+08:00" content="2016-12-09">
+              2016-12-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/09/docker/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/09/docker/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h5 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h5><p>1.镜像：    一个只读模板（ex:一个包含完整debian操作系统环境，里面安装了nginx），镜像用来安装容器。</p>
+<p>2.容器：镜像创建的运行实例（可以被启动，开始，停止，删除），容器在启动时创建一层可写作层作为最上层。</p>
+<p>3.仓库：集中放置镜像的地方。</p>
+<p>常用命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">docker run -it salivawbc/debian:tag /bin/bash  <span class="comment"># 没有冒号默认latest 启动docker</span></div><div class="line"></div><div class="line">docker commit -m <span class="string">"improve"</span> <span class="_">-a</span> <span class="string">"alian"</span> 72f1a8a0e394 salivawbc/debian:tag  <span class="comment">#将容器转化为镜像</span></div><div class="line"></div><div class="line">docker (attach| rm |start | stop | restart) (container_name|container_id) </div><div class="line"></div><div class="line">docker login </div><div class="line"></div><div class="line">docker run -it -v /home/alian/Downloads:/home/outer_doc salivawbc/debian /bin/bash <span class="comment">#挂载外部目录</span></div><div class="line"></div><div class="line">docker <span class="built_in">exec</span> -it (container_name|container_id) /bin/bash <span class="comment"># 多终端进入</span></div><div class="line">docker run --security-opt seccomp=unconfined  <span class="comment"># 保证能访问地址空间 不开启无法gdb调试</span></div></pre></td></tr></table></figure>
+<p>​<br>​                             </p>
+<p>​<br>​<br>​    </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/06/PCI-4~5/" itemprop="url">
                   PCI-4~5
                 </a>
@@ -1384,134 +1510,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/18/unix编程艺术/" itemprop="url">
-                  unix编程艺术
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-18T11:53:07+08:00" content="2016-10-18">
-              2016-10-18
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/programming/" itemprop="url" rel="index">
-                    <span itemprop="name">programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/18/unix编程艺术/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/18/unix编程艺术/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="UNIX编程艺术tips"><a href="#UNIX编程艺术tips" class="headerlink" title="UNIX编程艺术tips"></a>UNIX编程艺术tips</h3><h5 id="4-模块性"><a href="#4-模块性" class="headerlink" title="4.模块性"></a>4.模块性</h5><p>4.1 胶合层</p>
-<blockquote>
-<ul>
-<li>一般来说设计函数或对象层次结构可选择两个方向，自顶而下和自底而上</li>
-<li>为了解决自顶向下和自底向上发生冲突的问题，顶层的应用逻辑和底层的域源语言必须用胶合逻辑层进行阻抗匹配。</li>
-<li>薄胶合层原则可以看做是分离原则的升华。策略（应用逻辑）应该与机制（域原语集）清晰分离。如果胶合层厚，会增加复杂度。</li>
-</ul>
-</blockquote>
-<h5 id="5-文本化"><a href="#5-文本化" class="headerlink" title="5.文本化"></a>5.文本化</h5><p>5.1 文本格式和二进制格式</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1557,7 +1555,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-count">38</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

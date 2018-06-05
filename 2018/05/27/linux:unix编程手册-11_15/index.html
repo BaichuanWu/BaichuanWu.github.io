@@ -1,0 +1,761 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="tips," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="linux/unix编程手册-11(系统限制和选项)
+limit.h定义了最小值
+
+1234$ getconf OPEN_MAX7168$ getconf ARG_MAX262144
+略略略">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux/unix编程手册-6_10">
+<meta property="og:url" content="http://yoursite.com/2018/05/27/linux:unix编程手册-11_15/index.html">
+<meta property="og:site_name" content="One Alian">
+<meta property="og:description" content="linux/unix编程手册-11(系统限制和选项)
+limit.h定义了最小值
+
+1234$ getconf OPEN_MAX7168$ getconf ARG_MAX262144
+略略略">
+<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/12_1.png">
+<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/12_2.png">
+<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/13_1.png">
+<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/14_1.png">
+<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/14_2.png">
+<meta property="og:updated_time" content="2018-06-02T15:59:13.609Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux/unix编程手册-6_10">
+<meta name="twitter:description" content="linux/unix编程手册-11(系统限制和选项)
+limit.h定义了最小值
+
+1234$ getconf OPEN_MAX7168$ getconf ARG_MAX262144
+略略略">
+<meta name="twitter:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/12_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/27/linux:unix编程手册-11_15/"/>
+
+  <title> linux/unix编程手册-6_10 | One Alian </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">One Alian</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                linux/unix编程手册-6_10
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-05-27T11:53:07+08:00" content="2018-05-27">
+              2018-05-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/05/27/linux:unix编程手册-11_15/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/27/linux:unix编程手册-11_15/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="linux-unix编程手册-11-系统限制和选项"><a href="#linux-unix编程手册-11-系统限制和选项" class="headerlink" title="linux/unix编程手册-11(系统限制和选项)"></a>linux/unix编程手册-11(系统限制和选项)</h3><blockquote>
+<p>limit.h定义了最小值</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ getconf OPEN_MAX</div><div class="line">7168</div><div class="line">$ getconf ARG_MAX</div><div class="line">262144</div></pre></td></tr></table></figure>
+<p>略略略</p>
+<a id="more"></a>
+<h3 id="linux-unix编程手册-12-系统和进程信息"><a href="#linux-unix编程手册-12-系统和进程信息" class="headerlink" title="linux/unix编程手册-12(系统和进程信息)"></a>linux/unix编程手册-12(系统和进程信息)</h3><blockquote>
+<p>/proc/$PID</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/pid/self 访问当前进程 /pid/$PID</div><div class="line">/pid/$PID/tasks/$TID 线程</div></pre></td></tr></table></figure>
+<p><img src="https://github.com/BaichuanWu/prictures/raw/master/TLPI/12_1.png" alt=""></p>
+<p><img src="https://github.com/BaichuanWu/prictures/raw/master/TLPI/12_2.png" alt=""></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/utsname.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">uname</span><span class="params">(<span class="keyword">struct</span> utsname *utsbuf)</span></span></div></pre></td></tr></table></figure>
+<h3 id="linux-unix编程手册-13-文件I-O缓冲"><a href="#linux-unix编程手册-13-文件I-O缓冲" class="headerlink" title="linux/unix编程手册-13(文件I/O缓冲)"></a>linux/unix编程手册-13(文件I/O缓冲)</h3><blockquote>
+<p><u>文件系统的块（补充）</u></p>
+<p>read, write仅在用户缓冲区和内核缓冲区高速缓存(kernel buffer cache)之间复制数据，文件和内核缓冲区的数据复制由内核控制</p>
+</blockquote>
+<p><strong>用户缓冲区和内核缓冲区高速缓存</strong></p>
+<p>一些控制缓存的函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">setvbuf</span><span class="params">(FILE *stream, <span class="keyword">char</span> *buf, <span class="keyword">int</span> mode. <span class="keyword">size_t</span> size)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setbuf</span><span class="params">(FILE *stream, <span class="keyword">char</span> *buf)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setbuffer</span><span class="params">(FILE *stream, <span class="keyword">char</span> *buf, <span class="keyword">size_t</span> size)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fflush</span><span class="params">(FILE *stream)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//setbuf 忽略return 等价于：</span></div><div class="line">setbuf(fp, buf);</div><div class="line">setvbuf(fp, buf, (buf != BULL)? <span class="number">_</span>IOFBF:<span class="number">_</span>IONBF, BUFSIZE);</div><div class="line">setbiffer(fp, buf, size);</div><div class="line">setvbuffer(fp, buf, (buf != BULL)? <span class="number">_</span>IOFBF:<span class="number">_</span>IONBF, size);</div></pre></td></tr></table></figure>
+<p>setvbuf</p>
+<ul>
+<li>buf不为NULL, buf 和 size决定stream的缓冲区,在堆中分配空间</li>
+<li>buf为NULL, stdio库会为stream自动分配一个缓冲区，不一定使用size值</li>
+<li>mode<ul>
+<li>_IONBF不缓冲，立刻调用write(),open(),stderr默认这种类型</li>
+<li>_IOLBF行缓冲，对于输出流，换行符和缓冲区满输出，对于输入流，每次读取一行，终端设备默认</li>
+<li>_IOFBF全缓冲，指代磁盘的流默认此</li>
+</ul>
+</li>
+</ul>
+<p>fflush</p>
+<ul>
+<li>将输出流的数据刷新到内核缓冲区，无stream会刷新所有stdio缓冲区</li>
+<li>输入流时，将丢弃缓冲区内数据</li>
+<li>关闭流时会刷新</li>
+</ul>
+<blockquote>
+<p>多数c库实现,stdin和stdout指向同一终端，调用stdin时会隐含一次调用fflush(stdout)</p>
+</blockquote>
+<p><strong>内核缓冲到磁盘</strong></p>
+<blockquote>
+<ul>
+<li>同步I/O数据完整性</li>
+<li>同步I/O文件完整性（相较于前者，一些不影响文件读取的元数据也需要更新到磁盘上(如文件的时间戳)）</li>
+</ul>
+</blockquote>
+<p><strong>stdio函数库I/O详图</strong></p>
+<p><img src="https://github.com/BaichuanWu/prictures/raw/master/TLPI/13_1.png" alt=""></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> _XOPEN_SOURCE 600</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">posix_fadvise</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">off_t</span> offset, <span class="keyword">off_t</span> len, <span class="keyword">int</span> advise)</span></span>;</div><div class="line"><span class="comment">//通知内核优化缓冲区使用的接口，略、、、</span></div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fileno</span><span class="params">(FILE *stream)</span></span>;</div><div class="line"></div><div class="line"><span class="function">FILE *<span class="title">fdopen</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *mode)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//文件流和描述符转换</span></div></pre></td></tr></table></figure>
+<h3 id="linux-unix编程手册-14-文件系统"><a href="#linux-unix编程手册-14-文件系统" class="headerlink" title="linux/unix编程手册-14(文件系统)"></a>linux/unix编程手册-14(文件系统)</h3><h4 id="设备文件"><a href="#设备文件" class="headerlink" title="设备文件"></a>设备文件</h4><blockquote>
+<ul>
+<li>实际设备，虚拟设备</li>
+<li>字符型设备，块设备<ul>
+<li>字符型设备基于每个字符处理：键盘，终端</li>
+<li>块设备每次处理一块设备，通常为512的倍数：磁盘</li>
+</ul>
+</li>
+<li>/dev</li>
+</ul>
+</blockquote>
+<p><strong>磁盘和分区</strong></p>
+<blockquote>
+<p>磁盘分区可容纳任何类型的信息，但通常只包含之一</p>
+<ul>
+<li>文件系统</li>
+<li>数据区域</li>
+<li>交换区域：内核内存管理</li>
+</ul>
+</blockquote>
+<h4 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a><strong>文件系统</strong></h4><p><img src="https://github.com/BaichuanWu/prictures/raw/master/TLPI/14_1.png" alt=""></p>
+<p><img src="https://github.com/BaichuanWu/prictures/raw/master/TLPI/14_2.png" alt=""></p>
+<blockquote>
+<p>当文件存在大量空白时，文件系统只需将i节点和间接指针块中的相应指针打上0，无需分配额外资源</p>
+</blockquote>
+<p><strong>VFS</strong>：各种文件系统的抽象层</p>
+<p><strong>日志文件系统</strong>：避免系统崩溃后遍历文件系统的一致性检查(ext3, ext2）</p>
+<p>文件的挂载和卸载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ mount</div><div class="line">sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,relatime)</div><div class="line">proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)</div><div class="line">devtmpfs on /dev type devtmpfs (rw,nosuid,size=3995724k,nr_inodes=998931,mode=755)</div><div class="line">securityfs on /sys/kernel/security type securityfs (rw,nosuid,nodev,noexec,relatime)</div><div class="line">tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)</div><div class="line">devpts on /dev/pts type devpts (rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000)</div><div class="line">tmpfs on /run type tmpfs (rw,nosuid,nodev,mode=755)</div><div class="line">tmpfs on /sys/fs/cgroup type tmpfs (ro,nosuid,nodev,noexec,mode=755)</div><div class="line">cgroup on /sys/fs/cgroup/systemd type cgroup (rw,nosuid,nodev,noexec,relatime,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd)</div><div class="line">....</div><div class="line">##内容在 /proc/mounts   里面，每个进程都有独立的/proc/$PID/mounts</div><div class="line">$ ll /proc/mounts</div><div class="line">lrwxrwxrwx 1 root root 11 6月   2 21:25 /proc/mounts -&gt; self/mounts</div></pre></td></tr></table></figure>
+<blockquote>
+<p>绑定挂载和硬链</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ mkdir d1</div><div class="line">$ touch d1/x</div><div class="line">$ mkdir d2</div><div class="line">$ mount --bind d1 d2</div><div class="line">$ ls d2 </div><div class="line">x</div><div class="line">$ touch d2/y</div><div class="line">$ ls d1 </div><div class="line">x   y</div></pre></td></tr></table></figure>
+<h4 id="tmpfs-虚拟内存文件系统"><a href="#tmpfs-虚拟内存文件系统" class="headerlink" title="tmpfs:虚拟内存文件系统"></a><strong>tmpfs</strong>:虚拟内存文件系统</h4><h3 id="linux-unix编程手册-15-文件系统"><a href="#linux-unix编程手册-15-文件系统" class="headerlink" title="linux/unix编程手册-15(文件系统)"></a>linux/unix编程手册-15(文件系统)</h3><p><strong>获取文件信息</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/stat.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">stat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">struct</span> stat *statbuf)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">lstat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">struct</span> stat *statbuf)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fstat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">struct</span> stat *statbuf)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//lstat当访问的是链接时，返回的信息针对符号链接本身</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tips/" rel="tag">#tips</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/15/linux:unix编程手册-6_10的/" rel="next" title="linux/unix编程手册-6_10">
+                <i class="fa fa-chevron-left"></i> linux/unix编程手册-6_10
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/05/27/linux:unix编程手册-11_15/"
+           data-title="linux/unix编程手册-6_10" data-url="http://yoursite.com/2018/05/27/linux:unix编程手册-11_15/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="alian" />
+          <p class="site-author-name" itemprop="name">alian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-11-系统限制和选项"><span class="nav-number">1.</span> <span class="nav-text">linux/unix编程手册-11(系统限制和选项)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-12-系统和进程信息"><span class="nav-number">2.</span> <span class="nav-text">linux/unix编程手册-12(系统和进程信息)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-13-文件I-O缓冲"><span class="nav-number">3.</span> <span class="nav-text">linux/unix编程手册-13(文件I/O缓冲)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-14-文件系统"><span class="nav-number">4.</span> <span class="nav-text">linux/unix编程手册-14(文件系统)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设备文件"><span class="nav-number">4.1.</span> <span class="nav-text">设备文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件系统"><span class="nav-number">4.2.</span> <span class="nav-text">文件系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tmpfs-虚拟内存文件系统"><span class="nav-number">4.3.</span> <span class="nav-text">tmpfs:虚拟内存文件系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-15-文件系统"><span class="nav-number">5.</span> <span class="nav-text">linux/unix编程手册-15(文件系统)</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">alian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"alian"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
