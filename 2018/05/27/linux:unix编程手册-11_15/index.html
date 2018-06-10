@@ -98,12 +98,13 @@ limit.h定义了最小值
 
 1234$ getconf OPEN_MAX7168$ getconf ARG_MAX262144
 略略略">
-<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/12_1.png">
-<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/12_2.png">
-<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/13_1.png">
-<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/14_1.png">
-<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/14_2.png">
-<meta property="og:updated_time" content="2018-06-05T02:50:05.045Z">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/6/163d5aee9934fe6d?w=1174&h=584&f=png&s=156276">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/6/163d5aee8ed028a7?w=990&h=434&f=png&s=99917">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/6/163d5aee93efa45f?w=1236&h=1044&f=png&s=220262">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/6/163d5aee996b2249?w=1262&h=438&f=png&s=82681">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/6/163d5aee9ac5601a?w=1284&h=1260&f=png&s=234404">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/7/163da57d92edfc21?w=861&h=175&f=png&s=17262">
+<meta property="og:updated_time" content="2018-06-10T11:50:36.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux/unix编程手册-11_15">
 <meta name="twitter:description" content="linux/unix编程手册-11(系统限制和选项)
@@ -111,7 +112,7 @@ limit.h定义了最小值
 
 1234$ getconf OPEN_MAX7168$ getconf ARG_MAX262144
 略略略">
-<meta name="twitter:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/12_1.png">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/6/6/163d5aee9934fe6d?w=1174&h=584&f=png&s=156276">
 
 
 
@@ -350,8 +351,8 @@ limit.h定义了最小值
 <p>/proc/$PID</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/pid/self 访问当前进程 /pid/$PID</div><div class="line">/pid/$PID/tasks/$TID 线程</div></pre></td></tr></table></figure>
-<p><img src="https://github.com/BaichuanWu/prictures/raw/master/TLPI/12_1.png" alt=""></p>
-<p><img src="https://github.com/BaichuanWu/prictures/raw/master/TLPI/12_2.png" alt=""></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/6/6/163d5aee9934fe6d?w=1174&amp;h=584&amp;f=png&amp;s=156276" alt=""></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/6/6/163d5aee8ed028a7?w=990&amp;h=434&amp;f=png&amp;s=99917" alt=""></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/utsname.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">uname</span><span class="params">(<span class="keyword">struct</span> utsname *utsbuf)</span></span></div></pre></td></tr></table></figure>
 <h3 id="linux-unix编程手册-13-文件I-O缓冲"><a href="#linux-unix编程手册-13-文件I-O缓冲" class="headerlink" title="linux/unix编程手册-13(文件I/O缓冲)"></a>linux/unix编程手册-13(文件I/O缓冲)</h3><blockquote>
 <p><u>文件系统的块（补充）</u></p>
@@ -388,7 +389,7 @@ limit.h定义了最小值
 </ul>
 </blockquote>
 <p><strong>stdio函数库I/O详图</strong></p>
-<p><img src="https://github.com/BaichuanWu/prictures/raw/master/TLPI/13_1.png" alt=""></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/6/6/163d5aee93efa45f?w=1236&amp;h=1044&amp;f=png&amp;s=220262" alt=""></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> _XOPEN_SOURCE 600</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">posix_fadvise</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">off_t</span> offset, <span class="keyword">off_t</span> len, <span class="keyword">int</span> advise)</span></span>;</div><div class="line"><span class="comment">//通知内核优化缓冲区使用的接口，略、、、</span></div></pre></td></tr></table></figure>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fileno</span><span class="params">(FILE *stream)</span></span>;</div><div class="line"></div><div class="line"><span class="function">FILE *<span class="title">fdopen</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">char</span> *mode)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//文件流和描述符转换</span></div></pre></td></tr></table></figure>
 <h3 id="linux-unix编程手册-14-文件系统"><a href="#linux-unix编程手册-14-文件系统" class="headerlink" title="linux/unix编程手册-14(文件系统)"></a>linux/unix编程手册-14(文件系统)</h3><h4 id="设备文件"><a href="#设备文件" class="headerlink" title="设备文件"></a>设备文件</h4><blockquote>
@@ -411,8 +412,8 @@ limit.h定义了最小值
 <li>交换区域：内核内存管理</li>
 </ul>
 </blockquote>
-<h4 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a><strong>文件系统</strong></h4><p><img src="https://github.com/BaichuanWu/prictures/raw/master/TLPI/14_1.png" alt=""></p>
-<p><img src="https://github.com/BaichuanWu/prictures/raw/master/TLPI/14_2.png" alt=""></p>
+<h4 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a><strong>文件系统</strong></h4><p><img src="https://user-gold-cdn.xitu.io/2018/6/6/163d5aee996b2249?w=1262&amp;h=438&amp;f=png&amp;s=82681" alt=""></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/6/6/163d5aee9ac5601a?w=1284&amp;h=1260&amp;f=png&amp;s=234404" alt=""></p>
 <blockquote>
 <p>当文件存在大量空白时，文件系统只需将i节点和间接指针块中的相应指针打上0，无需分配额外资源</p>
 </blockquote>
@@ -426,6 +427,38 @@ limit.h定义了最小值
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ mkdir d1</div><div class="line">$ touch d1/x</div><div class="line">$ mkdir d2</div><div class="line">$ mount --bind d1 d2</div><div class="line">$ ls d2 </div><div class="line">x</div><div class="line">$ touch d2/y</div><div class="line">$ ls d1 </div><div class="line">x   y</div></pre></td></tr></table></figure>
 <h4 id="tmpfs-虚拟内存文件系统"><a href="#tmpfs-虚拟内存文件系统" class="headerlink" title="tmpfs:虚拟内存文件系统"></a><strong>tmpfs</strong>:虚拟内存文件系统</h4><h3 id="linux-unix编程手册-15-文件系统"><a href="#linux-unix编程手册-15-文件系统" class="headerlink" title="linux/unix编程手册-15(文件系统)"></a>linux/unix编程手册-15(文件系统)</h3><p><strong>获取文件信息</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/stat.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">stat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">struct</span> stat *statbuf)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">lstat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">struct</span> stat *statbuf)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fstat</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">struct</span> stat *statbuf)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//lstat当访问的是链接时，返回的信息针对符号链接本身</span></div></pre></td></tr></table></figure>
+<h4 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a><strong>文件权限</strong></h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">st_mode</div></pre></td></tr></table></figure>
+<p><img src="https://user-gold-cdn.xitu.io/2018/6/7/163da57d92edfc21?w=861&amp;h=175&amp;f=png&amp;s=17262" alt=""><br>权限检查算法</p>
+<blockquote>
+<ul>
+<li>linux内核会使用当前进程的文件系统用户ID和组ID（可以认为是有效ID）进行有效检查</li>
+<li>检查的顺序的影响（一般：特权-&gt;用户id-&gt;组id）</li>
+<li>文件的三种权限类型至少之一有可执行权限或读权限时，特权进程才有相应的执行和读(不同unix可能不同)</li>
+<li><p>U(set-user-id)位， G(set-group-id)位, T（sticky）位</p>
+<ul>
+<li>T位表明非特权进程，具有对目录的写权限并且为文件或目录的属主时，才能对目录下文件进行删除（/tmp文件可）<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;   $chmod +t tfile</div><div class="line">&gt;   $ls -l tfile</div><div class="line">&gt;   -rw-r--r-T</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>新文件的属主:</p>
+<ul>
+<li>用户ID集成进程的有效用户ID</li>
+<li>组ID取自有效用户组ID或者父目录的组ID <ul>
+<li>mount时有-o grpid时会设置目录的G位，新文件总会集成父目录同时设定G位</li>
+<li>mount默认是-o nogrpid</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="umask"><a href="#umask" class="headerlink" title="umask"></a><strong>umask</strong></h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></div><div class="line"><span class="keyword">mode_t</span> umask(<span class="keyword">mode_t</span> mask);</div><div class="line"><span class="comment">//Always successfully returns the previous process umask</span></div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>/etc/profile 默认值一般是0022(0002?)</li>
+<li>文件创建时通常没有x权限，目录有<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$lsattr</div><div class="line">$chattr</div></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
 
       
     </div>
@@ -581,7 +614,7 @@ limit.h定义了最小值
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-11-系统限制和选项"><span class="nav-number">1.</span> <span class="nav-text">linux/unix编程手册-11(系统限制和选项)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-12-系统和进程信息"><span class="nav-number">2.</span> <span class="nav-text">linux/unix编程手册-12(系统和进程信息)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-13-文件I-O缓冲"><span class="nav-number">3.</span> <span class="nav-text">linux/unix编程手册-13(文件I/O缓冲)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-14-文件系统"><span class="nav-number">4.</span> <span class="nav-text">linux/unix编程手册-14(文件系统)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设备文件"><span class="nav-number">4.1.</span> <span class="nav-text">设备文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件系统"><span class="nav-number">4.2.</span> <span class="nav-text">文件系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tmpfs-虚拟内存文件系统"><span class="nav-number">4.3.</span> <span class="nav-text">tmpfs:虚拟内存文件系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-15-文件系统"><span class="nav-number">5.</span> <span class="nav-text">linux/unix编程手册-15(文件系统)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-11-系统限制和选项"><span class="nav-number">1.</span> <span class="nav-text">linux/unix编程手册-11(系统限制和选项)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-12-系统和进程信息"><span class="nav-number">2.</span> <span class="nav-text">linux/unix编程手册-12(系统和进程信息)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-13-文件I-O缓冲"><span class="nav-number">3.</span> <span class="nav-text">linux/unix编程手册-13(文件I/O缓冲)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-14-文件系统"><span class="nav-number">4.</span> <span class="nav-text">linux/unix编程手册-14(文件系统)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设备文件"><span class="nav-number">4.1.</span> <span class="nav-text">设备文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件系统"><span class="nav-number">4.2.</span> <span class="nav-text">文件系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tmpfs-虚拟内存文件系统"><span class="nav-number">4.3.</span> <span class="nav-text">tmpfs:虚拟内存文件系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-15-文件系统"><span class="nav-number">5.</span> <span class="nav-text">linux/unix编程手册-15(文件系统)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件权限"><span class="nav-number">5.1.</span> <span class="nav-text">文件权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#umask"><span class="nav-number">5.2.</span> <span class="nav-text">umask</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
