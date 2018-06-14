@@ -255,6 +255,130 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/10/teocs-3/" itemprop="url">
+                  teocs-3
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-10T15:02:06+08:00" content="2016-09-10">
+              2016-09-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/10/teocs-3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/10/teocs-3/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="从零开始构建现代计算机"><a href="#从零开始构建现代计算机" class="headerlink" title="从零开始构建现代计算机"></a>从零开始构建现代计算机</h3><h4 id="二-时序逻辑"><a href="#二-时序逻辑" class="headerlink" title="二.时序逻辑"></a>二.时序逻辑</h4><h5 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h5><p>1.Bit.hdl</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 1-bit register:</div><div class="line"> * If load[t] == 1 then out[t+1] = in[t]</div><div class="line"> *                 else out does not change (out[t+1] = out[t])</div><div class="line"> */</div><div class="line"></div><div class="line">CHIP Bit &#123;</div><div class="line">    IN in, load;</div><div class="line">    OUT out;</div><div class="line"></div><div class="line">    PARTS:</div><div class="line">	Mux(a=cu, b=in, sel=load, out=mu);</div><div class="line">	DFF(in=mu, out=out, out=cu);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2.Register.hdl (同RAM.hdl)</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/10/teocs-3/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/09/teocs-2/" itemprop="url">
                   teocs-2
                 </a>
@@ -1211,7 +1335,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-count">39</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
