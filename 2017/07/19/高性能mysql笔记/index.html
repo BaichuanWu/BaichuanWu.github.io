@@ -84,31 +84,43 @@
 
 
 
-<meta name="description" content="高性能MYSQL
+<meta name="description" content="高性能MYSQL事务隔离
 
 行级锁只在存储引擎层实现
-事务的隔离级别
-read uncommited: 问题——脏读:一个事务会读进还没有被另一个事务提交的数据，所以你会看到一些最后被另一个事务回滚掉的数据
-read commited:问题——不可重复读:一个事务读进一条记录，另一个事务更改了这条记录并提交完毕，这时候第一个事务再次读这条记录时，它已经改变了(解决：如果只有在修改事务完全提交之后才可以读取">
+锁
+乐观锁：大多是基于数据版本（ Version ）记录机制实现。
+悲观锁：一致性锁定读。读取数据时给加锁，其它事务无法修改这些数据。修改删除数据时也要加锁，其它事务无法读取这些数据。
+
+
+两段锁
+加锁阶段：在该阶段可以进行加锁操作。在对任何数据进行读操作之前要申请并获得S锁（共享锁，其它事务可以继续加共享锁，但不能加排它锁），在进行写操作之前">
 <meta property="og:type" content="article">
 <meta property="og:title" content="高性能MYSQL">
 <meta property="og:url" content="http://yoursite.com/2017/07/19/高性能mysql笔记/index.html">
 <meta property="og:site_name" content="One Alian">
-<meta property="og:description" content="高性能MYSQL
+<meta property="og:description" content="高性能MYSQL事务隔离
 
 行级锁只在存储引擎层实现
-事务的隔离级别
-read uncommited: 问题——脏读:一个事务会读进还没有被另一个事务提交的数据，所以你会看到一些最后被另一个事务回滚掉的数据
-read commited:问题——不可重复读:一个事务读进一条记录，另一个事务更改了这条记录并提交完毕，这时候第一个事务再次读这条记录时，它已经改变了(解决：如果只有在修改事务完全提交之后才可以读取">
-<meta property="og:updated_time" content="2018-05-13T13:15:06.690Z">
+锁
+乐观锁：大多是基于数据版本（ Version ）记录机制实现。
+悲观锁：一致性锁定读。读取数据时给加锁，其它事务无法修改这些数据。修改删除数据时也要加锁，其它事务无法读取这些数据。
+
+
+两段锁
+加锁阶段：在该阶段可以进行加锁操作。在对任何数据进行读操作之前要申请并获得S锁（共享锁，其它事务可以继续加共享锁，但不能加排它锁），在进行写操作之前">
+<meta property="og:updated_time" content="2018-06-14T10:22:04.543Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高性能MYSQL">
-<meta name="twitter:description" content="高性能MYSQL
+<meta name="twitter:description" content="高性能MYSQL事务隔离
 
 行级锁只在存储引擎层实现
-事务的隔离级别
-read uncommited: 问题——脏读:一个事务会读进还没有被另一个事务提交的数据，所以你会看到一些最后被另一个事务回滚掉的数据
-read commited:问题——不可重复读:一个事务读进一条记录，另一个事务更改了这条记录并提交完毕，这时候第一个事务再次读这条记录时，它已经改变了(解决：如果只有在修改事务完全提交之后才可以读取">
+锁
+乐观锁：大多是基于数据版本（ Version ）记录机制实现。
+悲观锁：一致性锁定读。读取数据时给加锁，其它事务无法修改这些数据。修改删除数据时也要加锁，其它事务无法读取这些数据。
+
+
+两段锁
+加锁阶段：在该阶段可以进行加锁操作。在对任何数据进行读操作之前要申请并获得S锁（共享锁，其它事务可以继续加共享锁，但不能加排它锁），在进行写操作之前">
 
 
 
@@ -318,21 +330,72 @@ read commited:问题——不可重复读:一个事务读进一条记录，另�
       
 
       
-        <h2 id="高性能MYSQL"><a href="#高性能MYSQL" class="headerlink" title="高性能MYSQL"></a>高性能MYSQL</h2><blockquote>
+        <h2 id="高性能MYSQL"><a href="#高性能MYSQL" class="headerlink" title="高性能MYSQL"></a>高性能MYSQL</h2><h4 id="事务隔离"><a href="#事务隔离" class="headerlink" title="事务隔离"></a>事务隔离</h4><blockquote>
 <ul>
 <li>行级锁只在存储引擎层实现</li>
+<li>锁<ul>
+<li>乐观锁：大多是基于数据版本（ Version ）记录机制实现。</li>
+<li>悲观锁：一致性锁定读。读取数据时给加锁，其它事务无法修改这些数据。修改删除数据时也要加锁，其它事务无法读取这些数据。</li>
+</ul>
+</li>
+<li>两段锁<ul>
+<li>加锁阶段：在该阶段可以进行加锁操作。在对任何数据进行读操作之前要申请并获得S锁（共享锁，其它事务可以继续加共享锁，但不能加排它锁），在进行写操作之前要申请并获得X锁（排它锁，其它事务不能再获得任何锁）。加锁不成功，则事务进入等待状态，直到加锁成功才继续执行</li>
+<li>解锁阶段：当事务释放了一个封锁以后，事务进入解锁阶段，在该阶段只能进行解锁操作不能再进行加锁操作</li>
+</ul>
+</li>
 <li>事务的隔离级别<ul>
 <li>read uncommited: 问题——脏读:<strong>一个事务会读进还没有被另一个事务提交的数据，所以你会看到一些最后被另一个事务回滚掉的数据</strong></li>
 <li>read commited:问题——不可重复读:<strong>一个事务读进一条记录，另一个事务更改了这条记录并提交完毕，这时候第一个事务再次读这条记录时，它已经改变了</strong>(解决：如果只有在修改事务完全提交之后才可以读取数据，可以避免该问题)</li>
 <li>repeatable read:问题——幻读:<strong>一个事务用Where子句来检索一个表的数据，另一个事务插入一条新的记录，并且符合Where条件，这样，第一个事务用同一个where条件来检索数据后，就会多出一条记录</strong>(解决:如果在操作事务完成数据处理之前，任何其他事务都不可以添加新数据，则可避免该问题)</li>
-<li>serializable</li>
+<li>serializable: 读加共享锁，写加排他锁，读写互斥。使用的悲观锁的理论。</li>
 </ul>
 </li>
 <li>死锁:innodb的处理——将持有最少行级排他锁的事务回滚</li>
-<li>innodb下MVCC只在read commited 和 repeatable read 下适用</li>
+<li>innodb下MVCC只在read commited 和 repeatable read 下适用:</li>
 </ul>
 </blockquote>
 <a id="more"></a>
+<p>innodb 下 MVCC（参考美团技术blog）</p>
+<blockquote>
+<ul>
+<li>repeatable read级别下：<ul>
+<li>SELECT时，读取创建版本号&lt;=当前事务版本号，删除版本号为空或&gt;当前事务版本号。（快照读，解决了快照读中出现的幻读）</li>
+<li>INSERT时，保存当前事务版本号为行的创建版本号</li>
+<li>DELETE时，保存当前事务版本号为行的删除版本号</li>
+<li>UPDATE时，插入一条新纪录，保存当前事务版本号为行创建版本号，同时保存当前事务版本号到原来删除的行</li>
+</ul>
+</li>
+<li>快照读：使得select 不用加锁<ul>
+<li>select ………</li>
+</ul>
+</li>
+<li>当前读：特殊的读操作，插入/更新/删除操作，属于当前读，处理的都是当前的数据，需要加锁<ul>
+<li>Next-Key锁：行锁和GAP（间隙锁）的合并</li>
+<li>锁住索引和索引两边的区间，（如果有insert会加入到索引两边，因为LOCK存在会<code>阻塞</code>?)</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><blockquote>
+<ul>
+<li><p>innodb主键聚集索引，其他索引叶子节点保存主键id;MyISAM索引和数据分离，叶子节点保存数据地址</p>
+</li>
+<li><p>索引的评定原则</p>
+<ul>
+<li>索引将相关记录放在一起</li>
+<li>索引中的数据顺序和查找中的排序顺序一致</li>
+<li>索引中的列包含了查找的全部列</li>
+</ul>
+</li>
+<li>小：全表；中大：索引；大：分区</li>
+<li>优化索引合并(explain 结构extra 中有using union):<ul>
+<li>select  …… and | or ……</li>
+<li>因为合并等操作有时性能可能还不如全表扫描</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+
       
     </div>
 
@@ -439,7 +502,7 @@ read commited:问题——不可重复读:一个事务读进一条记录，另�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-count">40</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -485,7 +548,7 @@ read commited:问题——不可重复读:一个事务读进一条记录，另�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#高性能MYSQL"><span class="nav-number">1.</span> <span class="nav-text">高性能MYSQL</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#高性能MYSQL"><span class="nav-number">1.</span> <span class="nav-text">高性能MYSQL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事务隔离"><span class="nav-number">1.0.1.</span> <span class="nav-text">事务隔离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#索引"><span class="nav-number">1.0.2.</span> <span class="nav-text">索引</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>

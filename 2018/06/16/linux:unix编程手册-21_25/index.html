@@ -1,0 +1,896 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="tips," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="linux/unix编程手册-21(信号处理器函数)信号处理器函数设计
+
+信号处理器函数设置全局标志变量并退出，主程序对此标记进行周期检查，一旦置位随即采取相应动作
+信号处理器函数执行某种类型的清理，之后终止进程或者使用非本地跳转将栈解开并将控制返回主程序定位置
+
+可重入：
+
+同一进程多线程可以同时安全的调用一个函数(信号处理函数可在任意时间点中断程序的执行，从而在一个进程中形成2条独立但不是并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux/unix编程手册-21_25">
+<meta property="og:url" content="http://yoursite.com/2018/06/16/linux:unix编程手册-21_25/index.html">
+<meta property="og:site_name" content="One Alian">
+<meta property="og:description" content="linux/unix编程手册-21(信号处理器函数)信号处理器函数设计
+
+信号处理器函数设置全局标志变量并退出，主程序对此标记进行周期检查，一旦置位随即采取相应动作
+信号处理器函数执行某种类型的清理，之后终止进程或者使用非本地跳转将栈解开并将控制返回主程序定位置
+
+可重入：
+
+同一进程多线程可以同时安全的调用一个函数(信号处理函数可在任意时间点中断程序的执行，从而在一个进程中形成2条独立但不是并发">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/17/1640e3ba7b1b4045?w=834&h=444&f=png&s=62079">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/19/16418374780cee73?w=521&h=605&f=png&s=64191">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/19/164187d71fcf56bd?w=665&h=403&f=png&s=35206">
+<meta property="og:updated_time" content="2018-06-22T03:33:27.657Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux/unix编程手册-21_25">
+<meta name="twitter:description" content="linux/unix编程手册-21(信号处理器函数)信号处理器函数设计
+
+信号处理器函数设置全局标志变量并退出，主程序对此标记进行周期检查，一旦置位随即采取相应动作
+信号处理器函数执行某种类型的清理，之后终止进程或者使用非本地跳转将栈解开并将控制返回主程序定位置
+
+可重入：
+
+同一进程多线程可以同时安全的调用一个函数(信号处理函数可在任意时间点中断程序的执行，从而在一个进程中形成2条独立但不是并发">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/6/17/1640e3ba7b1b4045?w=834&h=444&f=png&s=62079">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/16/linux:unix编程手册-21_25/"/>
+
+  <title> linux/unix编程手册-21_25 | One Alian </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">One Alian</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                linux/unix编程手册-21_25
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-06-16T11:53:07+08:00" content="2018-06-16">
+              2018-06-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/06/16/linux:unix编程手册-21_25/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/06/16/linux:unix编程手册-21_25/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="linux-unix编程手册-21-信号处理器函数"><a href="#linux-unix编程手册-21-信号处理器函数" class="headerlink" title="linux/unix编程手册-21(信号处理器函数)"></a>linux/unix编程手册-21(信号处理器函数)</h3><h4 id="信号处理器函数设计"><a href="#信号处理器函数设计" class="headerlink" title="信号处理器函数设计"></a>信号处理器函数设计</h4><blockquote>
+<ul>
+<li>信号处理器函数设置全局标志变量并退出，主程序对此标记进行周期检查，一旦置位随即采取相应动作</li>
+<li><p>信号处理器函数执行某种类型的清理，之后终止进程或者使用非本地跳转将栈解开并将控制返回主程序定位置</p>
+</li>
+<li><p>可重入：</p>
+<ul>
+<li>同一进程多线程可以同时安全的调用一个函数(信号处理函数可在任意时间点中断程序的执行，从而在一个进程中形成2条独立但不是并发的执行线程)</li>
+</ul>
+</li>
+<li>异步信号安全：<ul>
+<li>如果一个函数是可重入的或者信号处理函数无法将其中断</li>
+</ul>
+</li>
+<li>仅当信号处理函数中断了不安全函数的执行，且处理函数自身也调用了这个函数时，该函数才是不安全的</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<p>实现的两种策略</p>
+<blockquote>
+<ul>
+<li>确保信号处理器函数代码<strong>本身</strong>是可重入的，且只<strong>调用</strong>异步信号安全的函数</li>
+<li>当主程序执行不安全函数或者是去处理信号处理器函数可能更新的全局数据结构时，阻塞信号的传递</li>
+</ul>
+</blockquote>
+<p>全局变量和sig_atomic_t</p>
+<blockquote>
+<ul>
+<li><code>volatile</code> 避免将全局变量优化的寄存器</li>
+<li><code>sig_atomic_t</code> 保证读写原子性</li>
+<li>主程序和信号处理器函数共享的全局变量声明如下<code>volatile sig_atomic flag</code></li>
+</ul>
+</blockquote>
+<p>信号处理器函数终止的方法</p>
+<blockquote>
+<ul>
+<li>调用_exit(),不是exit()(会清除I/O缓冲不安全)</li>
+<li>调用kill()来杀掉进程</li>
+<li>信号处理器函数执行非本地跳转：<ul>
+<li>略</li>
+</ul>
+</li>
+<li>调用abort()终止进程并产生核心转储<ul>
+<li>略</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>系统调用的中断和重启</p>
+<blockquote>
+<p>信号处理器函数中断了阻塞的系统调用时，系统调用会产生EINTR报错</p>
+</blockquote>
+<h3 id="linux-unix编程手册-22-信号的高级特性"><a href="#linux-unix编程手册-22-信号的高级特性" class="headerlink" title="linux/unix编程手册-22(信号的高级特性)"></a>linux/unix编程手册-22(信号的高级特性)</h3><h4 id="核心转储文件"><a href="#核心转储文件" class="headerlink" title="核心转储文件"></a>核心转储文件</h4><blockquote>
+<ul>
+<li>内含进程终止时内存镜像的一个文件(默认进程工作目录/core)</li>
+<li>文件命名/proc/sys/kernel/core_pattern</li>
+</ul>
+</blockquote>
+<h4 id="信号特殊情况"><a href="#信号特殊情况" class="headerlink" title="信号特殊情况"></a>信号特殊情况</h4><blockquote>
+<ul>
+<li><code>SIGKILL</code>和<code>SIGSTOP</code>的默认行为无法更改，调用<code>signal()</code>和<code>sigaction()</code>来改变时总会返回错误；同时也不能阻塞</li>
+<li><code>SIGCONT</code> 如果一个进程处于停止状态，<code>SIGCONT</code>总会使其回复；进程收到<code>SIGCONT</code>会将等待状态的停止信号丢弃，反之收到停止信号，会将等待状态的<code>SIGCONT</code>丢弃</li>
+</ul>
+</blockquote>
+<h4 id="可中断不可中断进程的休眠状态"><a href="#可中断不可中断进程的休眠状态" class="headerlink" title="可中断不可中断进程的休眠状态"></a>可中断不可中断进程的休眠状态</h4><blockquote>
+<p>内核经常需要领进程休眠，休眠有两种</p>
+<ul>
+<li>TASK_INTERRUPTIBLE:等待某一事件(终端输入等等),传递进来的信号会唤醒进程 ps STAT :S</li>
+<li>TASK_UNINTERRUPTIBLE:等待特定事件(磁盘I/O完成等的)，在摆脱状态前，系统不会把信号传递给进程 ps STAT:D<ul>
+<li>一般这种状态转瞬即逝，但是如果因为硬件故障等问题 因为（<code>SIGKILL</code>,<code>SIGSTOP</code>）不会终止挂起进程，只能通过重启</li>
+</ul>
+</li>
+<li>TASK_KILLABLE:类似于前者，但是收到杀死进程信号会唤起</li>
+</ul>
+</blockquote>
+<h4 id="信号传递的时机与顺序"><a href="#信号传递的时机与顺序" class="headerlink" title="信号传递的时机与顺序"></a>信号传递的时机与顺序</h4><blockquote>
+<ul>
+<li>同步信号(进程自己产生的信号，自己调用kill(), raise()等等)会立即传递</li>
+<li>异步信号在进程发生内核态到用户态的下一次切换时<ul>
+<li>进程在前度超时后，再度获得调用</li>
+<li>系统调用完成</li>
+</ul>
+</li>
+</ul>
+<p>如果通过<code>sigprocmask()</code>解除了多个等待信号的阻塞。这些信号会立刻传给进程</p>
+<ul>
+<li>Linux下通常是根据信号编号升序传递</li>
+<li>同时如果调度器函数引起了内核态和用户态的切换，会中断函数转而调用下一个信号处理器函数<br> <img src="https://user-gold-cdn.xitu.io/2018/6/17/1640e3ba7b1b4045?w=834&amp;h=444&amp;f=png&amp;s=62079" alt=""></li>
+</ul>
+</blockquote>
+<h4 id="实时信号"><a href="#实时信号" class="headerlink" title="实时信号"></a>实时信号</h4><blockquote>
+<ul>
+<li>信号范围扩大</li>
+<li>队列化管理，如果将某一实时信号的多个实例发给一进程，信号会多次传递</li>
+<li>可为信号指定伴随数据</li>
+<li>传递顺序得到保障，等待恢复后(信号编号小加时间早先传递)</li>
+</ul>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> _POSX_C_SOURCE 199309</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;signal.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">sigqueue</span><span class="params">(<span class="keyword">pid_t</span> pid, <span class="keyword">int</span> sig, <span class="keyword">const</span> <span class="keyword">union</span> sigval value)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">// 权限和kill()一致，但是pid不能为负</span></div><div class="line"></div><div class="line"><span class="keyword">union</span> sigval&#123;</div><div class="line">    <span class="keyword">int</span> sival_int;</div><div class="line">    <span class="keyword">void</span> *sival_ptr;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="使用掩码等待信号-原子操作"><a href="#使用掩码等待信号-原子操作" class="headerlink" title="使用掩码等待信号(原子操作)"></a>使用掩码等待信号(原子操作)</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;signal.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">sigsuspend</span><span class="params">(<span class="keyword">const</span> <span class="keyword">sigset_t</span> *mask)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//sigsuspend(&amp;mask) 等同于</span></div><div class="line"></div><div class="line">sigprocmask(SIG_SETMASK, &amp;mask, &amp;prevMask);</div><div class="line">pause();</div><div class="line">sigprocmask(SIG_SETMASK, &amp;prevMask, <span class="literal">NULL</span>);</div></pre></td></tr></table></figure>
+<p>调用，捕获，文件描述符获取信号略</p>
+<h4 id="信号用作IPC"><a href="#信号用作IPC" class="headerlink" title="信号用作IPC"></a>信号用作IPC</h4><blockquote>
+<p>限制比较多</p>
+<ul>
+<li>信号异步的本质，可重入性，竟态条件，全局变量的设置</li>
+<li>标准信号无法排队，实时信号排队数量限制</li>
+<li>携带信息有限</li>
+</ul>
+</blockquote>
+<h3 id="linux-unix编程手册-23-定时器和休眠"><a href="#linux-unix编程手册-23-定时器和休眠" class="headerlink" title="linux/unix编程手册-23(定时器和休眠)"></a>linux/unix编程手册-23(定时器和休眠)</h3><h4 id="间隔定时器"><a href="#间隔定时器" class="headerlink" title="间隔定时器"></a>间隔定时器</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/time.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">setitimer</span><span class="params">(<span class="keyword">int</span> which, <span class="keyword">const</span> <span class="keyword">struct</span> itimerval *new_value, <span class="keyword">struct</span> itimerval *old_value)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">// 0 success, -1 on error</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">getitimer</span><span class="params">(<span class="keyword">int</span> which, <span class="keyword">struct</span> itimerval *curr_value)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">// curr_value值和old_value值一致</span></div><div class="line"></div><div class="line"><span class="keyword">struct</span> itimerval&#123;</div><div class="line">    <span class="keyword">struct</span> timeval it_interval;</div><div class="line">    <span class="keyword">struct</span> timeval it_value;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> timeval&#123;</div><div class="line">    <span class="keyword">time_t</span> tv_sec;</div><div class="line">    <span class="keyword">suseconds_t</span> tv_usec;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>which取值</p>
+<ul>
+<li>ITIMER_REAL:真实时间倒计时的定时器，到期产生SIGALARM信号发送给进程</li>
+<li>ITIMER_VIRTUAL:用户模式下CPU时间倒计时计时器，到期产生SIGVTALRM</li>
+<li>ITIMER_PROF:进程时间(用户态和内核态CPU时间总和)的倒计时器，到期产生SIGPROF</li>
+</ul>
+<p>new_value取值</p>
+<ul>
+<li>it_value 指定了延迟时间</li>
+<li>it_interval如果两个字段为0，则为一次性定时器，否则，在每次定时器到期后，会重置定时器指定间隔后再到期</li>
+<li>如果调用setitimer时new_value 的 it_value的字段都为0，则屏蔽已有定时器</li>
+</ul>
+<p>SUSv4废弃了<code>getitimer()</code>和<code>setitimer()</code></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">alarm</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> seconds)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">// 一次性定时器，返回剩余时间，alarm(0)屏蔽所有定时器，根据操作系统实现决定是不是和setitimer共享屏蔽</span></div></pre></td></tr></table></figure>
+<h4 id="休眠"><a href="#休眠" class="headerlink" title="休眠"></a>休眠</h4><blockquote>
+<ul>
+<li>可通过定时器函数结合<code>sigsuspend</code>实现</li>
+<li><code>sleep</code><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">include&lt;unistd.h&gt;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">sleep</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> seconds)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//正常结束返回0，如果被终止返回剩余秒数</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h4 id="POSIX时钟，通常建议优先使用POSIX-api"><a href="#POSIX时钟，通常建议优先使用POSIX-api" class="headerlink" title="POSIX时钟，通常建议优先使用POSIX api"></a>POSIX时钟，通常建议优先使用POSIX api</h4><p>略</p>
+<h3 id="linux-unix编程手册-24-进程的创建"><a href="#linux-unix编程手册-24-进程的创建" class="headerlink" title="linux/unix编程手册-24(进程的创建)"></a>linux/unix编程手册-24(进程的创建)</h3><blockquote>
+<ul>
+<li>系统调用<code>fork()</code>:子进程获取父进程的栈，数据段，堆和执行文本段的拷贝，同一程序文本段</li>
+<li>库函数<code>exit(status)</code>(时系统调用<code>_exit(status)</code>的外层)，将进程所占用的所有资源归还内核；父进程通过<code>wait()</code>获取该状态</li>
+<li>系统调用<code>wait(&amp;status)</code><ul>
+<li>如果子进程未通过<code>exit()</code>终止，挂起父进程直至子进程终止</li>
+<li>子进程状态通过<code>status</code>参数返回</li>
+<li>父子进程一般只有一个会<code>exit()</code>退出，另一个使用<code>_exit()</code>退出</li>
+</ul>
+</li>
+<li>系统调用<code>execve(pathname, argv, envp)</code>加载一个新程序到当前内存，丢弃现存的程序文本段，并重新创建栈，数据段以及堆<br><img src="https://user-gold-cdn.xitu.io/2018/6/19/16418374780cee73?w=521&amp;h=605&amp;f=png&amp;s=64191" alt=""></li>
+</ul>
+</blockquote>
+<h4 id="fork"><a href="#fork" class="headerlink" title="fork()"></a><strong><code>fork()</code></strong></h4><blockquote>
+<p>完成<code>fork()</code>的调用后两个进程均会从<code>fork()</code>处返回，父进程返回子进程的pid,子进程返回0，无法创建时返回-1（可能是进程数超过了real_user_id的进程数上限或者系统级上限）<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">pid_t</span> childPid;</div><div class="line"></div><div class="line"><span class="keyword">switch</span> (childPid = fork())&#123;</div><div class="line">    <span class="keyword">case</span> <span class="number">-1</span>:</div><div class="line">        <span class="comment">/*...*/</span></div><div class="line">    <span class="keyword">case</span> <span class="number">0</span>:</div><div class="line">        <span class="comment">/* child perform */</span></div><div class="line">    <span class="keyword">default</span>:</div><div class="line">        <span class="comment">/* parent perform */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="父子进程文件共享"><a href="#父子进程文件共享" class="headerlink" title="父子进程文件共享"></a>父子进程文件共享</h4><blockquote>
+<p><code>fork()</code>文件描述符的创建类似<code>dup()</code>,指向相同的打开文件句柄，即文件偏移量等均是共享的，父子进程不会覆盖彼此的输出，但会乱序；shell中不加<code>&amp;</code>父进程会等待子进程结束</p>
+</blockquote>
+<h4 id="fork-内存语义"><a href="#fork-内存语义" class="headerlink" title="fork()内存语义"></a><code>fork()</code>内存语义</h4><blockquote>
+<ul>
+<li>原意是对程序段，数据段，堆段和栈段创建拷贝</li>
+<li>会造成浪费，比如<code>fork()</code>之后的<code>exec()</code>重新初始化….</li>
+<li>优化的措施<ul>
+<li>内核将每一个进程的代码段标记成RO，fork()为子进程的构建代码段时，其所构建的一系列进程级页表均指向父进程相同那个的物理内存页帧</li>
+<li>数据段，堆段，栈段中的各页，内核采用写时复制(copy-on-write)之前(redis BUG有遇到过):将这些段的页表指向父进程物理地址相同的物理内存页，并将这些页标记成只读，之后为要修改的页建立copy</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><img src="https://user-gold-cdn.xitu.io/2018/6/19/164187d71fcf56bd?w=665&amp;h=403&amp;f=png&amp;s=35206" alt=""></p>
+<h4 id="vfork"><a href="#vfork" class="headerlink" title="vfork()"></a><code>vfork()</code></h4><blockquote>
+<ul>
+<li>尽量避免使用</li>
+<li>适用于为子进程立刻调用<code>exec()</code>而设计</li>
+<li>无需为子进程复制虚拟内存页活页表，共享父进程内存，直到成功调用exec()或_exit()，（文件描述符表每个进程是独立的）</li>
+<li>在子进程调用exec()和_exit()之前暂停父进程</li>
+<li>能保证调用<code>vfork()</code>之后子进程先于父进程获得CPU调度</li>
+</ul>
+</blockquote>
+<h4 id="fork-之后的竞态条件"><a href="#fork-之后的竞态条件" class="headerlink" title="fork()之后的竞态条件"></a><code>fork()</code>之后的竞态条件</h4><blockquote>
+<ul>
+<li><code>/proc/sys/kernel/sched_child_runs_first</code> 为0 则<code>fork()</code>之后父进程先调度</li>
+</ul>
+</blockquote>
+<h3 id="linux-unix编程手册-25-进程的终止"><a href="#linux-unix编程手册-25-进程的终止" class="headerlink" title="linux/unix编程手册-25(进程的终止)"></a>linux/unix编程手册-25(进程的终止)</h3><h4 id="进程终止的方式"><a href="#进程终止的方式" class="headerlink" title="进程终止的方式"></a>进程终止的方式</h4><blockquote>
+<ul>
+<li>通过信号终止进程，可能产生核心转储。</li>
+<li>通过调用<code>_exit()</code>正常终止, <code>main()</code>函数<code>return n</code>等同于<code>exit(n)</code><ul>
+<li>如果在推出的处理过程中所执行的任何步骤需要访问<code>main()</code>本地变量，那么从<code>main()</code>返回会导致未定义的行为（ex:<code>setbuff()</code>调用本地变量）</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">void</span> <span class="number">_</span><span class="built_in">exit</span>(<span class="keyword">int</span> status);</div><div class="line"></div><div class="line"><span class="comment">//调用永远成功</span></div></pre></td></tr></table></figure>
+<h4 id="库函数exit"><a href="#库函数exit" class="headerlink" title="库函数exit()"></a>库函数<code>exit()</code></h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">exit</span><span class="params">(in status)</span></span>;</div><div class="line"><span class="comment">// 不是异步信号安全函数</span></div></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>调用退出处理程序(通过<code>atexit()</code>和<code>on_exit()</code>注册的函数)，执行顺序与注册顺序相反</li>
+<li>刷新<code>stdio</code>流缓冲区</li>
+<li>使用<code>status</code>执行<code>_exit()</code></li>
+</ul>
+</blockquote>
+<h4 id="进程终止的细节"><a href="#进程终止的细节" class="headerlink" title="进程终止的细节"></a>进程终止的细节</h4><blockquote>
+<ul>
+<li>关闭所有的打开文件描述符，目录流，信息目录描述符？以及转换描述符？</li>
+<li>之后章节涉及的细节待补充。</li>
+</ul>
+</blockquote>
+<h4 id="退出处理程序"><a href="#退出处理程序" class="headerlink" title="退出处理程序"></a>退出处理程序</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#include&lt;stdlib.h&gt;</div><div class="line"></div><div class="line">int atexit(void (*func) (void));</div><div class="line"></div><div class="line">// 0 on success</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#define _BSD_SOURCE</div><div class="line">#include&lt;stdlib.h&gt;</div><div class="line"></div><div class="line">int on_exit(void (*func)(int, void *), void *args);</div><div class="line"></div><div class="line">// 和 atexit是在同一列表注册，一样的执行和注册顺序相反</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Hello\n"</span>);</div><div class="line">    write(<span class="string">"STDOUT_FILENO"</span>, <span class="string">"WORLD\n"</span>，<span class="number">6</span>);</div><div class="line">    <span class="keyword">if</span>(fork() == <span class="number">-1</span>)&#123;</div><div class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">exit</span>(EXIT_SUCCESS);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ gcc fork_io.c -o fork_io</div><div class="line">$ ./fork_io</div><div class="line">Hello</div><div class="line">WORLD</div><div class="line"></div><div class="line">$ ./fork_io &gt; 1.txt | cat 1.txt</div><div class="line">WORLD</div><div class="line">Hello</div><div class="line">Hello</div><div class="line">//终端为行缓冲，重定向到文件为块缓冲</div></pre></td></tr></table></figure>
+<blockquote>
+<p>避免方法</p>
+<ul>
+<li><code>fork()</code>之前<code>fflush()</code>刷新缓冲区,或调整stdio的缓冲选择</li>
+<li>确认的情况下子进程调用_exit()（应该不是很合适）</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tips/" rel="tag">#tips</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/06/linux:unix编程手册-16_20/" rel="next" title="linux/unix编程手册-16_20">
+                <i class="fa fa-chevron-left"></i> linux/unix编程手册-16_20
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/06/16/linux:unix编程手册-21_25/"
+           data-title="linux/unix编程手册-21_25" data-url="http://yoursite.com/2018/06/16/linux:unix编程手册-21_25/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="alian" />
+          <p class="site-author-name" itemprop="name">alian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">40</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-21-信号处理器函数"><span class="nav-number">1.</span> <span class="nav-text">linux/unix编程手册-21(信号处理器函数)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#信号处理器函数设计"><span class="nav-number">1.1.</span> <span class="nav-text">信号处理器函数设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-22-信号的高级特性"><span class="nav-number">2.</span> <span class="nav-text">linux/unix编程手册-22(信号的高级特性)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#核心转储文件"><span class="nav-number">2.1.</span> <span class="nav-text">核心转储文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#信号特殊情况"><span class="nav-number">2.2.</span> <span class="nav-text">信号特殊情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可中断不可中断进程的休眠状态"><span class="nav-number">2.3.</span> <span class="nav-text">可中断不可中断进程的休眠状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#信号传递的时机与顺序"><span class="nav-number">2.4.</span> <span class="nav-text">信号传递的时机与顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实时信号"><span class="nav-number">2.5.</span> <span class="nav-text">实时信号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用掩码等待信号-原子操作"><span class="nav-number">2.6.</span> <span class="nav-text">使用掩码等待信号(原子操作)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#信号用作IPC"><span class="nav-number">2.7.</span> <span class="nav-text">信号用作IPC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-23-定时器和休眠"><span class="nav-number">3.</span> <span class="nav-text">linux/unix编程手册-23(定时器和休眠)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#间隔定时器"><span class="nav-number">3.1.</span> <span class="nav-text">间隔定时器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#休眠"><span class="nav-number">3.2.</span> <span class="nav-text">休眠</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#POSIX时钟，通常建议优先使用POSIX-api"><span class="nav-number">3.3.</span> <span class="nav-text">POSIX时钟，通常建议优先使用POSIX api</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-24-进程的创建"><span class="nav-number">4.</span> <span class="nav-text">linux/unix编程手册-24(进程的创建)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#fork"><span class="nav-number">4.1.</span> <span class="nav-text">fork()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#父子进程文件共享"><span class="nav-number">4.2.</span> <span class="nav-text">父子进程文件共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fork-内存语义"><span class="nav-number">4.3.</span> <span class="nav-text">fork()内存语义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vfork"><span class="nav-number">4.4.</span> <span class="nav-text">vfork()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fork-之后的竞态条件"><span class="nav-number">4.5.</span> <span class="nav-text">fork()之后的竞态条件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-25-进程的终止"><span class="nav-number">5.</span> <span class="nav-text">linux/unix编程手册-25(进程的终止)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进程终止的方式"><span class="nav-number">5.1.</span> <span class="nav-text">进程终止的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#库函数exit"><span class="nav-number">5.2.</span> <span class="nav-text">库函数exit()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程终止的细节"><span class="nav-number">5.3.</span> <span class="nav-text">进程终止的细节</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#退出处理程序"><span class="nav-number">5.4.</span> <span class="nav-text">退出处理程序</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">alian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"alian"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
