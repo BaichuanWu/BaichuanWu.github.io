@@ -84,18 +84,19 @@
 
 
 
-<meta name="description" content="linux/unix编程手册-2基本概念内核内核职责">
+<meta name="description" content="linux/unix编程手册-2基本概念内核
+内核职责">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux/unix编程手册-1_5">
 <meta property="og:url" content="http://yoursite.com/2018/05/01/linux:unix编程手册-1_5/index.html">
 <meta property="og:site_name" content="One Alian">
-<meta property="og:description" content="linux/unix编程手册-2基本概念内核内核职责">
-<meta property="og:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/5_2.png">
-<meta property="og:updated_time" content="2018-06-02T05:32:51.848Z">
+<meta property="og:description" content="linux/unix编程手册-2基本概念内核
+内核职责">
+<meta property="og:updated_time" content="2018-07-03T02:18:20.585Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux/unix编程手册-1_5">
-<meta name="twitter:description" content="linux/unix编程手册-2基本概念内核内核职责">
-<meta name="twitter:image" content="https://github.com/BaichuanWu/prictures/raw/master/TLPI/5_2.png">
+<meta name="twitter:description" content="linux/unix编程手册-2基本概念内核
+内核职责">
 
 
 
@@ -324,7 +325,10 @@
       
 
       
-        <h3 id="linux-unix编程手册-2"><a href="#linux-unix编程手册-2" class="headerlink" title="linux/unix编程手册-2"></a>linux/unix编程手册-2</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><h4 id="内核"><a href="#内核" class="headerlink" title="内核"></a><strong>内核</strong></h4><h5 id="内核职责"><a href="#内核职责" class="headerlink" title="内核职责"></a>内核职责</h5><a id="more"></a>
+        <h3 id="linux-unix编程手册-2"><a href="#linux-unix编程手册-2" class="headerlink" title="linux/unix编程手册-2"></a>linux/unix编程手册-2</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>内核</p>
+<p>内核职责</p>
+<a id="more"></a>
+<blockquote>
 <ul>
 <li>进程调度（哪些进程获得CPU的使用，每个进程使用多久）</li>
 <li>内存管理（虚拟内存管理：进程之间，进程和内核之间相互隔离；只需将进程的一部分内容放在内存中，变相提高CPU使用率）</li>
@@ -333,38 +337,32 @@
 <li>对提供设备访问接口</li>
 <li>提供系统调用API</li>
 </ul>
-<blockquote>
-<p>用户态和核心态</p>
-<p>硬件执行之指令使CPU在两种状态间切换；用户态运行时只能访问用户态内存，操作系统位域内核空间（shell是用户进程）</p>
-<p>文件描述符：实际上是一个索引指向内核为每一个进程所维护的打开的文件记录表</p>
 </blockquote>
-<h4 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h4><h5 id="1进程内存布局"><a href="#1进程内存布局" class="headerlink" title="1进程内存布局"></a>1进程内存布局</h5><ul>
+<h4 id="用户态和核心态"><a href="#用户态和核心态" class="headerlink" title="用户态和核心态"></a>用户态和核心态</h4><p>硬件执行之指令使CPU在两种状态间切换；用户态运行时只能访问用户态内存，操作系统位域内核空间（shell是用户进程）</p>
+<p>文件描述符：实际上是一个索引指向内核为每一个进程所维护的打开的文件记录表</p>
+<h4 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h4><blockquote>
+<p>进程内存布局</p>
+<ul>
 <li>文本：进程的指令</li>
 <li>数据：程序静态变量</li>
 <li>堆：动态分配额外内存</li>
 <li>栈：（线程仅仅有自己的栈）</li>
 </ul>
-<h5 id="2进程的创建"><a href="#2进程的创建" class="headerlink" title="2进程的创建"></a>2进程的创建</h5><ul>
+<p>进程的创建</p>
+<ul>
 <li>fork创建，子进程继承父进程数据段，堆段，栈段，在内存中创建副本，共享只读的程序文本</li>
 <li>execve加载新的程序，会销毁现有的文本，数据，堆，栈段</li>
 </ul>
-<blockquote>
-<p><a href="https://blog.csdn.net/gatieme/article/details/51484562" target="_blank" rel="external">特殊的进程</a></p>
-<p>0 — idel 进程 (第一个进程，N个处理器N个idle进程，cpu没事干的时候进入)</p>
-<p>1 — init进程</p>
-<p>2 — kthread进程</p>
+<p>特殊的进程<br>— idel 进程 (第一个进程，N个处理器N个idle进程，cpu没事干的时候进入)<br>— init进程<br>— kthread进程</p>
 </blockquote>
-<h5 id="3内存映射"><a href="#3内存映射" class="headerlink" title="3内存映射"></a>3内存映射</h5><ul>
+<h4 id="内存映射-mmap"><a href="#内存映射-mmap" class="headerlink" title="内存映射(mmap())"></a>内存映射(<code>mmap()</code>)</h4><blockquote>
+<ul>
 <li>文件映射:将文件部分区域映射到进程的虚拟内存</li>
-<li>匿名映射:</li>
+<li>匿名映射:通过传入标志，决定映射的内容其他进程是否可见（一般用于父子进程间通讯）</li>
 </ul>
-<blockquote>
-<p>通过传入标志，决定映射的内容其他进程是否可见</p>
 </blockquote>
-<h3 id="linux-unix编程手册-3"><a href="#linux-unix编程手册-3" class="headerlink" title="linux/unix编程手册-3"></a>linux/unix编程手册-3</h3><h4 id="系统编程概念"><a href="#系统编程概念" class="headerlink" title="系统编程概念"></a>系统编程概念</h4><ol>
-<li>系统调用流程  (一般:应用程序—&gt;C外壳函数(异常正)—&gt;ststem_call()例程(异常负)—&gt;服务例程(异常正))</li>
-</ol>
-<blockquote>
+<h3 id="linux-unix编程手册-3"><a href="#linux-unix编程手册-3" class="headerlink" title="linux/unix编程手册-3"></a>linux/unix编程手册-3</h3><h4 id="系统编程概念"><a href="#系统编程概念" class="headerlink" title="系统编程概念"></a>系统编程概念</h4><blockquote>
+<p>系统调用流程  (一般:应用程序—&gt;C外壳函数(异常正)—&gt;system_call()例程(异常负)—&gt;服务例程(异常正))</p>
 <ul>
 <li>通过C函数库的外壳函数发起系统调用</li>
 <li>外壳函数将调用参数复制到寄存器，同时将系统调用的编号复制到CPU寄存器(%eax)。</li>
@@ -376,32 +374,19 @@
 <li>返回至外壳函数，切换到用户态。</li>
 </ul>
 </li>
-<li>若系统调用返回值表明有误，外壳函数会使用<strong>该值</strong>来设置全局变量errno，然后外壳函数返回调用程序，并同时返回<strong>一个整型值(ex:-1)</strong>，表明是否成功。</li>
+<li>若系统调用返回值表明有误，外壳函数会使用该值来设置全局变量errno，然后外壳函数返回调用程序，并同时返回一个整型值(ex:-1)，表明是否成功。</li>
 </ul>
 <p>tip:</p>
-<ol>
-<li><p>一些系统调用成功后还是返回-1(ex:getpriority()), 需要在调用前将errno至为0，便于排查(p39)；</p>
-</li>
-<li><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;    void jkstack(void)  __attribute__((noreturn));  </div><div class="line">&gt;    // 就是告诉编译器这个函数不会返回给调用者，以便编译器在优化时去掉不必要的函数返回代码。</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</li>
-</ol>
+<ul>
+<li>一些系统调用成功后还是返回-1(ex:getpriority()), 需要在调用前将errno至为0，便于排查(p39)；</li>
+<li><code>void jkstack(void)  __attribute__((noreturn));</code> 就是告诉编译器这个函数不会返回给调用者，以便编译器在优化时去掉不必要的函数返回代码。</li>
+</ul>
 </blockquote>
-<p>&gt;</p>
-<blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt; <span class="meta">#<span class="meta-keyword">define</span>	LINUX_REBOOT_MAGIC1	0xfee1dead </span></div><div class="line">&gt; <span class="meta">#<span class="meta-keyword">define</span>	LINUX_REBOOT_MAGIC2	672274793</span></div><div class="line">&gt; <span class="meta">#<span class="meta-keyword">define</span>	LINUX_REBOOT_MAGIC2A	85072278</span></div><div class="line">&gt; <span class="meta">#<span class="meta-keyword">define</span>	LINUX_REBOOT_MAGIC2B	369367448</span></div><div class="line">&gt; <span class="meta">#<span class="meta-keyword">define</span>	LINUX_REBOOT_MAGIC2C	537993216</span></div><div class="line">&gt; <span class="comment">/*672274793 = 0x28121969</span></div><div class="line">&gt;  85072278 = 0x05121996</div><div class="line">&gt; 369367448 = 0x16041998</div><div class="line">&gt; 537993216 = 0x20112000*/</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-</blockquote>
-<h3 id="linux-unix编程手册-4-文件I-O"><a href="#linux-unix编程手册-4-文件I-O" class="headerlink" title="linux/unix编程手册-4 (文件I/O)"></a>linux/unix编程手册-4 (文件I/O)</h3><h4 id="I-O相关系统调用"><a href="#I-O相关系统调用" class="headerlink" title="I/O相关系统调用"></a><strong>I/O相关系统调用</strong></h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> buffer[BUFFER_SIZE]</div><div class="line"><span class="comment">//1</span></div><div class="line">fd = open(pathname,flags,mode)  <span class="comment">// flags指定文件打开方式以及是否创建, mode指定创建文件的权限</span></div><div class="line"><span class="comment">//2</span></div><div class="line">numread=read(fd, buffer, count) <span class="comment">// 从fd中读取至多count字节数据，存储到buffer</span></div><div class="line"><span class="comment">//3</span></div><div class="line">numwritten=write(fd,buffer,count) <span class="comment">//从buffer读取至多count，写入fd</span></div><div class="line"><span class="comment">//4</span></div><div class="line">status=close(fd) <span class="comment">//释放fd以及相应内核资源</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>/proc/$PID/fdinfo 获得系统内任意一进程所打开的fd</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;  pos:    0   //当前文件偏移量</div><div class="line">&gt;  flags:  0100002</div><div class="line">&gt;  mnt_id: 17 // represents mount ID of the file system containing the opened file</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-<p>&gt;</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span>	LINUX_REBOOT_MAGIC1	0xfee1dead </span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span>	LINUX_REBOOT_MAGIC2	672274793</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span>	LINUX_REBOOT_MAGIC2A	85072278</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span>	LINUX_REBOOT_MAGIC2B	369367448</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span>	LINUX_REBOOT_MAGIC2C	537993216</span></div><div class="line"><span class="comment">/*672274793 = 0x28121969</span></div><div class="line"> 85072278 = 0x05121996</div><div class="line">369367448 = 0x16041998</div><div class="line">537993216 = 0x20112000*/</div></pre></td></tr></table></figure>
+<h3 id="linux-unix编程手册-4-文件I-O"><a href="#linux-unix编程手册-4-文件I-O" class="headerlink" title="linux/unix编程手册-4 (文件I/O)"></a>linux/unix编程手册-4 (文件I/O)</h3><h4 id="I-O相关系统调用"><a href="#I-O相关系统调用" class="headerlink" title="I/O相关系统调用"></a>I/O相关系统调用</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> buffer[BUFFER_SIZE]</div><div class="line"><span class="comment">//1</span></div><div class="line">fd = open(pathname,flags,mode)  <span class="comment">// flags指定文件打开方式以及是否创建, mode指定创建文件的权限</span></div><div class="line"><span class="comment">//2</span></div><div class="line">numread=read(fd, buffer, count) <span class="comment">// 从fd中读取至多count字节数据，存储到buffer</span></div><div class="line"><span class="comment">//3</span></div><div class="line">numwritten=write(fd,buffer,count) <span class="comment">//从buffer读取至多count，写入fd</span></div><div class="line"><span class="comment">//4</span></div><div class="line">status=close(fd) <span class="comment">//释放fd以及相应内核资源</span></div></pre></td></tr></table></figure>
+<p><code>/proc/$PID/fdinfo</code> 获得系统内任意一进程所打开的fd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pos:    0   //当前文件偏移量</div><div class="line">flags:  0100002</div><div class="line">mnt_id: 17 // represents mount ID of the file system containing the opened file</div></pre></td></tr></table></figure></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// tee.c</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> BUF_SIZE</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> BUF_SIZE 1024</span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> append = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> opt;</div><div class="line">	<span class="keyword">while</span> ((opt=getopt(argc, argv, <span class="string">"a"</span>))!=<span class="number">1</span>)&#123;</div><div class="line">		<span class="keyword">if</span> ((<span class="keyword">unsigned</span> <span class="keyword">char</span>) opt ==<span class="string">'a'</span>)&#123; append=<span class="number">1</span>;&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (optind&gt;=argc) &#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%s [-a] file\n"</span>, argv[<span class="number">0</span>]);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> fd = open(argv[optind], O_CREAT|O_WRONLY|(append?O_APPEND:O_TRUNC), S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH);</div><div class="line">	<span class="keyword">if</span> (fd == <span class="number">-1</span>) &#123;<span class="built_in">printf</span>(<span class="string">"opening file %s"</span>, argv[optind]);&#125;</div><div class="line">	<span class="keyword">ssize_t</span> numRead;</div><div class="line">	<span class="keyword">char</span> buf[BUF_SIZE];</div><div class="line">	<span class="keyword">int</span> oFd[<span class="number">2</span>] = &#123;fd, STDOUT_FILENO&#125;;</div><div class="line">	<span class="keyword">while</span> ((numRead = read(STDIN_FILENO, buf, BUF_SIZE))&gt;<span class="number">0</span>)&#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;(<span class="keyword">int</span>)(<span class="keyword">sizeof</span>(oFd)/<span class="keyword">sizeof</span>(oFd[<span class="number">0</span>]));i++)&#123;</div><div class="line">		<span class="keyword">if</span> (write(fd, buf, numRead)!=numRead)&#123;<span class="built_in">printf</span>(<span class="string">"couldn't wirte whole buff"</span>);&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (numRead==<span class="number">-1</span>)&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"read error"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (close(fd)==<span class="number">-1</span>)&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"colse error"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="number">_</span><span class="built_in">exit</span>(<span class="number">-1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>###linux/unix编程手册-5 (深入探究文件I/O) </p>
-<h4 id="文件描述符和打开文件之间的关系"><a href="#文件描述符和打开文件之间的关系" class="headerlink" title="文件描述符和打开文件之间的关系"></a>文件描述符和打开文件之间的关系</h4><blockquote>
+<h3 id="linux-unix编程手册-5-深入探究文件I-O"><a href="#linux-unix编程手册-5-深入探究文件I-O" class="headerlink" title="linux/unix编程手册-5 (深入探究文件I/O)"></a>linux/unix编程手册-5 (深入探究文件I/O)</h3><h4 id="文件描述符和打开文件之间的关系"><a href="#文件描述符和打开文件之间的关系" class="headerlink" title="文件描述符和打开文件之间的关系"></a>文件描述符和打开文件之间的关系</h4><blockquote>
 <ul>
 <li>进程级的文件描述符表<ul>
 <li>控制文件描述符操作的一组标志(close-on-exec标志)</li>
@@ -423,31 +408,27 @@
 </ul>
 </li>
 </ul>
-<p><strong>进程A,B的文件描述符指向同一文件句柄：可能是fork()继承或者是UNIX域套接字传递；</strong></p>
-<p><strong>进程A,B的文件描述符指向不同文件句柄，不同文件句柄指向i-node列表同一条目：对同一文件发起open()调用，（统一进程两次open()同一文件类似）</strong></p>
-<p><img src="https://github.com/BaichuanWu/prictures/raw/master/TLPI/5_2.png" alt=""></p>
+<p>进程A,B的文件描述符指向同一文件句柄：可能是fork()继承或者是UNIX域套接字传递；</p>
+<p>进程A,B的文件描述符指向不同文件句柄，不同文件句柄指向i-node列表同一条目：对同一文件发起open()调用，（统一进程两次open()同一文件类似）</p>
+<p>同一进程不同文件描述符指向同一句柄，可能是<code>dup()</code>实现</p>
 </blockquote>
-<h4 id="复制文件描述符"><a href="#复制文件描述符" class="headerlink" title="复制文件描述符"></a>复制文件描述符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./myscripts &gt; t.log 2&gt;&amp;1</div></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">int</span> newfd;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup</span><span class="params">(<span class="keyword">int</span> oldfd)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup2</span><span class="params">(<span class="keyword">int</span> oldfd, <span class="keyword">int</span> newfd)</span></span>; <span class="comment">// 忽略close(newfd)的错误</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fcntl</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> cmd, ...)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//复制时 为 fcntl(oldfd, F_DUPFD, startfd) 大于等于startfd的最小未用值作为描述符编号</span></div><div class="line"></div><div class="line"><span class="comment">//下面三行成功时一致；oldfg不存在时dup2不会close(newfd),new=old时什么都不做</span></div><div class="line">close(<span class="number">2</span>); newfd=dup(<span class="number">1</span>)</div><div class="line">newfd=dup2(<span class="number">1</span>,<span class="number">2</span>)</div><div class="line">close(<span class="number">2</span>); newfd=fcntl(<span class="number">1</span>, F_DUPFD,<span class="number">2</span>)</div></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.d&gt;</span></span></div><div class="line"><span class="comment">//线程安全read，write</span></div><div class="line"><span class="keyword">ssize_t</span> pread(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count, <span class="keyword">off_t</span> offset);</div><div class="line"></div><div class="line"><span class="keyword">ssize_t</span> pwirte(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count, <span class="keyword">off_t</span> offset);</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/uio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">struct</span> iovec&#123;</div><div class="line">    <span class="keyword">void</span> *iov_base;</div><div class="line">    <span class="keyword">size_t</span> iov_len;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//多缓冲区读写</span></div><div class="line"></div><div class="line"><span class="keyword">ssize_t</span> readv(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">struct</span> iovec *iov, <span class="keyword">int</span> iovcnt);</div><div class="line"></div><div class="line"><span class="keyword">ssize_t</span> writev(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">struct</span> iovec *iov, <span class="keyword">int</span> iovcnt);</div></pre></td></tr></table></figure>
-<h4 id="非阻塞I-O"><a href="#非阻塞I-O" class="headerlink" title="非阻塞I/O"></a>非阻塞I/O</h4><blockquote>
+<h4 id="复制文件描述符"><a href="#复制文件描述符" class="headerlink" title="复制文件描述符"></a>复制文件描述符</h4><p><code>./myscripts &gt; t.log 2&gt;&amp;1</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">int</span> newfd;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup</span><span class="params">(<span class="keyword">int</span> oldfd)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup2</span><span class="params">(<span class="keyword">int</span> oldfd, <span class="keyword">int</span> newfd)</span></span>; <span class="comment">// 忽略close(newfd)的错误</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fcntl</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> cmd, ...)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//复制时 为 fcntl(oldfd, F_DUPFD, startfd) 大于等于startfd的最小未用值作为描述符编号</span></div><div class="line"></div><div class="line"><span class="comment">//下面三行成功时一致；oldfg不存在时dup2不会close(newfd),new=old时什么都不做</span></div><div class="line">close(<span class="number">2</span>); newfd=dup(<span class="number">1</span>)</div><div class="line">newfd=dup2(<span class="number">1</span>,<span class="number">2</span>)</div><div class="line">close(<span class="number">2</span>); newfd=fcntl(<span class="number">1</span>, F_DUPFD,<span class="number">2</span>)    </div><div class="line"></div><div class="line">#include&lt;unistd.d&gt;</div><div class="line"><span class="comment">//线程安全read，write</span></div><div class="line"><span class="keyword">ssize_t</span> pread(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count, <span class="keyword">off_t</span> offset);</div><div class="line"></div><div class="line"><span class="keyword">ssize_t</span> pwirte(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count, <span class="keyword">off_t</span> offset);</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/uio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">struct</span> iovec&#123;</div><div class="line">    <span class="keyword">void</span> *iov_base;</div><div class="line">    <span class="keyword">size_t</span> iov_len;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//多缓冲区读写</span></div><div class="line"></div><div class="line"><span class="keyword">ssize_t</span> readv(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">struct</span> iovec *iov, <span class="keyword">int</span> iovcnt);</div><div class="line"></div><div class="line"><span class="keyword">ssize_t</span> writev(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">struct</span> iovec *iov, <span class="keyword">int</span> iovcnt);</div></pre></td></tr></table></figure>
+<p>非阻塞I/O</p>
 <p>管道，FIFO，套接字，设备支持非阻塞模式</p>
-</blockquote>
-<h4 id="大文件I-O-LFS"><a href="#大文件I-O-LFS" class="headerlink" title="大文件I/O(LFS)"></a>大文件I/O(LFS)</h4><blockquote>
+<p>大文件I/O(LFS)</p>
 <p>大于2GB (32位)</p>
 <p>两种方式支持：</p>
 <ul>
 <li>LFS设计的大文件操作API</li>
 <li>将宏_FILE_OFFSET_BITS定义为64</li>
 </ul>
-</blockquote>
-<h4 id="dev-fd目录"><a href="#dev-fd目录" class="headerlink" title="/dev/fd目录"></a>/dev/fd目录</h4><blockquote>
+<p>/dev/fd目录</p>
 <p>每个进程的/dev/fd 链接到 /proc/$PID/fd</p>
 <p>同时存在/dev/[stdin|stdout|stderr] 分别链接到/dev/fd/[0|1|2]</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//对于统一进程以下等价</span></div><div class="line">fd = open(<span class="string">"/dev/fd/1"</span>, O_WRONLY)</div><div class="line">fd = dup(<span class="number">1</span>)</div></pre></td></tr></table></figure>
-<h4 id="临时文件"><a href="#临时文件" class="headerlink" title="临时文件"></a>临时文件</h4><blockquote>
-<p>打开文件后立刻unlink</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//对于同一进程以下等价</span></div><div class="line">fd = open(<span class="string">"/dev/fd/1"</span>, O_WRONLY)</div><div class="line">fd = dup(<span class="number">1</span>)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>临时文件的实现:打开文件后立刻<code>unlink</code>,进程维护的打开文件表会在进程结束时才会释放文件。</p>
 </blockquote>
 
       
@@ -608,7 +589,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-2"><span class="nav-number">1.</span> <span class="nav-text">linux/unix编程手册-2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内核"><span class="nav-number">1.2.</span> <span class="nav-text">内核</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#内核职责"><span class="nav-number">1.2.1.</span> <span class="nav-text">内核职责</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程"><span class="nav-number">1.3.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1进程内存布局"><span class="nav-number">1.3.1.</span> <span class="nav-text">1进程内存布局</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2进程的创建"><span class="nav-number">1.3.2.</span> <span class="nav-text">2进程的创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3内存映射"><span class="nav-number">1.3.3.</span> <span class="nav-text">3内存映射</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-3"><span class="nav-number">2.</span> <span class="nav-text">linux/unix编程手册-3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#系统编程概念"><span class="nav-number">2.1.</span> <span class="nav-text">系统编程概念</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-4-文件I-O"><span class="nav-number">3.</span> <span class="nav-text">linux/unix编程手册-4 (文件I/O)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#I-O相关系统调用"><span class="nav-number">3.1.</span> <span class="nav-text">I/O相关系统调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件描述符和打开文件之间的关系"><span class="nav-number">3.2.</span> <span class="nav-text">文件描述符和打开文件之间的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复制文件描述符"><span class="nav-number">3.3.</span> <span class="nav-text">复制文件描述符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非阻塞I-O"><span class="nav-number">3.4.</span> <span class="nav-text">非阻塞I/O</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#大文件I-O-LFS"><span class="nav-number">3.5.</span> <span class="nav-text">大文件I/O(LFS)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dev-fd目录"><span class="nav-number">3.6.</span> <span class="nav-text">/dev/fd目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#临时文件"><span class="nav-number">3.7.</span> <span class="nav-text">临时文件</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-2"><span class="nav-number">1.</span> <span class="nav-text">linux/unix编程手册-2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户态和核心态"><span class="nav-number">1.2.</span> <span class="nav-text">用户态和核心态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程"><span class="nav-number">1.3.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存映射-mmap"><span class="nav-number">1.4.</span> <span class="nav-text">内存映射(mmap())</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-3"><span class="nav-number">2.</span> <span class="nav-text">linux/unix编程手册-3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#系统编程概念"><span class="nav-number">2.1.</span> <span class="nav-text">系统编程概念</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-4-文件I-O"><span class="nav-number">3.</span> <span class="nav-text">linux/unix编程手册-4 (文件I/O)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#I-O相关系统调用"><span class="nav-number">3.1.</span> <span class="nav-text">I/O相关系统调用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-5-深入探究文件I-O"><span class="nav-number">4.</span> <span class="nav-text">linux/unix编程手册-5 (深入探究文件I/O)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件描述符和打开文件之间的关系"><span class="nav-number">4.1.</span> <span class="nav-text">文件描述符和打开文件之间的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复制文件描述符"><span class="nav-number">4.2.</span> <span class="nav-text">复制文件描述符</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
