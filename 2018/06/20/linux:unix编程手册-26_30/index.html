@@ -108,7 +108,7 @@ status非空则子进程终止信息通过status指向的int变量返回
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/7/1/16455e48ecab884f?w=814&h=403&f=png&s=51847">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/7/4/16460e0d962cf1f4?w=768&h=626&f=png&s=147437">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/7/9/1647fabbeb6501a8?w=705&h=721&f=png&s=73058">
-<meta property="og:updated_time" content="2018-07-19T02:39:33.984Z">
+<meta property="og:updated_time" content="2018-07-19T02:41:15.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux/unix编程手册-26_30">
 <meta name="twitter:description" content="linux/unix编程手册-26(监控子进程)wait()123#include&amp;lt;sys/wait.h&amp;gt;pid_t wait(int *status);
@@ -379,10 +379,11 @@ status非空则子进程终止信息通过status指向的int变量返回
 </li>
 <li>option = WCONTINUED:返回收到SIGCONT信号而恢复执行的已停止进程的状态信息</li>
 <li>option = WNOHANG:指定子进程未发生改变立刻返回不会阻塞，如果无匹配pid的子进程,<code>waitpid()</code>报错，错误号设置为ECHILD</li>
-<li>克隆子进程会有option扩展，见28章<h4 id="status所指代值的意义"><a href="#status所指代值的意义" class="headerlink" title="status所指代值的意义"></a>status所指代值的意义</h4></li>
+<li>克隆子进程会有option扩展，见28章<a id="more"></a>
+</li>
 </ul>
 </blockquote>
-<p><img src="https://user-gold-cdn.xitu.io/2018/6/21/16422e0e451f7aac?w=853&amp;h=399&amp;f=png&amp;s=48795" alt=""></p>
+<h4 id="status所指代值的意义"><a href="#status所指代值的意义" class="headerlink" title="status所指代值的意义"></a>status所指代值的意义</h4><p><img src="https://user-gold-cdn.xitu.io/2018/6/21/16422e0e451f7aac?w=853&amp;h=399&amp;f=png&amp;s=48795" alt=""></p>
 <blockquote>
 <p> <code>&lt;sys/wait.h&gt;</code>定义了一组宏对status处理</p>
 <ul>
