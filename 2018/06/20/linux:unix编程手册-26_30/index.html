@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="tips," />
 
 
 
@@ -84,12 +84,42 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="One Alian">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="linux/unix编程手册-26(监控子进程)wait()123#include&amp;lt;sys/wait.h&amp;gt;pid_t wait(int *status);
+
+
+阻塞直到一个子进程终止
+status非空则子进程终止信息通过status指向的int变量返回
+内核为父进程下所有子进程的运行总量追加进程CPU时间和资源使用数据
+终止子进程ID作为返回
+如果wait()返回-1,可能的原因是无等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux/unix编程手册-26_30">
+<meta property="og:url" content="http://yoursite.com/2018/06/20/linux:unix编程手册-26_30/index.html">
 <meta property="og:site_name" content="One Alian">
+<meta property="og:description" content="linux/unix编程手册-26(监控子进程)wait()123#include&amp;lt;sys/wait.h&amp;gt;pid_t wait(int *status);
+
+
+阻塞直到一个子进程终止
+status非空则子进程终止信息通过status指向的int变量返回
+内核为父进程下所有子进程的运行总量追加进程CPU时间和资源使用数据
+终止子进程ID作为返回
+如果wait()返回-1,可能的原因是无等">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/21/16422e0e451f7aac?w=853&h=399&f=png&s=48795">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/7/1/16455e48ecab884f?w=814&h=403&f=png&s=51847">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/7/4/16460e0d962cf1f4?w=768&h=626&f=png&s=147437">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/7/9/1647fabbeb6501a8?w=705&h=721&f=png&s=73058">
+<meta property="og:updated_time" content="2018-07-19T02:39:33.984Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="One Alian">
+<meta name="twitter:title" content="linux/unix编程手册-26_30">
+<meta name="twitter:description" content="linux/unix编程手册-26(监控子进程)wait()123#include&amp;lt;sys/wait.h&amp;gt;pid_t wait(int *status);
+
+
+阻塞直到一个子进程终止
+status非空则子进程终止信息通过status指向的int变量返回
+内核为父进程下所有子进程的运行总量追加进程CPU时间和资源使用数据
+终止子进程ID作为返回
+如果wait()返回-1,可能的原因是无等">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/6/21/16422e0e451f7aac?w=853&h=399&f=png&s=48795">
 
 
 
@@ -110,9 +140,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/20/linux:unix编程手册-26_30/"/>
 
-  <title> One Alian </title>
+  <title> linux/unix编程手册-26_30 | One Alian </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -133,9 +163,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -232,9 +260,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -254,10 +282,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2018/06/20/linux:unix编程手册-26_30/" itemprop="url">
-                  linux/unix编程手册-26_30
-                </a>
+                linux/unix编程手册-26_30
               
             
           </h1>
@@ -323,9 +348,7 @@
       
 
       
-        
-          
-            <h3 id="linux-unix编程手册-26-监控子进程"><a href="#linux-unix编程手册-26-监控子进程" class="headerlink" title="linux/unix编程手册-26(监控子进程)"></a>linux/unix编程手册-26(监控子进程)</h3><h4 id="wait"><a href="#wait" class="headerlink" title="wait()"></a><code>wait()</code></h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/wait.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">pid_t</span> wait(<span class="keyword">int</span> *status);</div></pre></td></tr></table></figure>
+        <h3 id="linux-unix编程手册-26-监控子进程"><a href="#linux-unix编程手册-26-监控子进程" class="headerlink" title="linux/unix编程手册-26(监控子进程)"></a>linux/unix编程手册-26(监控子进程)</h3><h4 id="wait"><a href="#wait" class="headerlink" title="wait()"></a><code>wait()</code></h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/wait.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">pid_t</span> wait(<span class="keyword">int</span> *status);</div></pre></td></tr></table></figure>
 <blockquote>
 <ul>
 <li>阻塞直到一个子进程终止</li>
@@ -620,1134 +643,59 @@
 </blockquote>
 <p><em>动态分配条件变量</em><br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;pthread.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_init</span><span class="params">(<span class="keyword">pthread_cond_t</span> *mutex, <span class="keyword">const</span> <span class="keyword">pthread_condattr_t</span> * attr)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_destroy</span><span class="params">(<span class="keyword">pthread_cond_t</span> *mutex)</span></span>;</div></pre></td></tr></table></figure></p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/06/16/linux:unix编程手册-21_25/" itemprop="url">
-                  linux/unix编程手册-21_25
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-06-16T11:53:07+08:00" content="2018-06-16">
-              2018-06-16
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/programming/" itemprop="url" rel="index">
-                    <span itemprop="name">programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/06/16/linux:unix编程手册-21_25/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/06/16/linux:unix编程手册-21_25/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/tips/" rel="tag">#tips</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h3 id="linux-unix编程手册-21-信号处理器函数"><a href="#linux-unix编程手册-21-信号处理器函数" class="headerlink" title="linux/unix编程手册-21(信号处理器函数)"></a>linux/unix编程手册-21(信号处理器函数)</h3><h4 id="信号处理器函数设计"><a href="#信号处理器函数设计" class="headerlink" title="信号处理器函数设计"></a>信号处理器函数设计</h4><blockquote>
-<ul>
-<li>信号处理器函数设置全局标志变量并退出，主程序对此标记进行周期检查，一旦置位随即采取相应动作</li>
-<li><p>信号处理器函数执行某种类型的清理，之后终止进程或者使用非本地跳转将栈解开并将控制返回主程序定位置</p>
-</li>
-<li><p>可重入：</p>
-<ul>
-<li>同一进程多线程可以同时安全的调用一个函数(信号处理函数可在任意时间点中断程序的执行，从而在一个进程中形成2条独立但不是并发的执行线程)</li>
-</ul>
-</li>
-<li>异步信号安全：<ul>
-<li>如果一个函数是可重入的或者信号处理函数无法将其中断</li>
-</ul>
-</li>
-<li>仅当信号处理函数中断了不安全函数的执行，且处理函数自身也调用了这个函数时，该函数才是不安全的</li>
-</ul>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/06/16/linux:unix编程手册-21_25/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/16/linux:unix编程手册-21_25/" rel="next" title="linux/unix编程手册-21_25">
+                <i class="fa fa-chevron-left"></i> linux/unix编程手册-21_25
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2018/06/06/linux:unix编程手册-16_20/" itemprop="url">
-                  linux/unix编程手册-16_20
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-06-06T11:53:07+08:00" content="2018-06-06">
-              2018-06-06
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/programming/" itemprop="url" rel="index">
-                    <span itemprop="name">programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/06/06/linux:unix编程手册-16_20/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/06/06/linux:unix编程手册-16_20/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="linux-unix编程手册-16-扩展属性EA"><a href="#linux-unix编程手册-16-扩展属性EA" class="headerlink" title="linux/unix编程手册-16(扩展属性EA)"></a>linux/unix编程手册-16(扩展属性EA)</h3><h4 id="EA的命名空间"><a href="#EA的命名空间" class="headerlink" title="EA的命名空间"></a>EA的命名空间</h4><blockquote>
-<ul>
-<li>user EA 只适用于文件或目录 (ext2~4上创建时需要：mount -o user_xattr device dir)</li>
-<li>trusted</li>
-<li>system</li>
-<li>security 略</li>
-</ul>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/06/06/linux:unix编程手册-16_20/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
           </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/05/27/linux:unix编程手册-11_15/" itemprop="url">
-                  linux/unix编程手册-11_15
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-05-27T11:53:07+08:00" content="2018-05-27">
-              2018-05-27
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/programming/" itemprop="url" rel="index">
-                    <span itemprop="name">programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/05/27/linux:unix编程手册-11_15/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/27/linux:unix编程手册-11_15/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h3 id="linux-unix编程手册-11-系统限制和选项"><a href="#linux-unix编程手册-11-系统限制和选项" class="headerlink" title="linux/unix编程手册-11(系统限制和选项)"></a>linux/unix编程手册-11(系统限制和选项)</h3><blockquote>
-<p>limit.h定义了最小值</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ getconf OPEN_MAX</div><div class="line">7168</div><div class="line">$ getconf ARG_MAX</div><div class="line">262144</div></pre></td></tr></table></figure>
-<p>略略略</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/05/27/linux:unix编程手册-11_15/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-      
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/05/15/linux:unix编程手册-6_10/" itemprop="url">
-                  linux/unix编程手册-6_10
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-05-15T11:53:07+08:00" content="2018-05-15">
-              2018-05-15
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/programming/" itemprop="url" rel="index">
-                    <span itemprop="name">programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/05/15/linux:unix编程手册-6_10/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/15/linux:unix编程手册-6_10/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="linux-unix编程手册-6-进程"><a href="#linux-unix编程手册-6-进程" class="headerlink" title="linux/unix编程手册-6(进程)"></a>linux/unix编程手册-6(进程)</h3><h4 id="进程和程序"><a href="#进程和程序" class="headerlink" title="进程和程序"></a>进程和程序</h4><ul>
-<li><p>程序：</p>
-<ul>
-<li>二进制格式标志：最初:a.out,COFF; 现:UNIX实现采用ELF(可执行链接格式)</li>
-<li>机器语言指令</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/05/15/linux:unix编程手册-6_10/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
+    <div class="post-spread">
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/05/01/linux:unix编程手册-1_5/" itemprop="url">
-                  linux/unix编程手册-1_5
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-05-01T11:53:07+08:00" content="2018-05-01">
-              2018-05-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/programming/" itemprop="url" rel="index">
-                    <span itemprop="name">programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/05/01/linux:unix编程手册-1_5/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/01/linux:unix编程手册-1_5/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="linux-unix编程手册-2"><a href="#linux-unix编程手册-2" class="headerlink" title="linux/unix编程手册-2"></a>linux/unix编程手册-2</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>内核</p>
-<p>内核职责</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/05/01/linux:unix编程手册-1_5/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/04/05/GO杂记/" itemprop="url">
-                  GO杂
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-04-05T00:05:32+08:00" content="2018-04-05">
-              2018-04-05
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/04/05/GO杂记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/05/GO杂记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="goroutine"><a href="#goroutine" class="headerlink" title="goroutine"></a>goroutine</h3><blockquote>
-<ul>
-<li>Go的并发同步模型CSP</li>
-<li>Go的并发调度器是在操作系统之上，将操作系统的线程和语言运行时的逻辑处理器绑定，在逻辑处理器运行goroutine</li>
-</ul>
-<ol>
-<li>将goroutine 放在逻辑处理器的执行队列</li>
-<li>goroutine 执行了阻塞的系统调用时，调度器将线程与处理器分离，线程一边阻塞等待系统调用返回，同时创建新的线程绑定到逻辑处理器，分配新的goroutine。</li>
-<li>goroutine执行网络IO调用时，会将goroutine放到网络轮询器，当轮询器表明网络IO操作已经就绪，重新分配goroutine到逻辑处理器</li>
-</ol>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/04/05/GO杂记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/12/select和epoll/" itemprop="url">
-                  select和epoll
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-08-12T23:25:00+08:00" content="2017-08-12">
-              2017-08-12
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/08/12/select和epoll/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/12/select和epoll/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="SELECT-和EPOLL"><a href="#SELECT-和EPOLL" class="headerlink" title="SELECT 和EPOLL"></a>SELECT 和EPOLL</h3>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/12/select和epoll/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/07/19/高性能mysql笔记/" itemprop="url">
-                  高性能MYSQL
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-07-19T22:53:54+08:00" content="2017-07-19">
-              2017-07-19
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/07/19/高性能mysql笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/19/高性能mysql笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="高性能MYSQL"><a href="#高性能MYSQL" class="headerlink" title="高性能MYSQL"></a>高性能MYSQL</h2><h4 id="事务隔离"><a href="#事务隔离" class="headerlink" title="事务隔离"></a>事务隔离</h4><blockquote>
-<ul>
-<li>行级锁只在存储引擎层实现</li>
-<li>锁<ul>
-<li>乐观锁：大多是基于数据版本（ Version ）记录机制实现。</li>
-<li>悲观锁：一致性锁定读。读取数据时给加锁，其它事务无法修改这些数据。修改删除数据时也要加锁，其它事务无法读取这些数据。</li>
-</ul>
-</li>
-<li>两段锁<ul>
-<li>加锁阶段：在该阶段可以进行加锁操作。在对任何数据进行读操作之前要申请并获得S锁（共享锁，其它事务可以继续加共享锁，但不能加排它锁），在进行写操作之前要申请并获得X锁（排它锁，其它事务不能再获得任何锁）。加锁不成功，则事务进入等待状态，直到加锁成功才继续执行</li>
-<li>解锁阶段：当事务释放了一个封锁以后，事务进入解锁阶段，在该阶段只能进行解锁操作不能再进行加锁操作</li>
-</ul>
-</li>
-<li>事务的隔离级别<ul>
-<li>read uncommited: 问题——脏读:<strong>一个事务会读进还没有被另一个事务提交的数据，所以你会看到一些最后被另一个事务回滚掉的数据</strong></li>
-<li>read commited:问题——不可重复读:<strong>一个事务读进一条记录，另一个事务更改了这条记录并提交完毕，这时候第一个事务再次读这条记录时，它已经改变了</strong>(解决：如果只有在修改事务完全提交之后才可以读取数据，可以避免该问题)</li>
-<li>repeatable read:问题——幻读:<strong>一个事务用Where子句来检索一个表的数据，另一个事务插入一条新的记录，并且符合Where条件，这样，第一个事务用同一个where条件来检索数据后，就会多出一条记录</strong>(解决:如果在操作事务完成数据处理之前，任何其他事务都不可以添加新数据，则可避免该问题)</li>
-<li>serializable: 读加共享锁，写加排他锁，读写互斥。使用的悲观锁的理论。</li>
-</ul>
-</li>
-<li>死锁:innodb的处理——将持有最少行级排他锁的事务回滚</li>
-<li>innodb下MVCC只在read commited 和 repeatable read 下适用:</li>
-</ul>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/07/19/高性能mysql笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/06/机器学习鸡屎/" itemprop="url">
-                  机器学习鸡屎
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-06T00:05:32+08:00" content="2017-06-06">
-              2017-06-06
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/06/机器学习鸡屎/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/06/机器学习鸡屎/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="第二节"><a href="#第二节" class="headerlink" title="第二节"></a>第二节</h3><h5 id="data——-gt-ML——-gt-improve-performance-measure"><a href="#data——-gt-ML——-gt-improve-performance-measure" class="headerlink" title="data——&gt;ML——&gt;improve performance measure"></a>data——&gt;ML——&gt;improve performance measure</h5><h4 id="什么情况下需要机器学习"><a href="#什么情况下需要机器学习" class="headerlink" title="什么情况下需要机器学习"></a>什么情况下需要机器学习</h4><ul>
-<li>有潜在规则需要学习，用来提高某些表现</li>
-<li>很难写出定义程序。</li>
-<li>有数据</li>
-</ul>
-<blockquote>
-<p>数据，假设的集合，演算法——&gt;矩~=f</p>
-<p>模型是演算法加上假设的集合</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+  </div>
 
 
           </div>
@@ -1755,6 +703,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/06/20/linux:unix编程手册-26_30/"
+           data-title="linux/unix编程手册-26_30" data-url="http://yoursite.com/2018/06/20/linux:unix编程手册-26_30/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -1774,8 +730,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -1825,6 +790,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-26-监控子进程"><span class="nav-number">1.</span> <span class="nav-text">linux/unix编程手册-26(监控子进程)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#wait"><span class="nav-number">1.1.</span> <span class="nav-text">wait()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#waitpid"><span class="nav-number">1.2.</span> <span class="nav-text">waitpid()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#status所指代值的意义"><span class="nav-number">1.3.</span> <span class="nav-text">status所指代值的意义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从信号处理器函数终止进程"><span class="nav-number">1.4.</span> <span class="nav-text">从信号处理器函数终止进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统调用waittid-，wait3-，wait4"><span class="nav-number">1.5.</span> <span class="nav-text">系统调用waittid()，wait3()，wait4()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#孤儿进程和僵尸进程"><span class="nav-number">1.6.</span> <span class="nav-text">孤儿进程和僵尸进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SIGCHLD信号"><span class="nav-number">1.7.</span> <span class="nav-text">SIGCHLD信号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-27-程序的执行"><span class="nav-number">2.</span> <span class="nav-text">linux/unix编程手册-27(程序的执行)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解释器脚本"><span class="nav-number">2.1.</span> <span class="nav-text">解释器脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件描述符和exec"><span class="nav-number">2.2.</span> <span class="nav-text">文件描述符和exec()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#信号与exec"><span class="nav-number">2.3.</span> <span class="nav-text">信号与exec()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行shell命令。system"><span class="nav-number">2.4.</span> <span class="nav-text">执行shell命令。system()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-28-详述进程的创建和程序的执行"><span class="nav-number">3.</span> <span class="nav-text">linux/unix编程手册-28(详述进程的创建和程序的执行)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进程记账"><span class="nav-number">3.1.</span> <span class="nav-text">进程记账</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统调用clone"><span class="nav-number">3.2.</span> <span class="nav-text">系统调用clone()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#KSE-kernel-sheduling-entity-内核调度所处理的对象"><span class="nav-number">3.3.</span> <span class="nav-text">KSE(kernel sheduling entity)内核调度所处理的对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-29-线程"><span class="nav-number">4.</span> <span class="nav-text">linux/unix编程手册-29(线程)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pthread-API"><span class="nav-number">4.1.</span> <span class="nav-text">Pthread API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建线程"><span class="nav-number">4.2.</span> <span class="nav-text">创建线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#终止线程"><span class="nav-number">4.3.</span> <span class="nav-text">终止线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取线程"><span class="nav-number">4.4.</span> <span class="nav-text">获取线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#连接已终止线程"><span class="nav-number">4.5.</span> <span class="nav-text">连接已终止线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程的分离"><span class="nav-number">4.6.</span> <span class="nav-text">线程的分离</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-unix编程手册-30-线程同步"><span class="nav-number">5.</span> <span class="nav-text">linux/unix编程手册-30(线程同步)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#互斥量（保护共享变量的访问）"><span class="nav-number">5.1.</span> <span class="nav-text">互斥量（保护共享变量的访问）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#死锁"><span class="nav-number">5.1.1.</span> <span class="nav-text">死锁</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件变量-通知状态的改变"><span class="nav-number">5.2.</span> <span class="nav-text">条件变量(通知状态的改变)</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -1926,6 +902,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
