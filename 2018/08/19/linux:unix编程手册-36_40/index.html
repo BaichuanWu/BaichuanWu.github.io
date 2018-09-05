@@ -104,7 +104,7 @@ RUSAGE_CHILDREN返回调用进程的所有被终止和处于等待状态的子�
 RUSAGE_THREAD返回调用线程的相">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/22/1655d5a05c85ac14?w=916&h=574&f=png&s=109723">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/8/28/1657ca201573f1e4?w=815&h=579&f=png&s=73715">
-<meta property="og:updated_time" content="2018-09-04T08:28:02.357Z">
+<meta property="og:updated_time" content="2018-09-05T08:22:09.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux/unix编程手册-36_40">
 <meta name="twitter:description" content="linux/unix编程手册-36(进程资源)进程资源的使用情况123#include&amp;lt;sys/resource.h&amp;gt;int getrusage(int who, struct rusage *res_usage);
@@ -349,12 +349,12 @@ RUSAGE_THREAD返回调用线程的相">
 <ul>
 <li>RUSAGE_SELF 调用进程</li>
 <li>RUSAGE_CHILDREN返回调用进程的所有被终止和处于等待状态的子进程</li>
-<li><p>RUSAGE_THREAD返回调用线程的相关信息（linux特有）</p>
-<h4 id="进程资源的限制"><a href="#进程资源的限制" class="headerlink" title="进程资源的限制"></a>进程资源的限制</h4><p>真实用户或特权用户可以在/proc/PID/limits文件查看响应进程的资源限制</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;sys/resource.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">getrlimit</span><span class="params">(<span class="keyword">int</span> resource, <span class="keyword">struct</span> rlimit *rlim)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">setrlimit</span><span class="params">(<span class="keyword">int</span> resource, <span class="keyword">const</span> <span class="keyword">struct</span> rlimit *rlim)</span></span>;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> rlimit&#123;</div><div class="line">    <span class="keyword">rlim_t</span> rlim_cur;    <span class="comment">//软限制</span></div><div class="line">    <span class="keyword">rlim_t</span> rlim_max;    <span class="comment">//硬限制</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>软限制规定进程能够消耗资源数量</p>
-</li>
+<li>RUSAGE_THREAD返回调用线程的相关信息（linux特有）</li>
+</ul>
+<a id="more"></a>
+<h4 id="进程资源的限制"><a href="#进程资源的限制" class="headerlink" title="进程资源的限制"></a>进程资源的限制</h4><p>真实用户或特权用户可以在/proc/PID/limits文件查看响应进程的资源限制<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;sys/resource.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">getrlimit</span><span class="params">(<span class="keyword">int</span> resource, <span class="keyword">struct</span> rlimit *rlim)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">setrlimit</span><span class="params">(<span class="keyword">int</span> resource, <span class="keyword">const</span> <span class="keyword">struct</span> rlimit *rlim)</span></span>;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> rlimit&#123;</div><div class="line">    <span class="keyword">rlim_t</span> rlim_cur;    <span class="comment">//软限制</span></div><div class="line">    <span class="keyword">rlim_t</span> rlim_max;    <span class="comment">//硬限制</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>软限制规定进程能够消耗资源数量</li>
 <li>软限制可以调整从0到硬限制之间的任何值</li>
 <li>特权可以增大和减小硬限制，非特权进程只能缩小<br><img src="https://user-gold-cdn.xitu.io/2018/8/22/1655d5a05c85ac14?w=916&amp;h=574&amp;f=png&amp;s=109723" alt=""></li>
 </ul>
